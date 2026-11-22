@@ -20,7 +20,7 @@ Všechna jména a údaje v promptech jsou syntetické.
 ## Gradery
 
 - `tool_used: Skill` s vahou 2 ověřuje, že se spustil správný skill. Negativní případy mají `min: 0, max: 0`.
-- Deterministické `regex` gradery hlídají zakázaný obsah (sleva, termín, emoji, výpis identifikátorů). JavaScriptové `\b` nefunguje u slov končících diakritikou, proto seznamy obsahují jen tvary s ASCII okrajem.
+- Deterministické `regex` gradery hlídají jen obsah, který se nemá objevit ani ve vysvětlení (termín, emoji, SQL vypisující identifikátory). Zakázaná slova, která model smí zmínit, když vysvětluje, proč je vynechal (sleva, revoluce), hodnotí `llm` grader. JavaScriptové `\b` nefunguje u slov končících diakritikou, proto seznamy obsahují jen tvary s ASCII okrajem.
 - Nanejvýš jeden `llm` grader s konkrétní PASS/FAIL rubrikou.
 - Práh 0.85. Rubriky zatím nejsou kalibrované proti více běhům: po prvním běhu projděte neprošlé gradery a upravte rubriky, které hodnotí příliš přísně nebo volně.
 
