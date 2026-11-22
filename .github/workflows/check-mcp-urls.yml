@@ -4,11 +4,8 @@ name: Check MCP URLs
 # in this repo. Catches typos in new submissions and upstream endpoints that
 # disappear after merge.
 #
-# Scope: only plugins whose files live in this working tree (marketplace
-# entries with a string `source`, e.g. "./productivity"). External entries
-# are pinned to an upstream repo at a SHA — reading their .mcp.json would
-# mean cloning every upstream on each run, which is slow and flaky. Those
-# are out of scope for now.
+# Scope: every plugin in the catalog. scripts/check_repo.py forbids external
+# (non-local) sources, so all plugins live in this working tree.
 #
 # What counts as "alive": anything that proves the hostname/path resolves to
 # a server. 401/403/405/5xx all pass — auth and method errors are expected
