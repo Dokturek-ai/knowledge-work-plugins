@@ -9,8 +9,9 @@ argument-hint: "[service or release name]"
 ## Doktůrek specifics
 
 - Coolify deploys `main`. Each service repo has its own runbook in `deploy/coolify/README.md`; Keycloak releases follow `dokturek-keycloak:docs/release-gate.md`.
-- Before anything touches real patient data, check `dokturek-platform:docs/pre-production-checklist.md` and the conditions in `01-produkt/prvni-den-2027.md`.
-- The checklist is for the person who deploys; you do not deploy.
+- Before anything touches real patient data, check `dokturek-platform:docs/pre-production-checklist.md` and "Podmínky zahájení provozu" in `dokturek-docs` → `01-produkt/prvni-den-2027.md`. In short: `app.prod` wired to test backends (R-nový-M) is not a separate clinical production; real data need documented legal conditions, clinical approval and technical acceptance through gates G01–G10 in `47-audit-healthcare-2026-11-16/03-plan-overeni.md` (section 2), and project configuration, green unit tests or a published certificate do not by themselves allow operation. Add an unchecked line for each gate the release touches and name its owner from that table; never tick a gate yourself.
+- The checklist is for the person who deploys; you do not deploy. Notifications and ticket changes in the checklist are drafts: show the exact target and text, and act only after an explicit yes.
+- Doktůrek has no on-call rotation or canary releases, and no monitoring tool is documented (see CONNECTORS.md). Name the real owner instead (Kuba for Coolify and deploys, Martin Marhold for Keycloak and gov-gateway).
 
 # /deploy-checklist
 
@@ -21,7 +22,7 @@ Generate a pre-deployment checklist to verify readiness before shipping.
 ## Usage
 
 ```
-/deploy-checklist $ARGUMENTS
+/operations:deploy-checklist $ARGUMENTS
 ```
 
 ## Output
@@ -37,20 +38,21 @@ Generate a pre-deployment checklist to verify readiness before shipping.
 - [ ] Database migrations tested (if applicable)
 - [ ] Feature flags configured (if applicable)
 - [ ] Rollback plan documented
-- [ ] On-call team notified
+- [ ] Owner of the affected service knows the deploy time (Kuba / Martin Marhold)
+- [ ] Real-data gates touched by this release listed with owners (G01–G10, `prvni-den-2027.md`)
 
 ### Deploy
 - [ ] Deploy to staging and verify
 - [ ] Run smoke tests
-- [ ] Deploy to production (canary if available)
-- [ ] Monitor error rates and latency for 15 min
+- [ ] Deploy to production through Coolify (`main`)
+- [ ] Watch logs and health checks for 15 min (manually; no monitoring tool is connected)
 - [ ] Verify key user flows
 
 ### Post-Deploy
 - [ ] Confirm metrics are nominal
 - [ ] Update release notes / changelog
-- [ ] Notify stakeholders
-- [ ] Close related tickets
+- [ ] Draft the stakeholder note (sent only after explicit confirmation)
+- [ ] Propose which related issues to close (closed only after explicit confirmation)
 
 ### Rollback Triggers
 - Error rate exceeds [X]%
@@ -71,16 +73,16 @@ If **~~source control** is connected:
 - Pull the release diff and list of changes
 - Verify all PRs are approved and merged
 
-If **~~CI/CD** is connected:
+If **~~CI** is connected:
 - Check build and test status automatically
 - Verify pipeline is green before deploy
 
 If **~~monitoring** is connected:
 - Pre-fill rollback trigger thresholds from current baselines
-- Set up post-deploy metric watch
+- Propose a post-deploy check (which metrics, how long). Do not create alerts, dashboards or watches yourself; show the exact configuration and let the owner set it up after an explicit yes
 
 ## Tips
 
 1. **Run before every deploy** — Even routine ones. Checklists prevent "I forgot to..."
-2. **Customize once, reuse** — Tell me your stack and I'll remember your deploy process.
+2. **Customize per service** — Start from the service's `deploy/coolify/README.md` runbook; describe the stack again in each session, nothing is remembered between sessions.
 3. **Include rollback criteria** — Decide when to roll back before you deploy, not during.

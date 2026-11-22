@@ -6,6 +6,7 @@ Skilly odkazují na nástroje obecnou kategorií se znaky `~~` (například `~~c
 | --- | --- | --- | --- |
 | `~~chat` | Slack | slack |  |
 | `~~CRM` | Pipedrive | — | Konektor není součástí pluginu. |
+| `~~knowledge base` | `dokturek-docs` (hlas značky v `05-design/Doktůrek-brand/DESIGN.md`) | — | V Claude Code přes `gh` nebo místní klon, v claude.ai přes konektor GitHub. Notion je jen archiv pro čtení. |
 | `~~email marketing, ~~marketing automation` | — | — | Nástroj pro newsletter dokumentace neuvádí; skill připraví text ke zkopírování. |
 | `~~product analytics, ~~SEO tools` | — | — | Bez připojeného nástroje skill pracuje s exporty a veřejnými daty. |
 

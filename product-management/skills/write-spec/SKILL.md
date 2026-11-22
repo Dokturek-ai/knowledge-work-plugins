@@ -1,6 +1,6 @@
 ---
 name: write-spec
-description: Write a feature spec or PRD from a problem statement or feature idea. Use when turning a vague idea or user request into a structured document, scoping a feature with goals and non-goals, defining success metrics and acceptance criteria, or breaking a big ask into a phased spec.
+description: Write a spec for a non-clinical Doktůrek feature or process (practice onboarding, subscription and billing, migration from an incumbent AIS, internal processes, the website) from a problem statement or idea. Use when turning a vague idea or request into a structured document, scoping with goals and non-goals, defining success metrics and acceptance criteria, or phasing a big ask. Clinical EHR screens, workflows and PRDs belong to the ehr-design plugin (ehr-prd).
 argument-hint: "<feature or problem statement>"
 ---
 
@@ -21,7 +21,7 @@ Write a feature specification or product requirements document (PRD).
 ## Usage
 
 ```
-/write-spec $ARGUMENTS
+/product-management:write-spec $ARGUMENTS
 ```
 
 ## Workflow
@@ -29,10 +29,10 @@ Write a feature specification or product requirements document (PRD).
 ### 1. Understand the Feature
 
 Ask the user what they want to spec. Accept any of:
-- A feature name ("SSO support")
-- A problem statement ("Enterprise customers keep asking for centralized auth")
-- A user request ("Users want to export their data as CSV")
-- A vague idea ("We should do something about onboarding drop-off")
+- A feature name ("pozvánky do týmu ordinace")
+- A problem statement ("Practices migrating from PC Doktor need to know which data comes over")
+- A user request ("The founding admin wants to download the subscription invoices")
+- A vague idea ("Onboarding of a new practice should take less of the doctor's time")
 
 ### 2. Gather Context
 
@@ -72,7 +72,7 @@ Produce a structured PRD with these sections. See **PRD Structure** below for de
 - **User Stories**: Standard format ("As a [user type], I want [capability] so that [benefit]"), grouped by persona
 - **Requirements**: Categorized as Must-Have (P0), Nice-to-Have (P1), and Future Considerations (P2), each with acceptance criteria
 - **Success Metrics**: Leading indicators (change quickly) and lagging indicators (change over time), with specific targets
-- **Open Questions**: Unresolved questions tagged with who needs to answer (engineering, design, legal, data)
+- **Open Questions**: Unresolved questions tagged with the owner who needs to answer
 - **Timeline Considerations**: Hard deadlines, dependencies, and phasing
 
 ### 5. Review and Iterate
@@ -114,9 +114,9 @@ Guidelines:
 - Order by priority — most important stories first
 
 Example:
-- "As a team admin, I want to configure SSO for my organization so that my team members can log in with their corporate credentials"
-- "As a team member, I want to be automatically redirected to my company's SSO login so that I do not need to remember a separate password"
-- "As a team admin, I want to see which members have logged in via SSO so that I can verify the rollout is working"
+- "As the founding admin of a practice, I want to invite a nurse by e-mail so that she can start working in our practice"
+- "As an invited nurse, I want the invitation to tell me in Czech what to do next so that I can sign in without calling support"
+- "As the founding admin, I want to see pending invitations so that I can resend or cancel one"
 
 ### Requirements
 
@@ -134,7 +134,7 @@ For each requirement:
 
 ### Open Questions
 - Questions that need answers before or during implementation
-- Tag each with who should answer (engineering, design, legal, data, stakeholder)
+- Tag each with the owner from the team table (Honza product, Petr technology, Anna clinical); a question that needs a decision becomes a proposed Q entry for `10-rozhodnuti-a-otevrene-otazky.md`
 - Distinguish between blocking questions (must answer before starting) and non-blocking (can resolve during implementation)
 
 ### Timeline Considerations
@@ -142,62 +142,11 @@ For each requirement:
 - Dependencies on other teams' work or releases
 - Suggested phasing if the feature is too large for one release
 
-## User Story Writing
+## User Stories, Priorities and Metrics
 
-Good user stories are:
-- **Independent**: Can be developed and delivered on their own
-- **Negotiable**: Details can be discussed, the story is not a contract
-- **Valuable**: Delivers value to the user (not just the team)
-- **Estimable**: The team can roughly estimate the effort
-- **Small**: Can be completed in one sprint/iteration
-- **Testable**: There is a clear way to verify it works
-
-### Common Mistakes in User Stories
-- Too vague: "As a user, I want the product to be faster" — what specifically should be faster?
-- Solution-prescriptive: "As a user, I want a dropdown menu" — describe the need, not the UI widget
-- No benefit: "As a user, I want to click a button" — why? What does it accomplish?
-- Too large: "As a user, I want to manage my team" — break this into specific capabilities
-- Internal focus: "As the engineering team, we want to refactor the database" — this is a task, not a user story
-
-## Requirements Categorization
-
-### MoSCoW Framework
-- **Must have**: Without these, the feature is not viable. Non-negotiable.
-- **Should have**: Important but not critical for launch. High-priority fast follows.
-- **Could have**: Desirable if time permits. Will not delay delivery if cut.
-- **Won't have (this time)**: Explicitly out of scope. May revisit in future versions.
-
-### Tips for Categorization
-- Be ruthless about P0s. The tighter the must-have list, the faster you ship and learn.
-- If everything is P0, nothing is P0. Challenge every must-have: "Would we really not ship without this?"
-- P1s should be things you are confident you will build soon, not a wish list.
-- P2s are architectural insurance — they guide design decisions even though you are not building them now.
-
-## Success Metrics Definition
-
-### Leading Indicators
-Metrics that change quickly after launch (days to weeks):
-- **Adoption rate**: % of eligible users who try the feature
-- **Activation rate**: % of users who complete the core action
-- **Task completion rate**: % of users who successfully accomplish their goal
-- **Time to complete**: How long the core workflow takes
-- **Error rate**: How often users encounter errors or dead ends
-- **Feature usage frequency**: How often users return to use the feature
-
-### Lagging Indicators
-Metrics that take time to develop (weeks to months):
-- **Retention impact**: Does this feature improve user retention?
-- **Revenue impact**: Does this drive upgrades, expansion, or new revenue?
-- **NPS / satisfaction change**: Does this improve how users feel about the product?
-- **Support ticket reduction**: Does this reduce support load?
-- **Competitive win rate**: Does this help win more deals?
-
-### Setting Targets
-- Targets should be specific: "50% adoption within 30 days" not "high adoption"
-- Base targets on comparable features, industry benchmarks, or explicit hypotheses
-- Set a "success" threshold and a "stretch" target
-- Define the measurement method: what tool, what query, what time window
-- Specify when you will evaluate: 1 week, 1 month, 1 quarter post-launch
+- Good user stories are independent, valuable, small and testable. Describe the need, not the UI widget; split anything that cannot be done in one weekly sprint.
+- Prioritize requirements as P0/P1/P2 above; for MoSCoW and value-vs-effort see `roadmap-update`. Challenge every P0: "Would we really not ship without this?"
+- Success metrics: prefer leading indicators that move within weeks (adoption, task completion, time to complete, error rate, support requests on the topic). Targets without data are assumptions: mark them [P] and say who set them, and define how and when they are measured.
 
 ## Acceptance Criteria
 
@@ -209,41 +158,23 @@ Write acceptance criteria in Given/When/Then format or as a checklist:
 - Then [expected outcome]
 
 Example:
-- Given the admin has configured SSO for their organization
-- When a team member visits the login page
-- Then they are automatically redirected to the organization's SSO provider
+- Given the founding admin is signed in to the practice
+- When they invite a colleague by e-mail
+- Then the colleague receives a Czech invitation and the invitation appears as pending
 
 **Checklist format**:
-- [ ] Admin can enter SSO provider URL in organization settings
-- [ ] Team members see "Log in with SSO" button on login page
-- [ ] SSO login creates a new account if one does not exist
-- [ ] SSO login links to existing account if email matches
-- [ ] Failed SSO attempts show a clear error message
+- [ ] The admin can enter the colleague's e-mail and role
+- [ ] A pending invitation can be resent or cancelled
+- [ ] An expired or cancelled invitation shows a clear Czech message
+- [ ] No patient data appears in the invitation
 
-### Tips for Acceptance Criteria
-- Cover the happy path, error cases, and edge cases
-- Be specific about the expected behavior, not the implementation
-- Include what should NOT happen (negative test cases)
-- Each criterion should be independently testable
-- Avoid ambiguous words: "fast", "user-friendly", "intuitive" — define what these mean concretely
+Cover the happy path, error cases and edge cases; describe behaviour, not implementation; include what should NOT happen; avoid words like "fast" or "intuitive" without a concrete meaning. Verify any product fact used in an example against `dokturek-docs` or the code before it goes into a real spec.
 
 ## Scope Management
 
-### Recognizing Scope Creep
-Scope creep happens when:
-- Requirements keep getting added after the spec is approved
-- "Small" additions accumulate into a significantly larger project
-- The team is building features no user asked for ("while we're at it...")
-- The launch date keeps moving without explicit re-scoping
-- Stakeholders add requirements without removing anything
-
-### Preventing Scope Creep
-- Write explicit non-goals in every spec
-- Require that any scope addition comes with a scope removal or timeline extension
-- Separate "v1" from "v2" clearly in the spec
-- Review the spec against the original problem statement — does everything serve it?
-- Time-box investigations: "If we cannot figure out X in 2 days, we cut it"
-- Create a "parking lot" for good ideas that are not in scope
+- Write explicit non-goals in every spec.
+- Any scope addition comes with a scope removal or a later phase; scope decisions are Honza's.
+- Separate v1 from later phases clearly, and keep a parking lot for good ideas that are out of scope.
 
 ## Output Format
 

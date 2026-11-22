@@ -1,6 +1,6 @@
 ---
 name: brand-review
-description: Review content against your brand voice, style guide, and messaging pillars, flagging deviations by severity with specific before/after fixes. Use when checking a draft before it ships, when auditing copy for voice consistency and terminology, or when screening for unsubstantiated claims, missing disclaimers, and other legal flags.
+description: Review Doktůrek marketing and sales texts (web, newsletter, social posts, emails, sales materials) against the brand voice in DESIGN.md and the Doktůrek context, flagging deviations by severity with specific before/after fixes. Use when checking a draft before it ships, auditing copy for voice and terminology, or screening for unsubstantiated clinical, AI, certification or compliance claims. Product UI copy belongs to design:ux-copy.
 argument-hint: "<content to review>"
 ---
 
@@ -19,23 +19,23 @@ Review marketing content against brand voice, style guidelines, and messaging st
 
 ## Trigger
 
-User runs `/brand-review` or asks to review, check, or audit content against brand guidelines.
+User runs `/marketing:brand-review` or asks to review, check, or audit content against brand guidelines.
 
 ## Inputs
 
 1. **Content to review** — accept content in any of these forms:
    - Pasted directly into the conversation
-   - A file path or ~~knowledge base reference (e.g. Notion page, shared doc)
+   - A file path or ~~knowledge base reference (e.g. a file in `dokturek-docs`; Notion is a read-only archive)
    - A URL to a published page
    - Multiple pieces for batch review
 
-2. **Brand guidelines source** (determined automatically):
-   - If a brand style guide is configured in local settings, use it automatically
-   - If not configured, ask: "Do you have a brand style guide or voice guidelines I should review against? You can paste them, share a file, or describe your brand voice. Otherwise, I'll do a general review for clarity, consistency, and professionalism."
+2. **Brand guidelines source** (fixed):
+   - Always review against `dokturek-docs` → `05-design/Doktůrek-brand/DESIGN.md` and the Voice section of the Doktůrek context; the context wins where they differ on wording rules
+   - If DESIGN.md is not reachable, say so and review against the Voice section and the Czech conventions below
 
 ## Review Process
 
-### With Brand Guidelines Configured
+### Brand Dimensions
 
 Evaluate the content against each of these dimensions:
 
@@ -57,12 +57,12 @@ Evaluate the content against each of these dimensions:
 - Is the content reinforcing or contradicting brand positioning?
 
 #### Style Guide Compliance
-- Grammar and punctuation per style guide (e.g., Oxford comma, title case vs. sentence case)
+- Czech grammar and punctuation (see Czech Conventions below)
 - Formatting conventions (headers, lists, emphasis)
-- Number formatting, date formatting
+- Number, date and time formatting per Czech Conventions
 - Acronym usage (defined on first use?)
 
-### Without Brand Guidelines (Generic Review)
+### General Quality (Always Checked)
 
 Evaluate the content for:
 
@@ -89,7 +89,8 @@ Regardless of whether brand guidelines are configured, flag:
 - **Missing disclaimers** — financial claims, health claims, or guarantees that may need legal disclaimers
 - **Comparative claims** — comparisons to competitors that could be challenged
 - **Regulatory language** — content that may need compliance review (financial services, healthcare, etc.)
-- **Testimonial issues** — quotes or endorsements without attribution or disclosure
+- **Testimonial issues** — quotes or endorsements without attribution or approval; any testimonial, case study or result from a practice before 1 January 2027 that the user did not provide
+- **Doktůrek claims** — clinical statements without Anna's confirmation; MDR, certification or compliance claims the documents do not prove (Q-750, Q-753); "AI rozhodla" or anything that lets the system decide instead of the doctor; prices other than a link to `dokturek.ai/cenik`; discounts or incentives
 - **Copyright concerns** — content that appears to be closely paraphrased from other sources
 
 ## Brand Voice Reference
@@ -150,7 +151,7 @@ The brand voice stays consistent, but tone adapts to context. Tone is the emotio
 | Social media (LinkedIn) | Professional, thought-provoking, concise | "Three things we learned from running 50 campaigns this quarter." |
 | Social media (Twitter/X) | Punchy, direct, sometimes witty | "Your landing page has 3 seconds. Make them count." |
 | Email marketing | Personal, helpful, action-oriented | "We put together something we think you'll find useful." |
-| Sales collateral | Confident, benefit-driven, specific | "Teams using our platform reduce reporting time by 40%." |
+| Sales collateral | Confident, benefit-driven, verifiable | "Víc času na pacienty, míň na papíry." (no unsourced numbers) |
 | Support/Help docs | Clear, patient, step-by-step | "If you see this error, here's how to fix it." |
 | Press release | Formal, factual, newsworthy | "The company today announced the launch of..." |
 | Error messages | Empathetic, helpful, blame-free | "Something went wrong on our end. We're looking into it." |
@@ -173,34 +174,26 @@ The voice attributes remain fixed. Tone dials them up or down based on context. 
 - In an incident response, dial up warmth
 - Neither attribute disappears; the balance shifts
 
-### Style Guide Enforcement
+### Czech Conventions
 
-#### Grammar and Mechanics
-Document and enforce these choices consistently:
+Apply these unless DESIGN.md says otherwise:
 
-| Rule | Options | Example |
-|------|---------|---------|
-| Oxford comma | Yes / No | "fast, reliable, and secure" vs. "fast, reliable and secure" |
-| Sentence case vs. title case (headings) | Sentence / Title | "How to get started" vs. "How to Get Started" |
-| Contractions | Use / Avoid | "we're" vs. "we are" |
-| Em dash spacing | No spaces / Spaces | "this—and more" vs. "this — and more" |
-| Numbers | Spell out 1-9, numerals 10+ / Always numerals | "five features" vs. "5 features" |
-| Percent | % / percent | "50%" vs. "50 percent" |
-| Date format | Month DD, YYYY / DD/MM/YYYY / etc. | "January 15, 2025" |
-| Time format | 12-hour / 24-hour | "3:00 PM" vs. "15:00" |
-| Lists | Periods / No periods on fragments | "Set up your account." vs. "Set up your account" |
-
-#### Formatting Conventions
-- Heading hierarchy (when to use H1, H2, H3)
-- Bold and italic usage (bold for emphasis, italic for titles/terms)
-- Link text (descriptive vs. "click here" — always descriptive)
-- Image alt text requirements
-- Code formatting (for technical brands)
-- Callout or highlight box usage
+| Rule | Convention | Example |
+|------|-----------|---------|
+| E-mail | With a hyphen | "e-mail", not "email" |
+| Date | Day. month. year with spaces | "22. 11. 2026" |
+| Time | 24-hour | "15:00", not "3:00 PM" |
+| Headings | Sentence case | "Jak začít", not "Jak Začít" |
+| Numbers | Space as thousands separator, decimal comma | "1 000 Kč", "2,5 %" |
+| Percent | Space before % ("50 procent"); no space only in the adjective form ("50%" = padesátiprocentní) | "50 %" |
+| Quotation marks | Czech quotes | „ordinace“ |
+| Dash | En dash with spaces for a pause, hyphen inside words | "kartotéka – přehled", "e-mail" |
+| Address | Vykání; capitalised Vy/Vám in a letter to one person, lowercase vy in texts for many readers | "Děkujeme Vám" (one doctor), "vyzkoušejte" (newsletter) |
+| Brand | Doktůrek with diacritics, without ".ai" in running text | "Doktůrek", not "Dokturek" |
+| Line breaks | No single-letter preposition or conjunction at the end of a line on web and print (v, k, s, z, o, u, a, i) | non-breaking space after "v" |
 
 #### Punctuation and Emphasis
 - Exclamation mark policy (limited use, never more than one)
-- Ellipsis usage (avoid in most professional contexts)
 - ALL CAPS policy (avoid; use bold for emphasis instead)
 - Emoji usage by channel (professional channels: minimal or none; social: where appropriate)
 
@@ -208,16 +201,18 @@ Document and enforce these choices consistently:
 
 #### Preferred Terms
 
-Maintain a list of preferred terms and their incorrect alternatives:
+From the Voice section of the Doktůrek context; DESIGN.md adds to it:
 
 | Use This | Not This | Notes |
 |----------|----------|-------|
-| sign up (verb) | signup (verb) | "signup" is the noun form |
-| log in (verb) | login (verb) | "login" is the noun/adjective form |
-| set up (verb) | setup (verb) | "setup" is the noun/adjective form |
-| email | e-mail | No hyphen |
-| website | web site | One word |
-| data is (singular) | data are | Unless the publication requires plural |
+| Doktůrek | Dokturek, Doktůrek.ai | ".ai" only in the domain |
+| přihlásit se | zalogovat se, login (verb) | |
+| předplatné | subscription | |
+| koncept, uloženo | draft, saved | |
+| ordinace, kartotéka, pacient | | Preferred everyday words |
+| Systém navrhuje, lékař rozhoduje | AI rozhodla, garantovaná diagnóza | Clinical decisions stay with the doctor |
+| ambulantní informační systém (AIS) | EHRko | |
+| (plain description) | revoluce, hotovo bez ověření | |
 
 #### Product and Feature Names
 - Official capitalization for product names
@@ -227,11 +222,8 @@ Maintain a list of preferred terms and their incorrect alternatives:
 - Trademark and registration symbols (when required and when to omit)
 
 #### Inclusive Language
-- Use gender-neutral language (they/them for unknown individuals)
-- Avoid ableist language ("crazy", "blind spot", "lame")
-- Use person-first language where appropriate
-- Avoid culturally specific idioms that may not translate
-- Use "simple" or "straightforward" instead of "easy" (what is easy varies by person)
+- Avoid ableist language and idioms that exclude readers
+- Use "jednoduše" or "přehledně" carefully: what is easy varies by person
 
 #### Industry Jargon Management
 - Define which technical terms the audience understands without explanation
@@ -280,4 +272,4 @@ Ask: "Would you like me to:
 - Revise the full content with these suggestions applied?
 - Focus on fixing just the high-severity issues?
 - Review additional content against the same guidelines?
-- Help you document your brand voice for future reviews?"
+- Propose text for a change to DESIGN.md (you file it in `dokturek-docs`)?"

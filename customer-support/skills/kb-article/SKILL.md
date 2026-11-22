@@ -10,23 +10,23 @@ argument-hint: "<resolved issue or ticket>"
 
 - Articles for practices are Czech with vykání and use synthetic data in every example and screenshot. Ask where the knowledge base lives; none is documented yet. For technical guides use `technical-documentation`.
 
-# /kb-article
+# KB article
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
 
-Draft a publish-ready knowledge base article from a resolved support issue, common question, or documented workaround. Structures the content for searchability and self-service.
+Draft a knowledge base article, ready for review, from a resolved support issue, common question, or documented workaround. Structures the content for searchability and self-service.
 
 ## Usage
 
 ```
-/kb-article <resolved issue, ticket reference, or topic description>
+/customer-support:kb-article <resolved issue, ticket reference, or topic description>
 ```
 
 Examples:
-- `/kb-article How to configure SSO with Okta — resolved this for 3 customers last month`
-- `/kb-article Ticket #4521 — customer couldn't export data over 10k rows`
-- `/kb-article Common question: how to set up webhook notifications`
-- `/kb-article Known issue: dashboard charts not loading on Safari 16`
+- `/customer-support:kb-article Nejde přihlášení přes Keycloak: stránka se vrací na přihlášení (vyřešený požadavek)`
+- `/customer-support:kb-article Issue #[číslo]: eRecept se neodeslal, lékař nevěděl, co dál`
+- `/customer-support:kb-article Častý dotaz: kde najdu uložený koncept dekurzu`
+- `/customer-support:kb-article Známý problém: [popis podle STAV.md]`
 
 ## Workflow
 
@@ -122,9 +122,8 @@ Articles are useless if customers can't find them. Optimize every article for se
 
 | Good Title | Bad Title | Why |
 |------------|-----------|-----|
-| "How to configure SSO with Okta" | "SSO Setup" | Specific, includes the tool name customers search for |
-| "Fix: Dashboard shows blank page" | "Dashboard Issue" | Includes the symptom customers experience |
-| "API rate limits and quotas" | "API Information" | Includes the specific terms customers search for |
+| "Jak se přihlásit do Doktůrku přes Keycloak" | "Přihlášení" | Specific, includes the words a practice searches for |
+| "eRecept se neodeslal: co dělat" | "Problém s eReceptem" | Includes the symptom the practice experiences |
 | "Error: 'Connection refused' when importing data" | "Import Problems" | Includes the exact error message |
 
 ### Keyword Optimization
@@ -257,8 +256,8 @@ Start every article with a sentence that restates the problem or task in plain l
 ## Workaround
 [Steps to work around the issue, or "No workaround available"]
 
-## Fix Timeline
-[Expected fix date or current status]
+## Current status
+[What we know now and the next step; no fix date unless the owner confirmed it]
 
 ## Updates
 - [Date]: [Update]
@@ -269,82 +268,12 @@ Start every article with a sentence that restates the problem or task in plain l
 - Update the article when the fix ships and mark as resolved
 - If resolved, keep the article live for 30 days for customers still searching the old symptoms
 
-## Review and Maintenance Cadence
+## Maintenance
 
-Knowledge bases decay without maintenance. Follow this schedule:
-
-| Activity | Frequency | Who |
-|----------|-----------|-----|
-| **New article review** | Before publishing | Peer review + SME for technical content |
-| **Accuracy audit** | Quarterly | Support team reviews top-traffic articles |
-| **Stale content check** | Monthly | Flag articles not updated in 6+ months |
-| **Known issue updates** | Weekly | Update status on all open known issues |
-| **Analytics review** | Monthly | Check which articles have low helpfulness ratings or high bounce rates |
-| **Gap analysis** | Quarterly | Identify top ticket topics without KB articles |
-
-### Article Lifecycle
-
-1. **Draft**: Written, needs review
-2. **Published**: Live and available to customers
-3. **Needs update**: Flagged for revision (product change, feedback, or age)
-4. **Archived**: No longer relevant but preserved for reference
-5. **Retired**: Removed from the knowledge base
-
-### When to Update vs. Create New
-
-**Update existing** when:
-- The product changed and steps need refreshing
-- The article is mostly right but missing a detail
-- Feedback indicates customers are confused by a specific section
-- A better workaround or solution was found
-
-**Create new** when:
-- A new feature or product area needs documentation
-- A resolved ticket reveals a gap — no article exists for this topic
-- The existing article covers too many topics and should be split
-- A different audience needs the same information explained differently
-
-## Linking and Categorization Taxonomy
-
-### Category Structure
-
-Organize articles into a hierarchy that matches how customers think:
-
-```
-Getting Started
-├── Account setup
-├── First-time configuration
-└── Quick start guides
-
-Features & How-tos
-├── [Feature area 1]
-├── [Feature area 2]
-└── [Feature area 3]
-
-Integrations
-├── [Integration 1]
-├── [Integration 2]
-└── API reference
-
-Troubleshooting
-├── Common errors
-├── Performance issues
-└── Known issues
-
-Billing & Account
-├── Plans and pricing
-├── Billing questions
-└── Account management
-```
-
-### Linking Best Practices
-
-- **Link from troubleshooting to how-to**: "For setup instructions, see [How to configure X]"
-- **Link from how-to to troubleshooting**: "If you encounter errors, see [Troubleshooting X]"
-- **Link from FAQ to detailed articles**: "For a full walkthrough, see [Guide to X]"
-- **Link from known issues to workarounds**: Keep the chain from problem to solution short
-- **Use relative links** within the KB — they survive restructuring better than absolute URLs
-- **Avoid circular links** — if A links to B, B shouldn't link back to A unless both are genuinely useful entry points
+- Before publishing: review by the owner of the topic (Anna for anything clinical) and a check that every example uses synthetic data.
+- **Update** an existing article when the product changed, a detail is missing or a better workaround exists; **create** a new one when no article covers the topic or a different audience needs it.
+- Keep known-issue articles current; mark them resolved when the fix ships.
+- Link troubleshooting and how-to articles to each other; keep the chain from problem to solution short.
 
 ## KB Writing Best Practices
 

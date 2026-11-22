@@ -19,7 +19,7 @@ Answer a data question, from a quick lookup to a full analysis to a formal repor
 ## Usage
 
 ```
-/analyze <natural language question>
+/data:analyze <natural language question>
 ```
 
 ## Workflow
@@ -104,17 +104,17 @@ When a chart would communicate results more effectively than a table:
 
 **Quick answer:**
 ```
-/analyze How many new users signed up in December?
+/data:analyze How many new users signed up in December?
 ```
 
 **Full analysis:**
 ```
-/analyze What's causing the increase in support ticket volume over the past 3 months? Break down by category and priority.
+/data:analyze What's causing the increase in support ticket volume over the past 3 months? Break down by category and priority.
 ```
 
 **Formal report:**
 ```
-/analyze Prepare a data quality assessment of our customer table -- completeness, consistency, and any issues we should address.
+/data:analyze Prepare a data quality assessment of our customer table -- completeness, consistency, and any issues we should address.
 ```
 
 ## Tips

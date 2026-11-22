@@ -29,7 +29,8 @@ Skill se spustí sám podle zadání, nebo ho zavolejte jménem, například `/c
 
 - Každý skill nejdřív načte [kontext Doktůrku](shared/dokturek-context.md): tým, zdroje pravdy, pravidla pro data a potvrzování, hlas značky a předávání jiným pluginům.
 - Odpovídá česky. Fakta o Doktůrku cituje z `dokturek-docs` a značí [Z], [P], [N].
-- Doktůrek zatím nemá dohodnuté SLA: skill ordinaci neslíbí termín odpovědi ani vyřešení.
+- Doktůrek zatím nemá dohodnuté SLA ani úrovně podpory: skill ordinaci neslíbí termín odpovědi ani vyřešení a nenapíše, že je něco zapsáno, eskalováno nebo opraveno, dokud to nepotvrdíte.
+- Šablony odpovědí jsou česky, s vykáním a s dalším krokem bez termínu. Eskalace jde na konkrétního vlastníka z týmu, ne na obecný tým.
 
 ## Konektory
 

@@ -11,7 +11,7 @@
 
 Katalog `dokturek-work` obsahuje pluginy pro Claude Code a Claude Cowork, které pomáhají týmu Doktůrek.ai s produktem, obchodem, marketingem, podporou ordinací, právem, provozem, texty rozhraní a analýzou dat. Každý plugin zná kontext Doktůrku: tým, zdroje pravdy v `dokturek-docs`, pravidla pro data a potvrzování a hlas značky.
 
-Marketplace **1.0.1** · [Historie změn](CHANGELOG.md) · [Přispívání](CONTRIBUTING.md)
+Marketplace **1.1.0** · [Historie změn](CHANGELOG.md) · [Přispívání](CONTRIBUTING.md)
 
 ## Kam patří který marketplace
 
@@ -54,14 +54,14 @@ V Claude Desktop a Cowork přidejte marketplace v **Customize → Plugins**. Na 
 
 | Plugin | Verze | K čemu slouží |
 | --- | --- | --- |
-| [`product-management`](product-management/README.md) | 2.0.0 | Neklinické specifikace, roadmapa jako diff do `dokturek-docs`, týdenní sprinty v GitHub Issues, reporty, vyhodnocení rozhovorů s lékaři. |
-| [`sales`](sales/README.md) | 3.0.0 | Průzkum ordinace, příprava a shrnutí hovoru, oslovení, námitky, srovnání s AIS konkurence, přehled obchodů v Pipedrive. |
-| [`marketing`](marketing/README.md) | 2.0.0 | Kampaně, newsletter a e-mailové sekvence pro lékaře, texty na web, kontrola tónu značky, SEO `dokturek.ai`. |
-| [`customer-support`](customer-support/README.md) | 2.0.0 | Třídění požadavků ordinací, odpovědi lékařům, eskalace, dohledání odpovědi, články do znalostní báze. |
-| [`legal`](legal/README.md) | 2.0.0 | Smlouvy a DPA s ordinacemi, NDA, GDPR a stav DPA/DPIA, právní rizika, další zpracovatelé. |
-| [`operations`](operations/README.md) | 2.0.0 | Incidenty, kontrola před nasazením přes Coolify, změnové požadavky, kapacita, technický dluh, popis procesů. |
-| [`design`](design/README.md) | 2.0.0 | České texty rozhraní a audit přístupnosti podle `DESIGN.md`. |
-| [`data`](data/README.md) | 2.0.0 | SQL, průzkum dat, statistika pilotu, grafy a dashboardy bez dat na úrovni pacienta. |
+| [`product-management`](product-management/README.md) | 2.1.0 | Neklinické specifikace, roadmapa jako diff do `dokturek-docs`, týdenní sprinty v GitHub Issues, reporty, vyhodnocení rozhovorů s lékaři. |
+| [`sales`](sales/README.md) | 3.1.0 | Průzkum ordinace, příprava a shrnutí hovoru, oslovení, námitky, srovnání s AIS konkurence, přehled obchodů v Pipedrive. |
+| [`marketing`](marketing/README.md) | 2.1.0 | Kampaně, newsletter a e-mailové sekvence pro lékaře, texty na web, kontrola tónu značky, SEO `dokturek.ai`. |
+| [`customer-support`](customer-support/README.md) | 2.1.0 | Třídění požadavků ordinací, odpovědi lékařům, eskalace, dohledání odpovědi, články do znalostní báze. |
+| [`legal`](legal/README.md) | 2.1.0 | Smlouvy a DPA s ordinacemi, NDA, GDPR a stav DPA/DPIA, právní rizika, další zpracovatelé. |
+| [`operations`](operations/README.md) | 2.1.0 | Incidenty, kontrola před nasazením přes Coolify, změnové požadavky, kapacita, technický dluh, popis procesů. |
+| [`design`](design/README.md) | 2.1.0 | České texty rozhraní a audit přístupnosti podle `DESIGN.md`. |
+| [`data`](data/README.md) | 2.1.0 | SQL pro PostgreSQL a Firebird, průzkum dat, statistika pilotu, grafy a dashboardy bez dat na úrovni pacienta. |
 
 ## Pravidla, která platí ve všech pluginech
 

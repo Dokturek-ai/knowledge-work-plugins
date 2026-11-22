@@ -1,0 +1,124 @@
+name: Plugin Evals
+
+# Behaviorální evaly (`claude plugin eval`) pravidel Doktůrku: potvrzení před odesláním, žádné slevy,
+# SLA ani vymyšlené reference, nejasný eRecept se neopakuje, data pacientů se nevypisují, klinické PRD
+# patří do ehr-design. Suite jsou v <plugin>/evals/, popis v evals/README.md.
+#
+# Každý běh jsou placená volání modelu, proto workflow neběží na push ani PR, jen ručně a jednou týdně,
+# a jen když je nastaven secret ANTHROPIC_API_KEY. Bez něj se evaly přeskočí s upozorněním.
+
+on:
+  workflow_dispatch:
+    inputs:
+      plugin:
+        description: Plugin k vyhodnocení
+        type: choice
+        options: [all, sales, marketing, customer-support, legal, product-management, operations, design, data]
+        default: all
+      runs:
+        description: Počet běhů na případ (1–50)
+        type: string
+        default: '3'
+      threshold:
+        description: Minimální skóre případu (0–1)
+        type: string
+        default: '0.85'
+  schedule:
+    - cron: '0 5 * * 1'   # každé pondělí 05:00 UTC
+
+permissions:
+  contents: read
+
+concurrency:
+  group: plugin-evals-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Preflight (secret + výběr pluginů)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      has_key: ${{ steps.check.outputs.has_key }}
+      plugins: ${{ steps.check.outputs.plugins }}
+    steps:
+      - id: check
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PLUGIN_INPUT: ${{ inputs.plugin }}
+        run: |
+          if [ -n "$ANTHROPIC_API_KEY" ]; then
+            echo "has_key=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_key=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Plugin evals přeskočeny::Secret ANTHROPIC_API_KEY není nastaven (Settings → Secrets and variables → Actions)."
+          fi
+          all='["sales","marketing","customer-support","legal","product-management","operations","design","data"]'
+          case "${PLUGIN_INPUT:-all}" in
+            all|'') echo "plugins=$all" >> "$GITHUB_OUTPUT" ;;
+            *) echo "plugins=[\"$PLUGIN_INPUT\"]" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+  evals:
+    name: claude plugin eval — ${{ matrix.plugin }}
+    needs: preflight
+    if: needs.preflight.outputs.has_key == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        plugin: ${{ fromJSON(needs.preflight.outputs.plugins) }}
+    env:
+      # CLI připnuté: sémantika runneru evalů se mezi verzemi mění a nesmí se plést s regresí pluginu.
+      CLAUDE_CODE_VERSION: '2.1.330'
+      PLUGIN: ${{ matrix.plugin }}
+      RUNS: ${{ inputs.runs || '3' }}
+      THRESHOLD: ${{ inputs.threshold || '0.85' }}
+      # Modely připnuté, aby změna modelu nevypadala jako regrese pluginu. Rubriky llm graderů zatím
+      # nejsou kalibrované proti více běhům; po prvním běhu je zkontrolujte (evals/README.md).
+      AGENT_MODEL: claude-sonnet-5-5
+      JUDGE_MODEL: claude-haiku-5-5
+      OUT_DIR: eval-results/${{ matrix.plugin }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install -g "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" && claude --version
+      # Bez grantu Bash/Write a bez skutečných MCP serverů (výchozí --mocks record je nespustí).
+      - name: Run eval suite
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          claude plugin eval "$PLUGIN" \
+            --trust-plugin --no-publish \
+            --output-dir "$OUT_DIR" \
+            --threshold "$THRESHOLD" \
+            --runs "$RUNS" \
+            --ablation none \
+            --model "$AGENT_MODEL" \
+            --judge-model "$JUDGE_MODEL" \
+            --max-cost-usd 10 \
+            -j 2
+      - name: Summary
+        if: always()
+        run: |
+          f="$OUT_DIR/aggregate-result.json"
+          {
+            echo "### claude plugin eval — \`$PLUGIN\`"
+            if [ ! -s "$f" ]; then echo "Výsledek nevznikl, viz log kroku *Run eval suite*."; exit 0; fi
+            jq -r '"Skóre: \(.aggregates.overallScore // "n/a") · nad prahem: \(.aggregates.casesPassed // "?")/\(.aggregates.casesTotal // "?") · cena: $\(.costUsd // "?")"' "$f"
+            echo
+            echo "| Případ | Skóre |"
+            echo "|---|---|"
+            jq -r '.cases[]? | "| \(.name) | \(.aggregates.score // "n/a") |"' "$f"
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-evals-${{ matrix.plugin }}
+          path: eval-results/${{ matrix.plugin }}/
+          if-no-files-found: warn
+          retention-days: 30

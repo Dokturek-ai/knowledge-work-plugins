@@ -1,6 +1,6 @@
 ---
 name: stakeholder-update
-description: Generate a stakeholder update tailored to audience and cadence. Use when writing a weekly or monthly status for leadership, announcing a launch, escalating a risk or blocker, or translating the same progress into exec-brief, engineering-detail, or customer-facing versions.
+description: Write a status report / update for Doktůrek stakeholders tailored to audience and cadence. Use when writing a weekly or monthly status for the team or leadership, announcing a launch, escalating a risk or blocker, or translating the same progress into leadership, technical or practice-facing versions. Decisions appear only as proposals for the register.
 argument-hint: "<update type and audience>"
 ---
 
@@ -20,7 +20,7 @@ Generate a stakeholder update tailored to the audience and cadence.
 ## Usage
 
 ```
-/stakeholder-update $ARGUMENTS
+/product-management:stakeholder-update $ARGUMENTS
 ```
 
 ## Workflow
@@ -39,7 +39,7 @@ Ask who the update is for:
 - **Executives / leadership**: High-level, outcome-focused, strategic framing, brief
 - **Engineering team**: Technical detail, implementation context, blockers, decisions needed
 - **Cross-functional partners**: Context-appropriate detail, focus on shared goals and dependencies
-- **Customers / external**: Benefits-focused, clear timelines, no internal jargon
+- **Practices / external**: Benefits-focused, no internal jargon, no dates the owner has not confirmed
 - **Board**: Metrics-driven, strategic, risk-focused, very concise
 
 ### 3. Pull Context from Connected Tools
@@ -88,7 +88,7 @@ Structure the update for the target audience using the templates and frameworks 
 After generating the update:
 - Ask if the user wants to adjust tone, detail level, or emphasis
 - Offer to format for the delivery channel (email, chat post, doc, slides)
-- If **~~chat** is connected, offer to draft the message for sending
+- If **~~chat** is connected, offer to draft the message; post only after the user confirms the exact channel and text
 
 ## Update Templates by Audience
 
@@ -135,7 +135,7 @@ In progress:
 - [Item] — [Owner]. [Expected completion]. [Blockers if any].
 
 Decisions:
-- [Decision made]: [Rationale]. [Link to ADR if exists].
+- [Decision recorded in the register]: [Rationale]. [Link to the R/ADR entry in `10-rozhodnuti-a-otevrene-otazky.md`].
 - [Decision needed]: [Context]. [Options]. [Recommendation].
 
 Priority changes:
@@ -178,7 +178,7 @@ What's new:
 - [Feature] — [Benefit in customer terms]. [How to use it / link].
 
 Coming soon:
-- [Feature] — [Expected timing]. [Why it matters to you].
+- [Feature] — [Timing only if Honza confirmed it]. [Why it matters to you].
 
 Known issues:
 - [Issue] — [Status]. [Workaround if available].
@@ -190,7 +190,7 @@ Feedback:
 **Tips for customer updates**:
 - No internal jargon. No ticket numbers. No technical implementation details.
 - Frame everything in terms of what the customer can now DO, not what you built.
-- Be honest about timelines but do not overcommit. "Later this quarter" is better than a date you might miss.
+- Do not commit to timelines. Name a date only if Honza confirmed it for external use.
 - Only mention known issues if they are customer-impacting and you have a resolution plan.
 
 ## Status Reporting Framework
@@ -242,108 +242,24 @@ Feedback:
 - Presenting risks without mitigations. Every risk should come with a plan.
 - Waiting too long. A risk communicated early is a planning input. A risk communicated late is a fire drill.
 
-## Decision Documentation (ADRs)
+## Decisions in an Update
 
-### Architecture Decision Record Format
-Document important decisions for future reference:
+An update reports decisions; it never makes or records them (Doktůrek context, rule 3).
+
+- Check `dokturek-docs` → `10-rozhodnuti-a-otevrene-otazky.md` first. If an R, ADR or Q entry exists, cite it and its state.
+- If a decision is needed, or a meeting reached one that is not in the register, propose an entry as text for the user or Petr to file:
 
 ```
-# [Decision Title]
+Navržené rozhodnutí (oddíl B):
+| R-nový-? (návrh, číslo přidělí registr) | [rozhodnutí jednou větou] | [zdrojový dokument] | Vlastník: [Honza / Petr / Anna]; co chybí k přijetí |
 
-## Status
-[Proposed / Accepted / Deprecated / Superseded by ADR-XXX]
-
-## Context
-What is the situation that requires a decision? What forces are at play?
-
-## Decision
-What did we decide? State the decision clearly and directly.
-
-## Consequences
-What are the implications of this decision?
-- Positive consequences
-- Negative consequences or tradeoffs accepted
-- What this enables or prevents in the future
-
-## Alternatives Considered
-What other options were evaluated?
-For each: what was it, why was it rejected?
+Otevřená otázka:
+| Q-? (návrh) | [otázka] | [vlastník] | [co blokuje] |
 ```
 
-### When to Write an ADR
-- Strategic product decisions (which market segment to target, which platform to support)
-- Significant technical decisions (architecture choices, vendor selection, build vs buy)
-- Controversial decisions where people disagreed (document the rationale for future reference)
-- Decisions that constrain future options (choosing a technology, signing a partnership)
-- Decisions you expect people to question later (capture the context while it is fresh)
-
-### Tips for Decision Documentation
-- Write ADRs close to when the decision is made, not weeks later
-- Include who was involved in the decision and who made the final call
-- Document the context generously — future readers will not have today's context
-- It is okay to document decisions that were wrong in hindsight — add a "superseded by" link
-- Keep them short. One page is better than five.
-
-## Meeting Facilitation
-
-### Stand-up / Daily Sync
-**Purpose**: Surface blockers, coordinate work, maintain momentum.
-**Format**: Each person shares:
-- What they accomplished since last sync
-- What they are working on next
-- What is blocking them
-
-**Facilitation tips**:
-- Keep it to 15 minutes. If discussions emerge, take them offline.
-- Focus on blockers — this is the highest-value part of standup
-- Track blockers and follow up on resolution
-- Cancel standup if there is nothing to sync on. Respect people's time.
-
-### Sprint / Iteration Planning
-**Purpose**: Commit to work for the next sprint. Align on priorities and scope.
-**Format**:
-1. Review: what shipped last sprint, what carried over, what was cut
-2. Priorities: what are the most important things to accomplish this sprint
-3. Capacity: how much can the team take on (account for PTO, on-call, meetings)
-4. Commitment: select items from the backlog that fit capacity and priorities
-5. Dependencies: flag any cross-team or external dependencies
-
-**Facilitation tips**:
-- Come with a proposed priority order. Do not ask the team to prioritize from scratch.
-- Push back on overcommitment. It is better to commit to less and deliver reliably.
-- Ensure every item has a clear owner and clear acceptance criteria.
-- Flag items that are underscoped or have hidden complexity.
-
-### Retrospective
-**Purpose**: Reflect on what went well, what did not, and what to change.
-**Format**:
-1. Set the stage: remind the team of the goal and create psychological safety
-2. Gather data: what went well, what did not go well, what was confusing
-3. Generate insights: identify patterns and root causes
-4. Decide actions: pick 1-3 specific improvements to try next sprint
-5. Close: thank people for honest feedback
-
-**Facilitation tips**:
-- Create psychological safety. People must feel safe to be honest.
-- Focus on systems and processes, not individuals.
-- Limit to 1-3 action items. More than that and nothing changes.
-- Follow up on previous retro action items. If you never follow up, people stop engaging.
-- Vary the retro format occasionally to prevent staleness.
-
-### Stakeholder Review / Demo
-**Purpose**: Show progress, gather feedback, build alignment.
-**Format**:
-1. Context: remind stakeholders of the goal and what they saw last time
-2. Demo: show what was built. Use real product, not slides.
-3. Metrics: share any early data or feedback
-4. Feedback: structured time for questions and input
-5. Next steps: what is coming next and when the next review will be
-
-**Facilitation tips**:
-- Demo the real product whenever possible. Slides are not demos.
-- Frame feedback collection: "What feedback do you have on X?" is better than "Any thoughts?"
-- Capture feedback visibly and commit to addressing it (or explaining why not)
-- Set expectations about what kind of feedback is actionable at this stage
+- Owner by area: Honza for product and business, Petr for technology, Anna for clinical content.
+- In the update, write "navrženo, čeká na rozhodnutí [owner]", not "rozhodli jsme".
+- Context and alternatives belong in the source document the entry links to, not in the update.
 
 ## Output Format
 

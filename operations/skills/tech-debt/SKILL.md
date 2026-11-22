@@ -1,6 +1,6 @@
 ---
 name: tech-debt
-description: Identify, categorize, and prioritize technical debt. Trigger with "tech debt", "technical debt audit", "what should we refactor", "code health", or when the user asks about code quality, refactoring priorities, or maintenance backlog.
+description: Triage a known technical-debt item or deferred piece of work and propose a row for the Doktůrek registers (technicky-dluh.md in dokturek-docs, or the dokturek-platform pre-production checklist). Use when someone reports a shortcut, workaround or postponed task that should be recorded, or asks to re-prioritise rows already in those registers. Not for code review or refactoring, which belong to the development plugins.
 ---
 
 > **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
@@ -8,6 +8,8 @@ description: Identify, categorize, and prioritize technical debt. Trigger with "
 ## Doktůrek specifics
 
 - Doktůrek keeps technical debt in `dokturek-docs:02-architektura/medplum-rozhodnuti/technicky-dluh.md` and deferred work in `dokturek-platform:docs/pre-production-checklist.md`. Propose rows there instead of a new register.
+- Output is a proposed row (or edit to an existing row) in the register's own columns, with the source and [Z]/[P]/[N] marks. Adding it is a `dokturek-docs` or `dokturek-platform` pull request that you open only after an explicit yes. Petr owns technical priorities.
+- Do not audit code, review pull requests or plan refactors here; route that to the development plugins (`medplum`, `medplum-engineering` in the `dokturek-team` marketplace).
 
 # Tech Debt Management
 

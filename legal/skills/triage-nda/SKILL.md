@@ -1,6 +1,6 @@
 ---
 name: triage-nda
-description: Rapidly triage an incoming NDA and classify it as GREEN (standard approval), YELLOW (counsel review), or RED (full legal review). Use when a new NDA arrives from sales or business development, when screening for embedded non-solicits, non-competes, or missing carveouts, or when deciding whether an NDA can be signed under standard delegation.
+description: Rapidly triage an incoming NDA under Czech law and classify it as GREEN (recommend signing), YELLOW (points to resolve) or RED (do not sign as is); every result is a recommendation to Honza, nothing is signed without him. Use when a new NDA arrives from a practice, an AIS vendor, a partner or an investor, or when screening for embedded non-solicits, non-competes or missing carveouts.
 argument-hint: "<NDA file or text>"
 ---
 
@@ -11,21 +11,24 @@ argument-hint: "<NDA file or text>"
 - The Doktůrek party is **Clementine Solutions s.r.o.** Typical counterparties: practices, AIS vendors, integration partners, investors.
 - An NDA that touches patient data is not an NDA case: route it to a DPA review (`review-contract`).
 - No lawyer is engaged yet: YELLOW and RED go to Honza with the list of points for an external lawyer.
+- **GREEN is a recommendation to Honza, not an approval.** Nothing is signed without him; there is no delegation of signing authority.
+- **No local NDA playbook exists** (there is no `legal.local.md`). Use the Czech defaults in Step 2; for anything touching personal data, the reference is [`dpa-revision-brief.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/04-pravo-a-regulatorika/dpa-revision-brief.md).
+- A contractual penalty (smluvní pokuta, § 2048 OZ) is common in Czech NDAs: treat it as YELLOW and check its amount, whether it is mutual and whether it excludes damages beyond the penalty.
 
 # /triage-nda -- NDA Pre-Screening
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
 
-Triage the NDA: @$1
+Triage the NDA: $ARGUMENTS
 
-Rapidly triage incoming NDAs against standard screening criteria. Classify the NDA for routing: standard approval, counsel review, or full legal review.
+Rapidly triage incoming NDAs against standard screening criteria. Classify the NDA as a recommendation to Honza: sign, resolve specific points, or do not sign as is.
 
 **Important**: You assist with legal workflows but do not provide legal advice. All analysis should be reviewed by qualified legal professionals before being relied upon.
 
 ## Invocation
 
 ```
-/triage-nda
+/legal:triage-nda <NDA file or text>
 ```
 
 ## Workflow
@@ -39,27 +42,16 @@ Accept the NDA in any format:
 
 If no NDA is provided, prompt the user to supply one.
 
-### Step 2: Load NDA Playbook
+### Step 2: Apply Czech Defaults
 
-Look for NDA screening criteria in local settings (e.g., `legal.local.md`).
-
-The NDA playbook should define:
-- Mutual vs. unilateral requirements
-- Acceptable term lengths
-- Required carveouts
-- Prohibited provisions
-- Organization-specific requirements
-
-**If no NDA playbook is configured:**
-- Proceed with reasonable market-standard defaults
-- Note clearly that defaults are being used
-- Defaults applied:
-  - Mutual obligations required (unless the organization is only disclosing)
-  - Term: 2-3 years standard, up to 5 years for trade secrets
+Doktůrek has no local NDA playbook (no `legal.local.md`); do not look for one. Apply these defaults and say in the report that they were used ([P], to be confirmed by a lawyer):
+  - Mutual obligations required (unless Clementine Solutions s.r.o. is only disclosing)
+  - Term: 2-3 years standard, up to 5 years for trade secrets (obchodní tajemství, § 504 OZ)
   - Standard carveouts required: independently developed, publicly available, rightfully received from third party, required by law
   - No non-solicitation or non-compete provisions
   - No residuals clause (or narrowly scoped if present)
-  - Governing law in a reasonable commercial jurisdiction
+  - A contractual penalty (smluvní pokuta, § 2048 OZ) is acceptable if proportionate and mutual; flag it YELLOW for Honza
+  - Czech law and Czech courts
 
 ### Step 3: Quick Screen
 
@@ -109,7 +101,7 @@ All of the following carveouts should be present:
 
 #### 8. Remedies
 - [ ] **Injunctive relief**: Acknowledgment that breach may cause irreparable harm and equitable relief may be appropriate is standard
-- [ ] **No pre-determined damages**: Avoid liquidated damages clauses in NDAs
+- [ ] **Contractual penalty (smluvní pokuta, § 2048 OZ)**: Common in Czech NDAs. Check the amount in Kč, whether it applies per breach, whether it is mutual, and whether the parties excluded damages beyond the penalty (§ 2050 OZ). A disproportionate penalty can be reduced by a court (§ 2051 OZ); whether that applies ověří právník
 - [ ] **Not one-sided**: Remedies provisions apply equally to both parties (in mutual NDAs)
 
 #### 9. Problematic Provisions to Flag
@@ -130,7 +122,7 @@ All of the following carveouts should be present:
 
 Based on the screening results, assign a classification:
 
-#### GREEN -- Standard Approval
+#### GREEN -- Recommend Signing
 
 **All** of the following must be true:
 - NDA is mutual (or unilateral in the appropriate direction)
@@ -139,15 +131,15 @@ Based on the screening results, assign a classification:
 - No non-solicitation, non-compete, or exclusivity provisions
 - No residuals clause, or residuals clause is narrowly scoped
 - Reasonable governing law jurisdiction
-- Standard remedies (no liquidated damages)
+- Standard remedies (no contractual penalty, or none beyond what is flagged YELLOW)
 - Permitted disclosures include employees, contractors, and advisors
 - Return/destruction provisions include retention exception for legal/compliance
 - Definition of confidential information is reasonably scoped
 
-**Routing**: Approve via standard delegation of authority. No counsel review required.
-- **Action**: Proceed to signature with standard delegation of authority
+**Routing**: Recommendation to Honza. Nothing is signed without him.
+- **Action**: Send the triage report to Honza with the recommendation to sign; mention anything a lawyer should glance at
 
-#### YELLOW -- Counsel Review Needed
+#### YELLOW -- Points to Resolve
 
 **One or more** of the following are present, but the NDA is not fundamentally problematic:
 - Definition of confidential information is broader than preferred but not unreasonable
@@ -159,9 +151,10 @@ Based on the screening results, assign a classification:
 - Marking requirements present but workable
 - Return/destruction lacks explicit retention exception (likely implied but should be added)
 - Unusual but non-harmful provisions (e.g., obligation to notify of potential breach)
+- Contractual penalty (smluvní pokuta) or liquidated damages, if proportionate and not one-sided
 
-**Routing**: Flag specific issues for counsel review. Counsel can likely resolve with minor redlines in a single review pass.
-- **Action**: Counsel can likely resolve in a single review pass
+**Routing**: Flag specific issues for Honza with proposed redlines and the points for an external lawyer.
+- **Action**: Honza decides whether to negotiate the points or have a lawyer look at them
 
 #### RED -- Significant Issues
 
@@ -174,13 +167,13 @@ Based on the screening results, assign a classification:
 - **Overbroad definition** that could capture public information or independently developed materials
 - **Broad residuals clause** that effectively creates a license to use confidential information
 - **IP assignment or license grant** hidden in the NDA
-- **Liquidated damages or penalty provisions**
+- **Disproportionate or one-sided contractual penalty** (e.g., a penalty that only Clementine Solutions s.r.o. pays, or an amount out of all proportion to the purpose)
 - **Audit rights** without reasonable scope or notice requirements
 - **Highly unfavorable jurisdiction** with mandatory arbitration
 - **The document is not actually an NDA** (contains substantive commercial terms, exclusivity, or other obligations beyond confidentiality)
 
-**Routing**: Full legal review required. Do not sign. Requires negotiation, counterproposal with the organization's standard form NDA, or rejection.
-- **Action**: Do not sign; requires negotiation or counterproposal
+**Routing**: Recommend not signing as is. Honza decides between negotiation, a counterproposal and rejection; points for an external lawyer attached.
+- **Action**: Do not sign as is; requires negotiation or counterproposal
 
 ### Step 5: Generate Triage Report
 
@@ -194,7 +187,7 @@ Output a structured report:
 **Type**: [Mutual / Unilateral (disclosing) / Unilateral (receiving)]
 **Term**: [duration]
 **Governing Law**: [jurisdiction]
-**Review Basis**: [Playbook / Default Standards]
+**Review Basis**: Czech defaults (no local playbook)
 
 ## Screening Results
 
@@ -215,9 +208,9 @@ Output a structured report:
 
 [Repeat for each issue]
 
-## Recommendation
+## Recommendation to Honza
 
-[Specific next step: approve, send for review with specific notes, or reject/counter]
+[Specific recommendation: sign, resolve the listed points, or counter/reject. Nothing is signed without Honza.]
 
 ## Next Steps
 
@@ -231,14 +224,14 @@ Based on the classification, recommend the appropriate next step:
 
 | Classification | Recommended Action | Typical Timeline |
 |---|---|---|
-| GREEN | Approve and route for signature per delegation of authority | Same day |
-| YELLOW | Send to designated reviewer with specific issues flagged | 1-2 business days |
-| RED | Engage counsel for full review; prepare counterproposal or standard form | 3-5 business days |
+| GREEN | Recommendation to Honza to sign | Honza decides |
+| YELLOW | To Honza with the flagged points and proposed redlines | Honza decides |
+| RED | To Honza with a recommendation not to sign as is; points for an external lawyer | Honza decides |
 
-For YELLOW and RED classifications:
-- Identify the specific person or role that should review (if the organization has defined routing rules)
-- Include a brief summary of issues suitable for the reviewer to quickly understand the key points
-- If the organization has a standard form NDA, recommend sending it as a counterproposal for RED-classified NDAs
+Do not promise a turnaround time. For YELLOW and RED classifications:
+- Include a brief summary of issues Honza can read in a minute
+- Include the list of points for an external lawyer (no lawyer is engaged yet)
+- No Doktůrek standard-form NDA is documented; do not claim one exists
 
 ## Common NDA Issues and Standard Positions
 
@@ -267,4 +260,4 @@ For YELLOW and RED classifications:
 
 - If the document is not actually an NDA (e.g., it's labeled as an NDA but contains substantive commercial terms), flag this immediately as a RED and recommend full contract review instead
 - For NDAs that are part of a larger agreement (e.g., confidentiality section in an MSA), note that the broader agreement context may affect the analysis
-- Always note that this is a screening tool and counsel should review any items the user is uncertain about
+- Always note that this is a screening tool, that GREEN is a recommendation and not an approval, and that a lawyer should review any items the user is uncertain about

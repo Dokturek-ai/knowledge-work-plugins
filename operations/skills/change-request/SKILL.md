@@ -9,6 +9,7 @@ argument-hint: "<change description>"
 ## Doktůrek specifics
 
 - Changes to identity, state integrations or clinical data storage need Petr's approval; clinical behaviour changes also need Anna's. Link the decision in the register and the docs PR.
+- The change request is a draft. Creating a ticket or issue, posting to a channel or sending a notification happens only after you show the exact target (repository, channel, recipient) and the exact content, and the user answers with an explicit yes in the current turn.
 
 # /change-request
 
@@ -19,7 +20,7 @@ Create a structured change request with impact analysis, risk assessment, and ro
 ## Usage
 
 ```
-/change-request $ARGUMENTS
+/operations:change-request $ARGUMENTS
 ```
 
 ## Change Management Framework
@@ -108,17 +109,17 @@ Apply the assess-plan-execute-sustain framework when building the request:
 
 ## If Connectors Available
 
-If **~~ITSM** is connected:
-- Create the change request ticket automatically
-- Pull change advisory board schedule and approval workflows
+If **~~ITSM** is connected (Doktůrek has none today):
+- Draft the change request ticket; create it only after the user confirms the target and the exact text
+- Pull the approval workflow (approvers are Petr, and Anna for clinical behaviour)
 
-If **~~project tracker** is connected:
-- Link to related implementation tasks and dependencies
-- Track change progress against milestones
+If **~~project tracker** is connected (GitHub Issues in `Dokturek-ai/dokturek-docs`):
+- Find related implementation issues and dependencies, and propose the links
+- Draft a new issue or comment; create it only after the user confirms the repository and the exact text
 
 If **~~chat** is connected:
 - Draft stakeholder notifications for the communication plan
-- Post change updates to the relevant team channels
+- Propose the channel for each update; post only after the user confirms the channel and the exact text
 
 ## Tips
 

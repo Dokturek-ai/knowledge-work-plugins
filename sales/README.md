@@ -22,7 +22,7 @@ Skill se spustí sám podle zadání, nebo ho zavolejte jménem, například `/s
 | `account-research` | Průzkum ordinace nebo sítě ordinací z veřejných zdrojů (NRPZS, web ordinace). |
 | `call-prep` | Podklad před hovorem nebo ukázkou: kdo přijde, historie, otevřené otázky. |
 | `call-summary` | Z poznámek nebo přepisu hovoru připraví návrh follow-up e-mailu, interní shrnutí a změny pro Pipedrive. |
-| `draft-outreach` | Návrh oslovení nebo sekvence e-mailů pro ordinaci, jen jako koncept. |
+| `draft-outreach` | Návrh oslovení a navazujících e-mailů pro jednu ordinaci nebo lékaře, jen jako koncept. Pro seznam ordinací použijte `marketing:email-sequence`. |
 | `handle-objection` | Odpověď na námitku: přechod z dosavadního AIS, státní integrace, ochrana dat, cena. |
 | `competitive-intelligence` | Srovnání s PC Doktorem, SmartMedixem, Medistarem a dalšími AIS z doložených zdrojů. |
 | `create-an-asset` | One-pager, prezentace nebo leave-behind pro ordinaci podle brandu Doktůrku. |
@@ -35,7 +35,7 @@ Skill se spustí sám podle zadání, nebo ho zavolejte jménem, například `/s
 
 - Každý skill nejdřív načte [kontext Doktůrku](shared/dokturek-context.md): tým, zdroje pravdy, pravidla pro data a potvrzování, hlas značky a předávání jiným pluginům.
 - Odpovídá česky. Fakta o Doktůrku cituje z `dokturek-docs` a značí [Z], [P], [N].
-- Skill nic neodesílá ani nezapisuje sám. Ceny uvádí jen z [ceníku](https://dokturek.ai/cenik) s odkazem a nenabízí slevy.
+- Vše připraví jako koncept; odeslání, rezervace i změny v Pipedrive proběhnou jen po vašem výslovném potvrzení. Ceny uvádí jen z [ceníku](https://dokturek.ai/cenik) s odkazem a nenabízí slevy.
 
 ## Konektory
 

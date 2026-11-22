@@ -44,7 +44,7 @@ Pro Pipedrive, GitHub a Google Workspace plugin konektor nepřibaluje: GitHub po
 Z kořene repozitáře:
 
 ```bash
-python3 -m pip install pyyaml
+python3 -m pip install pyyaml==6.0.2
 python3 scripts/check_repo.py
 claude plugin validate . --strict
 ```

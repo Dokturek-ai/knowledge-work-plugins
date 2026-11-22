@@ -1,6 +1,6 @@
 ---
 name: capacity-plan
-description: Plan resource capacity — workload analysis and utilization forecasting. Use when heading into quarterly planning, the team feels overallocated and you need the numbers, deciding whether to hire or deprioritize, or stress-testing whether upcoming projects fit the people you have.
+description: Plan resource capacity — workload analysis and utilization forecasting. Use when heading into quarterly planning, the team feels overallocated and you need the numbers, deciding what to deprioritize, or stress-testing whether upcoming projects fit the people you have.
 argument-hint: "<team or project scope>"
 ---
 
@@ -8,7 +8,8 @@ argument-hint: "<team or project scope>"
 
 ## Doktůrek specifics
 
-- Use the capacity section of [`03-implementacni-plan/plan-prvni-ordinace.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/03-implementacni-plan/plan-prvni-ordinace.md) and the team table. Do not plan work for advisors or for Adrian.
+- Use the capacity section of [`03-implementacni-plan/plan-prvni-ordinace.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/03-implementacni-plan/plan-prvni-ordinace.md) and the team table. Do not assign work to Adrian Golian or advisors on your own; ask Petr.
+- Budget, hiring and contractor spend are leadership-only (Honza, Anna, Petr). This skill plans the time of the people already on the team; if the plan shows a gap that only money or a hire would close, write "raise with Honza (Jan Chromec)" and stop there, without figures.
 
 # /capacity-plan
 
@@ -19,7 +20,7 @@ Analyze team capacity and plan resource allocation.
 ## Usage
 
 ```
-/capacity-plan $ARGUMENTS
+/operations:capacity-plan $ARGUMENTS
 ```
 
 ## What I Need From You
@@ -27,21 +28,13 @@ Analyze team capacity and plan resource allocation.
 - **Team size and roles**: Who do you have?
 - **Current workload**: What are they working on? (Upload from project tracker or describe)
 - **Upcoming work**: What's coming next quarter?
-- **Constraints**: Budget, hiring timeline, skill requirements
+- **Constraints**: deadlines, dependencies, skill requirements
 
 ## Planning Dimensions
 
 ### People
 - Available headcount and skills
 - Current allocation and utilization
-- Planned hires and timeline
-- Contractor and vendor capacity
-
-### Budget
-- Operating budget by category
-- Project-specific budgets
-- Variance tracking
-- Forecast vs. actual
 
 ### Time
 - Project timelines and dependencies
@@ -55,7 +48,7 @@ Analyze team capacity and plan resource allocation.
 |-----------|-------------------|-------|
 | IC / Specialist | 75-80% | Leave room for reactive work and growth |
 | Manager | 60-70% | Management overhead, meetings, 1:1s |
-| On-call / Support | 50-60% | Interrupt-driven work is unpredictable |
+| Support / incident-driven | 50-60% | Interrupt-driven work is unpredictable |
 
 ## Common Pitfalls
 
@@ -91,14 +84,15 @@ Analyze team capacity and plan resource allocation.
 - [Time period with a crunch]
 
 ### Recommendations
-1. [Hire / Contract / Reprioritize / Delay]
+1. [Reprioritize / Delay / Split the work]
 2. [Specific action]
+3. [Gap that needs money or a hire: "raise with Honza", no figures]
 
 ### Scenarios
 | Scenario | Outcome |
 |----------|---------|
 | Do nothing | [What happens] |
-| Hire [X] | [What changes] |
+| Raise a gap with Honza | [What would change; no cost or hiring figures] |
 | Deprioritize [Y] | [What frees up] |
 ```
 

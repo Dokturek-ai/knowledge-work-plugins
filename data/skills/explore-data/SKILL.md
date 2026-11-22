@@ -1,6 +1,6 @@
 ---
 name: explore-data
-description: Profile and explore a dataset to understand its shape, quality, and patterns. Use when encountering a new table or file, checking null rates and column distributions, spotting data quality issues like duplicates or suspicious values, or deciding which dimensions and metrics to analyze.
+description: Profile and explore a dataset to understand its shape, quality, and patterns, with Doktůrek's patient-data limits. Always use for any profiling, "profil tabulky", top values, lengths or min/max request on a table or database copy that may hold patient data (pacient, kartotéka, rodné číslo, AIS, Firebird, Medplum). Use when encountering a new table or file, checking null rates and column distributions, spotting data quality issues like duplicates or suspicious values, or deciding which dimensions and metrics to analyze.
 argument-hint: "<table or file>"
 ---
 
@@ -8,7 +8,10 @@ argument-hint: "<table or file>"
 
 ## Doktůrek specifics
 
-- The incumbent AIS database copy (Firebird 3) may be explored only through schema and aggregates; never select rows with patient data.
+- **Synthetic or test data only for full profiling.** Every profiling check below (top/bottom values, string lengths and patterns, min/max dates, sample rows) runs only on synthetic data or a test instance.
+- **Real sources (the incumbent AIS database copy in Firebird 3, any production data): aggregates only.** Read the schema (system tables), then use only the query types of the AIS analysis method (`dokturek-docs` → `36-analyza-ambulantniho-ais/01-metodika-a-zdroje.md`, section 5): `COUNT(*)` per table, `MAX(date)` per table as last activity, and `SUM(IIF(date in period, 1, 0))` style counts. Never select rows, and never list values, value frequencies, lengths or patterns of text, identifier or date columns (names, rodné číslo, insurance number, birth dates, visit dates). Suppress any group smaller than 5 before the result leaves your hands.
+- **The legal basis for working with the AIS copy is still open** (Q-753 in `10-rozhodnuti-a-otevrene-otazky.md`, owners Anna and Lukáš Peter). Say so when you profile it, and stop if the user asks for anything beyond the aggregates above.
+- Medplum data belongs to the `dokturek-dev-toolkit` marketplace, not to this skill.
 
 # /explore-data - Profile and Explore a Dataset
 
@@ -19,7 +22,7 @@ Generate a comprehensive data profile for a table or uploaded file. Understand i
 ## Usage
 
 ```
-/explore-data <table_name or file>
+/data:explore-data <table_name or file>
 ```
 
 ## Workflow
@@ -30,7 +33,7 @@ Generate a comprehensive data profile for a table or uploaded file. Understand i
 
 1. Resolve the table name (handle schema prefixes, suggest matches if ambiguous)
 2. Query table metadata: column names, types, descriptions if available
-3. Run profiling queries against the live data
+3. Run profiling queries: the full set only on synthetic or test data; on a real source only the aggregates allowed in Doktůrek specifics
 
 **If a file is provided (CSV, Excel, Parquet, JSON):**
 
@@ -64,7 +67,7 @@ Before analyzing any data, understand its structure:
 
 ### 3. Generate Data Profile
 
-Run the following profiling checks:
+Run the following profiling checks. On a real source skip every check that lists or describes individual values (most/least common values, string lengths and patterns, min/max dates of record content); keep counts, null rates and per-table `MAX(date)` only, with groups under 5 suppressed.
 
 **Table-level metrics:**
 - Total row count
@@ -290,7 +293,7 @@ When documenting a dataset for team use:
 
 ### Schema Exploration Queries
 
-When connected to a data warehouse, use these patterns to discover schema:
+When connected to a database, use these patterns to discover schema:
 
 ```sql
 -- List all tables in a schema (PostgreSQL)
@@ -312,17 +315,19 @@ ORDER BY pg_total_relation_size(relid) DESC;
 
 -- Row counts for all tables (general pattern)
 -- Run per-table: SELECT COUNT(*) FROM table_name
+
+-- List user tables (Firebird 3, AIS copy)
+SELECT TRIM(RDB$RELATION_NAME)
+FROM RDB$RELATIONS
+WHERE COALESCE(RDB$SYSTEM_FLAG, 0) = 0 AND RDB$VIEW_BLR IS NULL
+ORDER BY 1;
+
+-- Allowed aggregates per table on the AIS copy (Firebird 3)
+SELECT COUNT(*) AS n_total,
+       MAX(DATUM) AS last_activity,
+       SUM(IIF(DATUM >= DATE '2025-05-20' AND DATUM < DATE '2026-05-21', 1, 0)) AS n_last_12m
+FROM TBL_EXAMPLE;
 ```
-
-### Lineage and Dependencies
-
-When exploring an unfamiliar data environment:
-
-1. Start with the "output" tables (what reports or dashboards consume)
-2. Trace upstream: What tables feed into them?
-3. Identify raw/staging/mart layers
-4. Map the transformation chain from raw data to analytical tables
-5. Note where data is enriched, filtered, or aggregated
 
 ## Tips
 

@@ -1,6 +1,6 @@
 ---
 name: compliance-check
-description: Run a compliance check on a proposed action, product feature, or business initiative, surfacing applicable regulations, required approvals, and risk areas. Use when launching a feature that touches personal data, when marketing or product proposes something with regulatory implications, or when you need to know which approvals and jurisdictional requirements apply before proceeding.
+description: Run a Czech and EU compliance check (GDPR, Act 110/2019 Sb., Act 372/2011 Sb., Decree 444/2024 Sb., NIS2, DPA and DPIA status) on a proposed action, product feature or business initiative, surfacing applicable rules, required approvals and risk areas. Use when a feature or pilot touches personal or patient data, when marketing or product proposes something with regulatory implications, or when you need to know which approvals apply before proceeding.
 argument-hint: "<action or initiative to check>"
 ---
 
@@ -10,6 +10,7 @@ argument-hint: "<action or initiative to check>"
 
 - MDR, IVDR, AI Act and SaMD classification belong to the `mdr-compliance` plugin. Here cover GDPR, DPA and DPIA status, health-records retention (Decree 444/2024 Sb.) and contractual obligations.
 - Real patient data stays blocked until a signed DPA and a DPIA exist. Report that gate explicitly whenever a feature or a pilot touches real data.
+- No lawyer and no DPO are engaged: say so whenever a requirement depends on them.
 - Check the current state in [`04-pravo-a-regulatorika/README.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/04-pravo-a-regulatorika/README.md) and the open questions in the register (for example Q-314, Q-745, Q-750, Q-753) before stating anything as settled.
 
 # /compliance-check -- Compliance Review
@@ -23,16 +24,18 @@ Run a compliance check on a proposed action, product feature, marketing campaign
 ## Usage
 
 ```
-/compliance-check $ARGUMENTS
+/legal:compliance-check <action or initiative>
 ```
+
+Check: $ARGUMENTS
 
 ## What I Need From You
 
 Describe what you're planning to do. Examples:
-- "We want to launch a referral program with cash rewards"
-- "We're adding biometric authentication to our mobile app"
-- "We need to process EU customer data in our US data center"
-- "Marketing wants to use customer testimonials in ads"
+- "We want to run the first practice's pilot with real patient data"
+- "We're adding a new vendor for OCR of scanned documents"
+- "We want to migrate a practice's records from its current AIS"
+- "Filip wants to send the newsletter to doctors from a purchased list"
 
 ## Output
 
@@ -45,7 +48,7 @@ Describe what you're planning to do. Examples:
 ### Applicable Regulations and Policies
 | Regulation/Policy | Relevance | Key Requirements |
 |-------------------|-----------|-----------------|
-| [GDPR / CCPA / HIPAA / etc.] | [How it applies] | [What you need to do] |
+| [GDPR / 110/2019 Sb. / 372/2011 Sb. / 444/2024 Sb. / 264/2025 Sb. / etc.] | [How it applies] | [What you need to do] |
 
 ### Requirements
 | # | Requirement | Status | Action Needed |
@@ -68,7 +71,7 @@ Describe what you're planning to do. Examples:
 | [Person/Team] | [Reason] | [Pending] |
 
 ### Further Review Recommended
-[Areas where outside counsel or specialist review is advised]
+[Points for an external lawyer, for Lukáš Peter (GDPR) and handovers to `mdr-compliance`]
 ```
 
 ## Privacy Regulation Overview
@@ -77,51 +80,34 @@ Describe what you're planning to do. Examples:
 
 **Scope**: Applies to processing of personal data of individuals in the EU/EEA, regardless of where the processing organization is located.
 
-**Key Obligations for In-House Legal Teams**:
+**Key Obligations** (Doktůrek is the processor for practices; the practice is the controller):
 - **Lawful basis**: Identify and document lawful basis for each processing activity (consent, contract, legitimate interest, legal obligation, vital interest, public task)
-- **Data subject rights**: Respond to access, rectification, erasure, portability, restriction, and objection requests within 30 days (extendable by 60 days for complex requests)
+- **Data subject rights**: The controller responds to access, rectification, erasure, portability, restriction, and objection requests within one month of receipt, extendable by two further months where necessary (Art. 12(3)); the processor assists under Art. 28(3)(e)
 - **Data protection impact assessments (DPIAs)**: Required for processing likely to result in high risk to individuals
-- **Breach notification**: Notify supervisory authority within 72 hours of becoming aware of a personal data breach; notify affected individuals without undue delay if high risk
+- **Breach notification**: The controller notifies ÚOOÚ within 72 hours of becoming aware of a personal data breach and affected individuals without undue delay if high risk; the processor notifies the controller without undue delay (contractually 24 h per the DPA brief)
 - **Records of processing**: Maintain Article 30 records of processing activities
 - **International transfers**: Ensure appropriate safeguards for transfers outside EEA (SCCs, adequacy decisions, BCRs)
-- **DPO requirement**: Appoint a Data Protection Officer if required (public authority, large-scale processing of special categories, large-scale systematic monitoring)
+- **DPO requirement**: Appoint a Data Protection Officer if required (public authority, large-scale processing of special categories, large-scale systematic monitoring). Clementine Solutions s.r.o. has no DPO; whether one is required is open [N] and ověří právník
 
-**Common In-House Legal Touchpoints**:
-- Reviewing vendor DPAs for GDPR compliance
-- Advising product teams on privacy by design requirements
-- Responding to supervisory authority inquiries
-- Managing cross-border data transfer mechanisms
-- Reviewing consent mechanisms and privacy notices
+**Common Doktůrek Touchpoints**:
+- Reviewing sub-processor terms (see `vendor-check`)
+- Privacy by design in product features (with Petr)
+- Assisting practices with data-subject requests (see `legal-response`)
+- Keeping all processing in the EU/EEA
 
-### CCPA / CPRA (California Consumer Privacy Act / California Privacy Rights Act)
+### Czech and EU Requirements
 
-**Scope**: Applies to businesses that collect personal information of California residents and meet revenue, data volume, or data sale thresholds.
-
-**Key Obligations**:
-- **Right to know**: Consumers can request disclosure of personal information collected, used, and shared
-- **Right to delete**: Consumers can request deletion of their personal information
-- **Right to opt-out**: Consumers can opt out of the sale or sharing of personal information
-- **Right to correct**: Consumers can request correction of inaccurate personal information (CPRA addition)
-- **Right to limit use of sensitive personal information**: Consumers can limit use of sensitive PI to specific purposes (CPRA addition)
-- **Non-discrimination**: Cannot discriminate against consumers who exercise their rights
-- **Privacy notice**: Must provide a privacy notice at or before collection describing categories of PI collected and purposes
-- **Service provider agreements**: Contracts with service providers must restrict use of PI to the specified business purpose
-
-**Response Timelines**:
-- Acknowledge receipt within 10 business days
-- Respond substantively within 45 calendar days (extendable by 45 days with notice)
-
-### Other Key Regulations to Monitor
-
-| Regulation | Jurisdiction | Key Differentiators |
+| Item | What to check | Source or owner |
 |---|---|---|
-| **LGPD** (Brazil) | Brazil | Similar to GDPR; requires DPO appointment; National Data Protection Authority (ANPD) enforcement |
-| **POPIA** (South Africa) | South Africa | Information Regulator oversight; required registration of processing |
-| **PIPEDA** (Canada) | Canada (federal) | Consent-based framework; OPC oversight; being modernized |
-| **PDPA** (Singapore) | Singapore | Do Not Call registry; mandatory breach notification; PDPC enforcement |
-| **Privacy Act** (Australia) | Australia | Australian Privacy Principles (APPs); notifiable data breaches scheme |
-| **PIPL** (China) | China | Strict cross-border transfer rules; data localization requirements; CAC oversight |
-| **UK GDPR** | United Kingdom | Post-Brexit UK version; ICO oversight; similar to EU GDPR with UK-specific adequacy |
+| **Act 110/2019 Sb.** (zákon o zpracování osobních údajů) | Czech rules implementing GDPR; cited as a legal basis in the DPA brief, where the reference is marked [N] | `dpa-revision-brief.md` §3; ověří právník |
+| **ÚOOÚ** (Úřad pro ochranu osobních údajů) | Supervisory authority: breach notification by the controller within 72 h, complaints, inquiries | GDPR Art. 33, 77 |
+| **Act 372/2011 Sb.** (zákon o zdravotních službách) | Medical records (zdravotnická dokumentace) and who may access them and obtain copies; access requests are the provider's duty, Doktůrek assists | Exact provisions ověří právník |
+| **Decree 444/2024 Sb.** | Retention of medical records: 10 years from change of registering provider or death; record of destruction kept 40 years [Z] | `04-pravo-a-regulatorika/README.md` |
+| **NIS2: Act 264/2025 Sb.** (cybersecurity) | Whether Clementine Solutions s.r.o. falls under the Act and in which regime is open | Q-739 (Petr) |
+| **DPA and DPIA** | Signed DPA and documented DPIA assessment before any real patient data | Q-745; `04-pravo-a-regulatorika/README.md` |
+| **DPO** | No DPO is appointed; whether Art. 37 GDPR requires one for Clementine Solutions s.r.o. is open [N] | ověří právník |
+| **EHDS** (EU) 2025/327 | Applicability to the product is open | Q-740 |
+| **MDR, AI Act** | Not covered here | `mdr-compliance` plugin |
 
 ## DPA Review Checklist
 
@@ -149,7 +135,7 @@ When reviewing a Data Processing Agreement or Data Processing Addendum, verify t
 - [ ] **Security and breach assistance**: Processor will assist with security obligations, breach notification, DPIAs, and prior consultation
 - [ ] **Deletion or return**: On termination, delete or return all personal data (at controller's choice) and delete existing copies unless legal retention required
 - [ ] **Audit rights**: Controller has right to conduct audits and inspections (or accept third-party audit reports)
-- [ ] **Breach notification**: Processor will notify controller of personal data breaches without undue delay (ideally within 24-48 hours; must enable controller to meet 72-hour regulatory deadline)
+- [ ] **Breach notification**: Processor will notify controller of personal data breaches without undue delay (contractually within 24 hours per the DPA brief; must enable controller to meet the 72-hour deadline towards ÚOOÚ)
 
 ### International Transfers
 
@@ -158,7 +144,6 @@ When reviewing a Data Processing Agreement or Data Processing Addendum, verify t
 - [ ] **Correct module**: Appropriate SCC module selected (C2P, C2C, P2P, P2C)
 - [ ] **Transfer impact assessment**: Completed if transferring to countries without adequacy decisions
 - [ ] **Supplementary measures**: Technical, organizational, or contractual measures to address gaps identified in transfer impact assessment
-- [ ] **UK addendum**: If UK personal data is in scope, UK International Data Transfer Addendum included
 
 ### Practical Considerations
 
@@ -173,7 +158,7 @@ When reviewing a Data Processing Agreement or Data Processing Addendum, verify t
 | Issue | Risk | Standard Position |
 |---|---|---|
 | Blanket sub-processor authorization without notification | Loss of control over processing chain | Require notification with right to object |
-| Breach notification timeline > 72 hours | May prevent timely regulatory notification | Require notification within 24-48 hours |
+| Breach notification timeline > 72 hours | May prevent timely regulatory notification | Require notification within 24 hours (DPA brief) |
 | No audit rights (or audit rights only via third-party reports) | Cannot verify compliance | Accept SOC 2 Type II + right to audit upon cause |
 | Data deletion timeline not specified | Data retained indefinitely | Require deletion within 30-90 days of termination |
 | No data processing locations specified | Data could be processed anywhere | Require disclosure of processing locations |
@@ -182,6 +167,8 @@ When reviewing a Data Processing Agreement or Data Processing Addendum, verify t
 ## Data Subject Request Handling
 
 ### Request Intake
+
+Doktůrek is the processor: a request that reaches Doktůrek is forwarded to the practice (controller) without undue delay, and Doktůrek assists (Art. 28(3)(e) GDPR; draft the hand-over with `legal-response`). The steps below describe what the practice does and what Doktůrek must be able to support.
 
 When a data subject request is received:
 
@@ -192,12 +179,10 @@ When a data subject request is received:
    - Restriction of processing
    - Data portability (structured, machine-readable format)
    - Objection to processing
-   - Opt-out of sale/sharing (CCPA/CPRA)
-   - Limit use of sensitive personal information (CPRA)
 
-2. **Identify applicable regulation(s)**:
-   - Where is the data subject located?
-   - Which laws apply based on your organization's presence and activities?
+2. **Identify the controller and the applicable rules**:
+   - Which practice is the controller?
+   - GDPR with Act 110/2019 Sb.; for access to medical records also Act 372/2011 Sb.
    - What are the specific requirements and timelines?
 
 3. **Verify identity**:
@@ -217,10 +202,7 @@ When a data subject request is received:
 
 | Regulation | Initial Acknowledgment | Substantive Response | Extension |
 |---|---|---|---|
-| GDPR | Not specified (best practice: promptly) | 30 days | +60 days (with notice) |
-| CCPA/CPRA | 10 business days | 45 calendar days | +45 days (with notice) |
-| UK GDPR | Not specified (best practice: promptly) | 30 days | +60 days (with notice) |
-| LGPD | Not specified | 15 days | Limited extensions |
+| GDPR Art. 12(3) | Not specified (best practice: promptly) | One month from receipt | Two further months where necessary, with the data subject told within the first month |
 
 ### Exemptions and Exceptions
 
@@ -233,9 +215,9 @@ Before fulfilling a request, check whether any exemptions apply:
 - Freedom of expression and information (for erasure requests)
 - Archiving in the public interest or scientific/historical research
 
-**Organization-specific considerations**:
-- Litigation hold: Data subject to a legal hold cannot be deleted
-- Regulatory retention: Financial records, employment records, and other categories may have mandatory retention periods
+**Doktůrek-specific considerations**:
+- Medical records retention: Decree 444/2024 Sb. sets mandatory retention, so erasure requests for medical records usually cannot be fulfilled in full; the practice decides
+- Other regulatory retention: accounting and employment records have their own periods
 - Third-party rights: Fulfilling the request might adversely affect the rights of others
 
 ### Response Process
@@ -252,7 +234,7 @@ Before fulfilling a request, check whether any exemptions apply:
 ### What to Monitor
 
 Maintain awareness of developments in:
-- **Regulatory guidance**: New or updated guidance from supervisory authorities (ICO, CNIL, FTC, state AGs, etc.)
+- **Regulatory guidance**: New or updated guidance from ÚOOÚ, the EDPB, NÚKIB, SÚKL and MZČR
 - **Enforcement actions**: Fines, orders, and settlements that signal regulatory priorities
 - **Legislative changes**: New privacy laws, amendments to existing laws, implementing regulations
 - **Industry standards**: Updates to ISO 27001, SOC 2, NIST frameworks, and sector-specific requirements
@@ -264,11 +246,11 @@ Maintain awareness of developments in:
 2. **Track relevant legal publications** for analysis of new developments
 3. **Review industry association updates** for sector-specific guidance
 4. **Maintain a regulatory calendar** of known upcoming deadlines, effective dates, and compliance milestones
-5. **Brief the legal team** on material developments that affect the organization's processing activities
+5. **Brief Honza and Petr** on material developments that affect Doktůrek's processing; a decision goes to the register as a proposal
 
 ### Escalation Criteria
 
-Escalate regulatory developments to senior counsel or leadership when:
+Escalate regulatory developments to Honza and Petr (with points for an external lawyer) when:
 - A new regulation or guidance directly affects the organization's core business activities
 - An enforcement action in the organization's sector signals heightened regulatory scrutiny
 - A compliance deadline is approaching that requires organizational changes
@@ -278,5 +260,5 @@ Escalate regulatory developments to senior counsel or leadership when:
 ## Tips
 
 1. **Be specific** — "We want to email all our users" is better than "marketing campaign."
-2. **Include the geography** — Compliance requirements vary by jurisdiction.
+2. **Say whether real patient data is involved** — Real patient data stays blocked until a signed DPA and a documented DPIA assessment exist.
 3. **Mention the data** — What personal data is involved? This drives most compliance requirements.

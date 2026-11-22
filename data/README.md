@@ -26,7 +26,6 @@ Skill se spustí sám podle zadání, nebo ho zavolejte jménem, například `/d
 | `create-viz` | Graf v barvách Doktůrku. |
 | `build-dashboard` | Interaktivní HTML dashboard se syntetickými nebo agregovanými daty. |
 | `validate-data` | Kontrola analýzy před sdílením, včetně ochrany malých skupin. |
-| `data-context-extractor` | Popis datového kontextu; FHIR modelování předá pluginu `fhir`. |
 
 ## Jak plugin pracuje
 

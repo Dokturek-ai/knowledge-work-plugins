@@ -9,6 +9,7 @@ argument-hint: "<process name or description>"
 ## Doktůrek specifics
 
 - Operational guides and runbooks for engineers go to `technical-documentation`. Use this skill for business processes: onboarding a practice, support, vendor and authority communication.
+- The SOP is a draft. Notion is a read-only archive: never create or edit a Notion page. The durable home is `dokturek-docs`, so propose a pull request there (target path, branch name and full text) and open it only after an explicit yes. Issues for improvement actions are drafts too: show the repository and exact text first.
 
 # /process-doc
 
@@ -19,7 +20,7 @@ Document a business process as a complete standard operating procedure (SOP).
 ## Usage
 
 ```
-/process-doc $ARGUMENTS
+/operations:process-doc $ARGUMENTS
 ```
 
 ## How It Works
@@ -74,12 +75,12 @@ Walk me through the process — describe it, paste existing docs, or just tell m
 ## If Connectors Available
 
 If **~~knowledge base** is connected:
-- Search for existing process documentation to update rather than duplicate
-- Publish the completed SOP to your wiki
+- Search for existing process documentation (`dokturek-docs` first, Notion only as a read-only archive) to update rather than duplicate
+- Propose the SOP as a pull request to `dokturek-docs`: show the target path and the exact text, and open the PR only after an explicit yes. Never write to Notion
 
 If **~~project tracker** is connected:
-- Link the process to related projects and workflows
-- Create tasks for process improvement action items
+- Link the process to related issues and workflows
+- Draft issues for process improvement action items (GitHub Issues in `Dokturek-ai/dokturek-docs`); create them only after the user confirms the repository and the exact text of each
 
 ## Tips
 

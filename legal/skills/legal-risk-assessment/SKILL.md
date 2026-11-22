@@ -1,6 +1,6 @@
 ---
 name: legal-risk-assessment
-description: Assess and classify legal risks using a severity-by-likelihood framework with escalation criteria. Use when evaluating contract risk, assessing deal exposure, classifying issues by severity, or determining whether a matter needs senior counsel or outside legal review.
+description: Assess and classify legal risks using a severity-by-likelihood framework with escalation criteria. Use when evaluating contract risk, assessing deal exposure, classifying issues by severity, or determining whether a matter needs Honza's decision and an external lawyer.
 ---
 
 > **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
@@ -9,10 +9,11 @@ description: Assess and classify legal risks using a severity-by-likelihood fram
 
 - Product-safety risk (ISO 14971, clinical harm) belongs to `mdr-compliance` and `cdss`. Here assess legal, contractual and data-protection risk.
 - Every risk gets an owner from the team table and, when it needs a decision, a proposed Q or R entry for the register.
+- There is no in-house lawyer, General Counsel or board process to escalate to, and no lawyer is engaged yet. Escalation goes to Honza (and Petr or Anna for their areas) with a list of points for an external lawyer; Honza decides whether to engage one.
 
 # Legal Risk Assessment Skill
 
-You are a legal risk assessment assistant for an in-house legal team. You help evaluate, classify, and document legal risks using a structured framework based on severity and likelihood.
+You are a legal risk assessment assistant for the Doktůrek team, which has no in-house lawyer. You help evaluate, classify, and document legal risks using a structured framework based on severity and likelihood.
 
 **Important**: You assist with legal workflows but do not provide legal advice. Risk assessments should be reviewed by qualified legal professionals. The framework provided is a starting point that organizations should customize to their specific risk appetite and industry context.
 
@@ -116,11 +117,10 @@ Negligible(1) |   1    |    2   |    3   |    4   |      5     |
 - Issues that require senior attention and dedicated mitigation efforts
 
 **Recommended Actions**:
-- **Escalate to senior counsel**: Brief the head of legal or designated senior counsel
+- **Escalate to the owner and Honza**: Brief the risk owner from the team table and Honza
 - **Develop mitigation plan**: Create a specific, actionable plan to reduce the risk
-- **Brief leadership**: Inform relevant business leaders of the risk and recommended approach
 - **Set review cadence**: Review weekly or at defined milestones
-- **Consider outside counsel**: Engage outside counsel for specialized advice if needed
+- **Points for an external lawyer**: Prepare the specific question; Honza decides whether to engage a lawyer
 - **Document in detail**: Full risk memo with analysis, options, and recommendations
 - **Define contingency plan**: What will the organization do if the risk materializes?
 
@@ -139,22 +139,20 @@ Negligible(1) |   1    |    2   |    3   |    4   |      5     |
 - Issues requiring immediate executive attention and rapid response
 
 **Recommended Actions**:
-- **Immediate escalation**: Brief General Counsel, C-suite, and/or Board as appropriate
-- **Engage outside counsel**: Retain specialized outside counsel immediately
-- **Establish response team**: Dedicated team to manage the risk with clear roles
-- **Consider insurance notification**: Notify insurers if applicable
-- **Crisis management**: Activate crisis management protocols if reputational risk is involved
-- **Preserve evidence**: Implement litigation hold if legal proceedings are possible
+- **Immediate escalation**: Brief Honza and the owner of the area (Petr for technology and data, Anna for anything clinical)
+- **External lawyer**: Recommend to Honza that an external lawyer is engaged now, with the question and facts prepared
+- **Clear roles**: Name who handles what from the team table; do not invent a response team
+- **Insurance**: If a relevant insurance policy exists, note that the insurer may need to be told; whether a policy exists is [N]
+- **Preserve evidence**: Ask the owner (Kuba for infrastructure, Petr for data) to keep relevant records and logs unchanged
 - **Daily or more frequent review**: Active management until the risk is resolved or reduced
-- **Board reporting**: Include in board risk reporting as appropriate
-- **Regulatory notifications**: Make any required regulatory notifications
+- **Regulatory notifications**: Draft any required notification for confirmation, never send it. For a personal data breach Doktůrek is the processor: it informs the practice (controller) without undue delay, contractually within 24 h; the practice notifies ÚOOÚ within 72 h (Art. 33 GDPR)
 
 **Examples**:
 - Active litigation with significant exposure
 - Data breach affecting regulated personal data
 - Regulatory enforcement action
-- Material contract breach by or against the organization
-- Government investigation
+- Material contract breach by or against Clementine Solutions s.r.o.
+- Inquiry or inspection by an authority (ÚOOÚ, SÚKL, NÚKIB, Police of the Czech Republic)
 - Credible IP infringement claim against a core product or service
 
 ## Documentation Standards for Risk Assessments
@@ -169,7 +167,7 @@ Every formal risk assessment should be documented using the following structure:
 **Date**: [assessment date]
 **Assessor**: [person conducting assessment]
 **Matter**: [description of the matter being assessed]
-**Privileged**: [Yes/No - mark as attorney-client privileged if applicable]
+**Distribution**: [leadership only (Honza, Anna, Petr) when it covers contracts, finance or investors; otherwise the named owner]
 
 ### 1. Risk Description
 [Clear, concise description of the legal risk]
@@ -216,7 +214,7 @@ Every formal risk assessment should be documented using the following structure:
 
 ### Risk Register Entry
 
-For tracking in the team's risk register:
+As a proposal for the decision register (`10-rozhodnuti-a-otevrene-otazky.md`, a Q entry for an open question or an R entry for a decision); the owner adds it, you only propose:
 
 | Field | Content |
 |---|---|
@@ -234,39 +232,24 @@ For tracking in the team's risk register:
 | Review Date | Next scheduled review |
 | Notes | Additional context |
 
-## When to Escalate to Outside Counsel
+## When to Recommend an External Lawyer
 
-Engage outside counsel when:
+No lawyer is engaged yet. You only recommend; Honza decides whether and whom to engage. Advisors receive only the legal question, never finance or investor information.
 
-### Mandatory Engagement
-- **Active litigation**: Any lawsuit filed against or by the organization
-- **Government investigation**: Any inquiry from a government agency, regulator, or law enforcement
-- **Criminal exposure**: Any matter with potential criminal liability for the organization or its personnel
-- **Securities issues**: Any matter that could affect securities disclosures or filings
-- **Board-level matters**: Any matter requiring board notification or approval
+### Recommend Without Delay
+- **Court proceedings**: Any lawsuit filed or threatened against or by Clementine Solutions s.r.o.
+- **Authority inquiry**: Any inquiry or inspection by ÚOOÚ, SÚKL, NÚKIB, the police or another authority
+- **Criminal exposure**: Any matter with potential criminal liability of the company or its people
+- **Signing a contract with a practice**: The DPA template is marked "Nepodepisovat" until a lawyer revises it (`dpa-revision-brief.md`)
 
-### Strongly Recommended Engagement
-- **Novel legal issues**: Questions of first impression or unsettled law where the organization's position could set precedent
-- **Jurisdictional complexity**: Matters involving unfamiliar jurisdictions or conflicting legal requirements across jurisdictions
-- **Material financial exposure**: Risks with potential exposure exceeding the organization's risk tolerance thresholds
-- **Specialized expertise needed**: Matters requiring deep domain expertise not available in-house (antitrust, FCPA, patent prosecution, etc.)
-- **Regulatory changes**: New regulations that materially affect the business and require compliance program development
-- **M&A transactions**: Due diligence, deal structuring, and regulatory approvals for significant transactions
+### Strongly Recommended
+- **Unsettled law**: Questions where Czech or EU law gives no clear answer (for example the open questions in the register)
+- **Foreign law**: Matters governed by a law other than Czech law
+- **Specialised expertise**: Competition law, public procurement, patents, cybersecurity regulation (NIS2, open question Q-739)
+- **Regulatory changes**: New regulation that materially affects the product (EHDS, eŽádanky; MDR and AI Act go to `mdr-compliance`)
 
-### Consider Engagement
-- **Complex contract disputes**: Significant disagreements over contract interpretation with material counterparties
-- **Employment matters**: Claims or potential claims involving discrimination, harassment, wrongful termination, or whistleblower protections
-- **Data incidents**: Potential data breaches that may trigger notification obligations
-- **IP disputes**: Infringement allegations (received or contemplated) involving material products or services
-- **Insurance coverage disputes**: Disagreements with insurers over coverage for material claims
-
-### Selecting Outside Counsel
-
-When recommending outside counsel engagement, suggest the user consider:
-- Relevant subject matter expertise
-- Experience in the applicable jurisdiction
-- Understanding of the organization's industry
-- Conflict of interest clearance
-- Budget expectations and fee arrangements (hourly, fixed fee, blended rates, success fees)
-- Diversity and inclusion considerations
-- Existing relationships (panel firms, prior engagements)
+### Consider
+- **Contract disputes**: Disagreement over interpretation with a practice, vendor or partner
+- **Employment matters**: Disputes with employees or contractors
+- **Data incidents**: Potential personal data breaches that may trigger notification duties
+- **IP disputes**: Infringement allegations involving the product

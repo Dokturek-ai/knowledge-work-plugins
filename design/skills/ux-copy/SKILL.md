@@ -10,6 +10,9 @@ argument-hint: "<context or copy to review>"
 
 - UI text is Czech. Use the vocabulary in the Doktůrek context (ordinace, kartotéka, pacient, koncept, uloženo, přihlásit se) and the terms in `SLOVNIK.md`.
 - State the real result: "Uloženo" only after the save succeeded; never "hotovo" for something not verified. Clinical wording goes to Anna.
+- Voice is calm, concrete, professional and clear (klidný, konkrétní, profesionální, srozumitelný). No playful or celebratory tone, no exclamation marks in confirmations.
+- The UI is Czech only: there is no localisation, so write the final Czech text, not a source string for translators.
+- Red is reserved for clinical safety (`DESIGN.md`): do not ask for red or alarm styling for ordinary errors.
 - Clinical screens are reviewed with `ehr-design` (`ehr-ux-reference`).
 
 # /ux-copy
@@ -21,14 +24,16 @@ Write or review UX copy for any interface context.
 ## Usage
 
 ```
-/ux-copy $ARGUMENTS
+/design:ux-copy <context or copy to review>
 ```
+
+Copy task: $ARGUMENTS
 
 ## What I Need From You
 
 - **Context**: What screen, flow, or feature?
 - **User state**: What is the user trying to do? How are they feeling?
-- **Tone**: Formal, friendly, playful, reassuring?
+- **Tone**: The Doktůrek voice is fixed (calm, concrete, professional); say only whether the moment needs a neutral or a reassuring note
 - **Constraints**: Character limits, platform guidelines?
 
 ## Principles
@@ -42,7 +47,7 @@ Write or review UX copy for any interface context.
 ## Copy Patterns
 
 ### CTAs
-- Start with a verb: "Start free trial", "Save changes", "Download report"
+- Start with a verb: "Save draft", "Save changes", "Download report"
 - Be specific: "Create account" not "Submit"
 - Match the outcome to the label
 
@@ -71,8 +76,8 @@ Structure: What this is + Why it's empty + How to start
 ## Voice and Tone
 
 Adapt tone to context:
-- **Success**: Celebratory but not over the top
-- **Error**: Empathetic and helpful
+- **Success**: Calm confirmation of the real result ("Uloženo"), no celebration
+- **Error**: Calm and helpful, with the next step
 - **Warning**: Clear and actionable
 - **Neutral**: Informative and concise
 
@@ -94,8 +99,8 @@ Adapt tone to context:
 ### Rationale
 [Why this copy works — user context, clarity, action-orientation]
 
-### Localization Notes
-[Anything translators should know — idioms to avoid, character expansion, cultural context]
+### Terminology Check
+[Terms checked against the Doktůrek vocabulary and `SLOVNIK.md`; any word to avoid that was replaced]
 ```
 
 ## If Connectors Available
@@ -105,11 +110,11 @@ If **~~knowledge base** is connected:
 - Check for existing copy patterns and terminology standards
 
 If **~~design tool** is connected:
-- View the screen context in Figma to understand the full user flow
+- View the screen context in the design file to understand the full user flow (no design tool is documented for Doktůrek; ask for a screenshot or description)
 - Check character limits and layout constraints from the design
 
 ## Tips
 
 1. **Be specific about context** — "Error message when payment fails" is better than "error message."
-2. **Share your brand voice** — "We're professional but warm" helps me match your tone.
-3. **Consider the user's emotional state** — Error messages need empathy. Success messages can celebrate.
+2. **Name the screen and the user** — "Doctor saving a dekurz in the kartotéka" helps more than a generic description.
+3. **Consider the user's emotional state** — Error messages need calm help with the next step. Success messages confirm the result without celebrating.

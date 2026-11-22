@@ -56,7 +56,17 @@ for entry in market.get("plugins", []):
     if not copy.is_file() or copy.read_text(encoding="utf-8") != canon:
         err(copy, "kopie kontextu se liší od shared/dokturek-context.md")
 
-    skills = sorted(p.name for p in (pdir / "skills").iterdir() if (p / "SKILL.md").is_file())
+    skill_dirs = [p for p in (pdir / "skills").iterdir() if p.is_dir()]
+    for d in skill_dirs:
+        if not (d / "SKILL.md").is_file():
+            err(d, "adresář skillu bez SKILL.md")
+    skills = sorted(d.name for d in skill_dirs if (d / "SKILL.md").is_file())
+    conn_file = pdir / "CONNECTORS.md"
+    conn_text = conn_file.read_text(encoding="utf-8") if conn_file.is_file() else ""
+    if not conn_text:
+        err(conn_file, "chybí")
+    declared = set(re.findall(r"~~([a-z][a-z ]*[a-z])", conn_text, re.I))
+    declared = {c.lower() for c in declared}
     for s in skills:
         sk = pdir / "skills" / s / "SKILL.md"
         fm = frontmatter(sk)
@@ -72,11 +82,20 @@ for entry in market.get("plugins", []):
             err(sk, f"description má {len(desc)} znaků > {DESC_LIMIT}")
         if "when_to_use" in fm:
             err(sk, "pole when_to_use claude.ai odmítne")
-        if POINTER not in sk.read_text(encoding="utf-8"):
+        body = sk.read_text(encoding="utf-8")
+        if POINTER not in body:
             err(sk, "chybí odkaz na kontext Doktůrku")
+        if "\n## Doktůrek specifics\n" not in body:
+            err(sk, "chybí oddíl ## Doktůrek specifics")
+        # Kategorie v textu může pokračovat dalšími slovy ("~~chat channels I should check"),
+        # proto stačí, když začíná některou kategorií z CONNECTORS.md.
+        for used in set(re.findall(r"~~([a-zA-Z][a-zA-Z ]*[a-zA-Z])", body)):
+            u = used.lower()
+            if not any(u == c or u.startswith(c + " ") for c in declared):
+                err(sk, f"kategorie ~~{used} chybí v CONNECTORS.md pluginu")
 
     readme = pdir / "README.md"
-    listed = sorted(set(re.findall(r"^\| `([a-z0-9-]+)` \|", readme.read_text(encoding="utf-8"), re.M)) - {"~~"})
+    listed = sorted(set(re.findall(r"^\| `([a-z0-9-]+)` \|", readme.read_text(encoding="utf-8"), re.M)))
     if listed != skills:
         err(readme, f"tabulka skillů {listed} neodpovídá adresáři skills/ {skills}")
 
@@ -86,10 +105,37 @@ for entry in market.get("plugins", []):
         for key, cfg in servers.items():
             if "command" in cfg:
                 args = " ".join(cfg.get("args", []))
-                if re.search(r"(npx|uvx)\b", cfg["command"] + " " + args) and not re.search(r"@\d", args):
+                if re.search(r"(npx|uvx)\b", cfg["command"] + " " + args) and not re.search(r"(@|==)\d+\.\d+", args):
                     err(mcp, f"{key}: balíček musí mít připnutou verzi")
             elif not str(cfg.get("url", "")).startswith("https://"):
                 err(mcp, f"{key}: chybí https URL")
+
+root_readme = (ROOT / "README.md").read_text(encoding="utf-8")
+for entry in market.get("plugins", []):
+    pj_path = ROOT / entry["source"] / ".claude-plugin/plugin.json"
+    if pj_path.is_file():
+        ver = json.loads(pj_path.read_text(encoding="utf-8")).get("version")
+        if not re.search(rf"\[`{re.escape(entry['name'])}`\]\([^)]*\) \| {re.escape(str(ver))} \|", root_readme):
+            err("README.md", f"tabulka pluginů neuvádí {entry['name']} ve verzi {ver}")
+
+SECRET = re.compile(r"(sk-ant-[A-Za-z0-9_-]{10,}|ghp_[A-Za-z0-9]{30,}|xox[bpa]-[0-9A-Za-z-]{10,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY)")
+RODNE_CISLO = re.compile(r"(?<![\d/])\d{6}/\d{3,4}(?![\d/])")
+ABS_PATH = re.compile(r"(/home/[a-z]|/Users/[A-Za-z]|/root/|/tmp/claude)")
+for f in ROOT.rglob("*"):
+    if ".git" in f.parts or not f.is_file() or f.suffix in {".png", ".jpg", ".webp"}:
+        continue
+    try:
+        text = f.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        continue
+    if f.name == "check_repo.py":
+        continue
+    if SECRET.search(text):
+        err(f, "vypadá jako tajemství")
+    if RODNE_CISLO.search(text):
+        err(f, "vypadá jako rodné číslo (jen syntetická data, bez lomítkového tvaru)")
+    if ABS_PATH.search(text):
+        err(f, "absolutní lokální cesta")
 
 for md in ROOT.rglob("*.md"):
     if ".git" in md.parts:

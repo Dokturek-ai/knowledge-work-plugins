@@ -1,6 +1,6 @@
 ---
 name: vendor-check
-description: Check the status of existing agreements with a vendor across all connected systems — CLM, CRM, email, and document storage — with gap analysis and upcoming deadlines. Use when onboarding or renewing a vendor, when you need a consolidated view of what's signed and what's missing (MSA, DPA, SOW), or when checking for approaching expirations and surviving obligations.
+description: Check a vendor as a sub-processor of Clementine Solutions s.r.o. under Art. 28(2) and 28(4) GDPR — prior written authorisation by the practices, a processing contract with the same obligations, processing location in the EU/EEA, presence in the DPA sub-processor annex, and SCC with a transfer impact assessment if anything leaves the EEA. Use when adding or renewing a vendor that touches personal or patient data, or when checking the sub-processor list before a DPA is signed.
 argument-hint: "[vendor name]"
 ---
 
@@ -10,157 +10,89 @@ argument-hint: "[vendor name]"
 
 - Doktůrek sub-processors named in the documents include Hetzner (hosting), Mistral (OCR) and Langfuse (disabled). The DPA review lists them as missing from the template: check that every vendor that touches personal data appears in the DPA annex.
 - Only EU/EEA processing is acceptable for clinical data (DPA revision brief).
+- The reference is [`dpa-revision-brief.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/04-pravo-a-regulatorika/dpa-revision-brief.md) §1 (sub-processors) and §2 (transfers). No CLM, CRM or document-storage connector ships with this plugin: work from the documents and links the user provides and from `dokturek-docs`.
 
-# /vendor-check -- Vendor Agreement Status
+# /vendor-check -- Sub-processor Check
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
 
-Check the status of existing agreements with a vendor across all connected systems. Provides a consolidated view of the legal relationship.
+Check whether a vendor can act as a sub-processor of Clementine Solutions s.r.o. for the practices' data, and what is missing. Doktůrek is the processor; the practices are the controllers.
 
-**Important**: This command assists with legal workflows but does not provide legal advice. Agreement status reports should be verified against original documents by qualified legal professionals.
+**Important**: This command assists with legal workflows but does not provide legal advice. Findings should be verified against the original documents; no lawyer is engaged yet, so open points go to Honza and Petr with a list for an external lawyer.
 
 ## Invocation
 
 ```
-/vendor-check [vendor name]
+/legal:vendor-check [vendor name]
 ```
+
+Vendor: $ARGUMENTS
 
 If no vendor name is provided, prompt the user to specify which vendor to check.
 
 ## Workflow
 
-### Step 1: Identify the Vendor
+### Step 1: Identify the Vendor and What It Does
 
-Accept the vendor name from the user. Handle common variations:
-- Full legal name vs. trade name (e.g., "Alphabet Inc." vs. "Google")
-- Abbreviations (e.g., "AWS" vs. "Amazon Web Services")
-- Parent/subsidiary relationships
+- Full legal name, seat (country) and the trade name, for example a parent and a subsidiary with different seats
+- Which service Doktůrek uses (hosting, OCR, monitoring, e-mail, identity, etc.) and in which environment (production, test, demo)
+- Whether the vendor touches personal data at all, and whether that includes patient health data. A vendor that only ever sees synthetic data is not a sub-processor today; note when that would change
 
-Ask the user to clarify if the vendor name is ambiguous.
+Ask the user to clarify if the vendor or the service is ambiguous.
 
-### Step 2: Search Connected Systems
+### Step 2: Collect the Sources
 
-Search for the vendor across all available connected systems, in priority order:
+Work from what is available and list what was not checked:
+- The vendor's data processing terms (DPA) and its own sub-processor list, from links or files the user provides
+- `dokturek-docs`: `04-pravo-a-regulatorika/dpa-template.md` (sub-processor annex), `dpa-review.md`, `dpa-revision-brief.md`, `STAV.md`
+- Infrastructure facts (region, data centre, self-hosted or cloud) from Petr or Kuba; mark anything not documented [N]
 
-#### CLM (Contract Lifecycle Management) -- If Connected
-Search for all contracts involving the vendor:
-- Active agreements
-- Expired agreements (last 3 years)
-- Agreements in negotiation or pending signature
-- Amendments and addenda
+### Step 3: Check the Sub-processor Requirements
 
-#### CRM -- If Connected
-Search for the vendor/account record:
-- Account status and relationship type
-- Associated opportunities or deals
-- Contact information for vendor's legal/contracts team
+| # | Requirement | Basis | Status |
+|---|---|---|---|
+| 1 | **Prior written authorisation**: the practices (controllers) authorised the sub-processor, specifically or generally; with general authorisation, the practice was informed of the change and could object (the brief proposes 30 days' notice) | Art. 28(2) GDPR; brief §1 | [Met / Missing / Unknown] |
+| 2 | **Same obligations flow down**: a contract with the vendor imposes the same data protection obligations as the DPA with the practice, including security measures | Art. 28(4) GDPR; brief §1 | |
+| 3 | **Doktůrek remains liable** to the practice for the sub-processor's performance | Art. 28(4) GDPR | |
+| 4 | **Processing location** in the EU/EEA, including support access, backups and the vendor's own sub-processors | brief §2 | |
+| 5 | **Listed in the DPA annex** (sub-processor list as a separate annex, kept current) | brief §1; `dpa-template.md` | |
+| 6 | **Transfers outside the EEA**: if any, a separate decision of the controller, EU SCC (the correct module), a transfer impact assessment and supplementary measures | Chapter V GDPR; brief §2 | [Not applicable / Met / Missing] |
+| 7 | **Breach notice** from the vendor fast enough for Doktůrek to inform the practice within 24 h | brief §8 | |
+| 8 | **Return and deletion** at the end of the contract in line with the brief (30 / 60 / 90 days) | brief §10 | |
+| 9 | **No use of the data for AI/ML training** without written consent | brief §4 | |
 
-#### Email -- If Connected
-Search for recent relevant correspondence:
-- Contract-related emails (last 6 months)
-- NDA or agreement attachments
-- Negotiation threads
-
-#### Documents (e.g., Box, Egnyte, SharePoint) -- If Connected
-Search for:
-- Executed agreements
-- Redlines and drafts
-- Due diligence materials
-
-#### Chat (e.g., Slack, Teams) -- If Connected
-Search for recent mentions:
-- Contract requests involving this vendor
-- Legal questions about the vendor
-- Relevant team discussions (last 3 months)
-
-### Step 3: Compile Agreement Status
-
-For each agreement found, report:
-
-| Field | Details |
-|-------|---------|
-| **Agreement Type** | NDA, MSA, SOW, DPA, SLA, License Agreement, etc. |
-| **Status** | Active, Expired, In Negotiation, Pending Signature |
-| **Effective Date** | When the agreement started |
-| **Expiration Date** | When it expires or renews |
-| **Auto-Renewal** | Yes/No, with renewal term and notice period |
-| **Key Terms** | Liability cap, governing law, termination provisions |
-| **Amendments** | Any amendments or addenda on file |
-
-### Step 4: Gap Analysis
-
-Identify what agreements exist and what might be missing:
+### Step 4: Generate Report
 
 ```
-## Agreement Coverage
+## Sub-processor Check: [Vendor Name]
 
-[CHECK] NDA -- [status]
-[CHECK/MISSING] MSA -- [status or "Not found"]
-[CHECK/MISSING] DPA -- [status or "Not found"]
-[CHECK/MISSING] SOW(s) -- [status or "Not found"]
-[CHECK/MISSING] SLA -- [status or "Not found"]
-[CHECK/MISSING] Insurance Certificate -- [status or "Not found"]
+**Date**: [today's date]
+**Vendor**: [full legal name, seat]
+**Service**: [what Doktůrek uses it for, environment]
+**Personal data**: [none / personal data / patient health data] [Z/P/N]
+**Sources checked**: [documents and links]
+**Not checked**: [what was not available]
+
+## Requirements
+
+| # | Requirement | Status | Evidence | Gap |
+|---|---|---|---|---|
+| 1 | Prior written authorisation (Art. 28(2)) | | | |
+| 2 | Same obligations flow down (Art. 28(4)) | | | |
+| ... | | | | |
+
+## Gaps and Next Steps
+
+- [Gap] -- [owner from the team table] -- [what is needed]
+
+## Points for a Lawyer
+
+- [Questions an external lawyer must answer]
 ```
-
-Flag any gaps that may be needed based on the relationship type (e.g., if there is an MSA but no DPA and the vendor handles personal data).
-
-### Step 5: Generate Report
-
-Output a consolidated report:
-
-```
-## Vendor Agreement Status: [Vendor Name]
-
-**Search Date**: [today's date]
-**Sources Checked**: [list of systems searched]
-**Sources Unavailable**: [list of systems not connected, if any]
-
-## Relationship Overview
-
-**Vendor**: [full legal name]
-**Relationship Type**: [vendor/partner/customer/etc.]
-**CRM Status**: [if available]
-
-## Agreement Summary
-
-### [Agreement Type 1] -- [Status]
-- **Effective**: [date]
-- **Expires**: [date] ([auto-renews / does not auto-renew])
-- **Key Terms**: [summary of material terms]
-- **Location**: [where the executed copy is stored]
-
-### [Agreement Type 2] -- [Status]
-[etc.]
-
-## Gap Analysis
-
-[What's in place vs. what may be needed]
-
-## Upcoming Actions
-
-- [Any approaching expirations or renewal deadlines]
-- [Required agreements not yet in place]
-- [Amendments or updates that may be needed]
 
 ## Notes
 
-[Any relevant context from email/chat searches]
-```
-
-### Step 6: Handle Missing Sources
-
-If key systems are not connected via MCP:
-
-- **No CLM**: Note that no CLM is connected. Suggest the user check their CLM manually. Report what was found in other systems.
-- **No CRM**: Skip CRM context. Note the gap.
-- **No Email**: Note that email was not searched. Suggest the user search their email for "[vendor name] agreement" or "[vendor name] NDA".
-- **No Documents**: Note that document storage was not searched.
-
-Always clearly state which sources were checked and which were not, so the user knows the completeness of the report.
-
-## Notes
-
-- If no agreements are found in any connected system, report that clearly and ask the user if they have agreements stored elsewhere
-- For vendor groups (e.g., a vendor with multiple subsidiaries), ask whether the user wants to check a specific entity or the entire group
-- Flag any agreements that are expired but may still have surviving obligations (confidentiality, indemnification, etc.)
-- If an agreement is approaching expiration (within 90 days), highlight this prominently
+- Never claim a DPA, SCC or authorisation exists unless a document shows it; mark it [N] otherwise
+- The sub-processors named in the documents (Hetzner, Mistral, Langfuse) are missing from the DPA template annex according to the DPA review; report that as a gap until the annex exists
+- Cloud versus self-hosted Medplum and the location of other sub-processors are open in the brief; do not resolve them here
+- Do not contact the vendor; draft any question for the user to send after confirmation
