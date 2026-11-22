@@ -1,6 +1,6 @@
 ---
 name: write-query
-description: Write optimized SQL for your dialect with best practices. Use when translating a natural-language data need into SQL, building a multi-CTE query with joins and aggregations, optimizing a query against a large partitioned table, or getting dialect-specific syntax for PostgreSQL, Firebird 3 or another SQL engine.
+description: Write optimized SQL for your dialect with best practices and Doktůrek's patient-data limits. Always use for any SQL request ("napiš SQL", "dotaz") against an AIS database copy, Firebird or Medplum PostgreSQL, or any table with patient columns. Use when translating a natural-language data need into SQL, building a multi-CTE query with joins and aggregations, optimizing a query against a large partitioned table, or getting dialect-specific syntax for PostgreSQL, Firebird 3 or another SQL engine.
 argument-hint: "<description of what data you need>"
 ---
 

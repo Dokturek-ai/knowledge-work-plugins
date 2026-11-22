@@ -1,6 +1,6 @@
 ---
 name: explore-data
-description: Profile and explore a dataset to understand its shape, quality, and patterns. Use when encountering a new table or file, checking null rates and column distributions, spotting data quality issues like duplicates or suspicious values, or deciding which dimensions and metrics to analyze.
+description: Profile and explore a dataset to understand its shape, quality, and patterns, with Doktůrek's patient-data limits. Always use for any profiling, "profil tabulky", top values, lengths or min/max request on a table or database copy that may hold patient data (pacient, kartotéka, rodné číslo, AIS, Firebird, Medplum). Use when encountering a new table or file, checking null rates and column distributions, spotting data quality issues like duplicates or suspicious values, or deciding which dimensions and metrics to analyze.
 argument-hint: "<table or file>"
 ---
 
