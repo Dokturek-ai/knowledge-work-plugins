@@ -2,6 +2,13 @@
 
 Formát vychází z [Keep a Changelog](https://keepachangelog.com/cs/1.1.0/), verze podle [SemVer](https://semver.org/lang/cs/).
 
+## 2026-11-22 — Obálka a mapa v README (marketplace 1.0.1)
+
+### Přidáno
+
+- Obálka [`assets/cover.png`](assets/cover.png) a mapa marketplace Doktůrku [`assets/map.png`](assets/map.png) ve stylu `DESIGN.md` (logo, Geist, teal), se zdrojovými SVG.
+- Odznaky CI v README.
+
 ## 2026-11-22 — Personalizace pro Doktůrek (marketplace 1.0.0)
 
 Fork `anthropics/knowledge-work-plugins` je přestavěný na marketplace `dokturek-work` pro práci týmu Doktůrek.ai mimo vývoj.

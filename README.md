@@ -1,12 +1,25 @@
+<p align="center">
+  <img src="assets/cover.png" alt="Doktůrek. Pluginy pro práci mimo vývoj. Marketplace dokturek-work pro Claude: product-management, sales, marketing, customer-support, legal, operations, design, data." width="100%">
+</p>
+
+<p align="center">
+  <a href="https://github.com/Dokturek-ai/knowledge-work-plugins/actions/workflows/validate-plugins.yml"><img alt="CI: Validate Plugins" src="https://github.com/Dokturek-ai/knowledge-work-plugins/actions/workflows/validate-plugins.yml/badge.svg"></a>
+  <a href="https://github.com/Dokturek-ai/knowledge-work-plugins/actions/workflows/check-mcp-urls.yml"><img alt="CI: Check MCP URLs" src="https://github.com/Dokturek-ai/knowledge-work-plugins/actions/workflows/check-mcp-urls.yml/badge.svg"></a>
+</p>
+
 # Doktůrek · Marketplace pro práci mimo vývoj
 
 Katalog `dokturek-work` obsahuje pluginy pro Claude Code a Claude Cowork, které pomáhají týmu Doktůrek.ai s produktem, obchodem, marketingem, podporou ordinací, právem, provozem, texty rozhraní a analýzou dat. Každý plugin zná kontext Doktůrku: tým, zdroje pravdy v `dokturek-docs`, pravidla pro data a potvrzování a hlas značky.
 
-Marketplace **1.0.0** · [Historie změn](CHANGELOG.md) · [Přispívání](CONTRIBUTING.md)
+Marketplace **1.0.1** · [Historie změn](CHANGELOG.md) · [Přispívání](CONTRIBUTING.md)
 
 ## Kam patří který marketplace
 
 Doktůrek má tři marketplace s oddělenou odpovědností. Vyberte podle úkolu.
+
+<p align="center">
+  <img src="assets/map.png" alt="Mapa: vlevo osm pluginů dokturek-work, vpravo dokturek-team (ehr-design, fhir, medplum, cdss, mdr-compliance, vykazovani, mzcr-ez, technical-documentation), dokturek-dev-toolkit (medplum-mcp, mcp-smoke) a OpenClaw ve Slacku. Dole pravidla sdíleného kontextu." width="100%">
+</p>
 
 | Marketplace | Repozitář | Obsah |
 | --- | --- | --- |
@@ -70,6 +83,7 @@ V Claude Desktop a Cowork přidejte marketplace v **Customize → Plugins**. Na 
 | [`shared/dokturek-context.md`](shared/dokturek-context.md) | Kanonický kontext Doktůrku; CI hlídá, že se kopie v pluginech neliší |
 | [`scripts/check_repo.py`](scripts/check_repo.py) | Kontroly struktury, popisů skillů, tabulek v README, konektorů a odkazů |
 | [`.github/workflows/`](.github/workflows/) | Validace pluginů a kontrola dostupnosti MCP serverů |
+| [`assets/`](assets/) | Obálka a mapa: zdrojové SVG a PNG vykreslené písmem Geist, barvy a logo podle `DESIGN.md` |
 
 ## Původ a licence
 
