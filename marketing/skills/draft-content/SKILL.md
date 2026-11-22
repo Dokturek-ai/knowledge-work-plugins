@@ -4,6 +4,13 @@ description: Draft blog posts, social media, email newsletters, landing pages, p
 argument-hint: "<content type and topic>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Audience: Czech GPs and practice staff. Czech, vykání, the Doktůrek voice. Prices only from `dokturek.ai/cenik`; no MDR or certification claims, no "AI rozhodla".
+- Clinical statements need Anna's confirmation; screenshots only with synthetic data.
+
 # Draft Content
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

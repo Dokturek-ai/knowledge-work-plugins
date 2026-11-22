@@ -4,6 +4,12 @@ description: Create a change management request with impact analysis and rollbac
 argument-hint: "<change description>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Changes to identity, state integrations or clinical data storage need Petr's approval; clinical behaviour changes also need Anna's. Link the decision in the register and the docs PR.
+
 # /change-request
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

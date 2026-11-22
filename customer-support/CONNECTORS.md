@@ -1,19 +1,13 @@
-# Connectors
+# Konektory: Podpora
 
-## How tool references work
+Skilly odkazují na nástroje obecnou kategorií se znaky `~~` (například `~~chat`). Tabulka uvádí, čím je kategorie v Doktůrku obsazená a jestli plugin konektor přibaluje v `.mcp.json`.
 
-Plugin files use `~~category` as a placeholder for whatever tool the user connects in that category. For example, `~~support platform` might mean Intercom, Zendesk, or any other support tool with an MCP server.
+| Kategorie | Nástroj v Doktůrku | Server v `.mcp.json` | Poznámka |
+| --- | --- | --- | --- |
+| `~~chat` | Slack | slack |  |
+| `~~knowledge base` | `dokturek-docs`, Notion (archiv) | notion | Znalostní báze pro ordinace zatím není zdokumentovaná; skill se zeptá, kam článek patří. |
+| `~~project tracker` | GitHub Issues v `Dokturek-ai/dokturek-docs` | — | V Claude Code přes `gh`, v claude.ai přes konektor GitHub. |
+| `~~support platform, ~~CRM` | —, Pipedrive | — | Helpdesk dokumentace neuvádí; vložte text požadavku. Pipedrive konektor není součástí pluginu. |
+| `~~email` | Gmail | — | Vestavěný konektor claude.ai, pokud je zapnutý. |
 
-Plugins are **tool-agnostic** — they describe workflows in terms of categories (support platform, CRM, chat, etc.) rather than specific products. The `.mcp.json` pre-configures specific MCP servers, but any MCP server in that category works.
-
-## Connectors for this plugin
-
-| Category | Placeholder | Included servers | Other options |
-|----------|-------------|-----------------|---------------|
-| Chat | `~~chat` | Slack | Microsoft Teams |
-| Email | `~~email` | Microsoft 365 | — |
-| Cloud storage | `~~cloud storage` | Microsoft 365 | — |
-| Support platform | `~~support platform` | Intercom | Zendesk, Freshdesk, HubSpot Service Hub |
-| CRM | `~~CRM` | HubSpot | Salesforce, Pipedrive |
-| Knowledge base | `~~knowledge base` | Guru, Notion | Confluence, Help Scout |
-| Project tracker | `~~project tracker` | Atlassian (Jira/Confluence) | Linear, Asana |
+Kategorie bez nástroje skill obejde: pracuje s vloženým textem nebo nahraným souborem a řekne, co nepoužil. Přidání konektoru popisuje [CONTRIBUTING](https://github.com/Dokturek-ai/knowledge-work-plugins/blob/main/CONTRIBUTING.md#konektory).

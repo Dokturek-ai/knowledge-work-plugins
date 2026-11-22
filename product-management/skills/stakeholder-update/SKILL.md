@@ -4,6 +4,13 @@ description: Generate a stakeholder update tailored to audience and cadence. Use
 argument-hint: "<update type and audience>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Audiences: the team (Slack), leadership (Honza, Anna, Petr), advisors, pilot practices. Finance, investors and contracts appear only in the leadership version.
+- Build the update from `STAV.md`, the register and closed GitHub Issues, and cite them. Post nothing; the user sends the draft.
+
 # Stakeholder Update
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

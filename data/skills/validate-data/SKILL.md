@@ -4,6 +4,12 @@ description: QA an analysis before sharing -- methodology, accuracy, and bias ch
 argument-hint: "<analysis to review>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Before sharing, confirm the analysis contains no patient identifiers and that small groups cannot identify a person.
+
 # /validate-data - Validate Analysis Before Sharing
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

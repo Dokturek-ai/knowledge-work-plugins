@@ -4,6 +4,13 @@ description: Generate a response to a common legal inquiry using configured temp
 argument-hint: "[inquiry-type]"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Doktůrek is the processor for practices. A data-subject request from a patient goes to the practice (controller); draft the hand-over and the processor's assistance, not a direct answer to the patient.
+- Requests from authorities (SÚKL, ČSSZ, MZČR, ÚOOÚ) and from practices are external: draft only, and Honza confirms before anything is sent.
+
 # /legal-response -- Generate Response from Templates
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

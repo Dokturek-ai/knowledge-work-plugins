@@ -3,6 +3,12 @@ name: schedule-meeting
 description: Find a time, draft the invite, and book the meeting on Google Calendar or Outlook - then log it to the CRM as an event on the right account and opportunity. Use when the user says "schedule a follow-up with [contact]", "book the demo with [account]", "find time with [name] next week", "send my Calendly link", or "get the QBR on the calendar".
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Practices are external: propose times as a draft and book only after the user confirms.
+
 # Schedule Meeting
 
 **Rules (apply to every step of this skill):**
@@ -67,8 +73,8 @@ Fridays).
 
 Two paths - ask which one if the user has not said, unless they asked to send their booking link (third path below) (when no email or calendar write is available - files-only, or writes refused - both paths end as paste-ready text, so skip the question and give the email text and the invite details together):
 
-- **Propose-by-email:** an email draft offering the times (in the voice learned in setup, or pasted sent emails). Lands as a draft; send it when the user
-  asks. Body plain text; append the rep's signature (learned in setup, or from pasted sent emails) as text; keep [ATTACH: ...] placeholders as placeholders.
+- **Propose-by-email:** an email draft offering the times (in the sender's voice from pasted sent emails or the Doktůrek voice rules). Lands as a draft; send it when the user
+  asks. Body plain text; append the rep's signature (from pasted sent emails) as text; keep [ATTACH: ...] placeholders as placeholders.
   A reply draft is created against the message being answered, so it lands inside the customer's thread on Gmail and on Microsoft 365. If the connector offers no reply-to option, fall back to subject "Re: <original subject>", quote the line being answered, and say the draft needs pasting into the thread. Do not edit a threaded draft after creating it unless asked - a rewrite can drop the threading.
 - **Direct invite:** show the full invite - title, time, attendees,
   agenda, video link if the calendar adds one. Creating the event emails the invitation to every attendee, so say so ("this sends an invite to ..."). When the user asked to book it, create it through the calendar connector; when the skill is only proposing it, let the user decide. No calendar write available: output the invite as paste-ready details.

@@ -4,6 +4,13 @@ description: Synthesize user research from interviews, surveys, and feedback int
 argument-hint: "<research topic or question>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Typical inputs: interviews with GPs, pilot feedback, observations from incumbent AIS products (PC Doktor, SmartMedix, Medistar). Remove patient identifiers before analysis.
+- Clinical conclusions are proposals for Anna. Insights that change scope become proposed Q entries for Honza.
+
 # Synthesize Research
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

@@ -4,6 +4,12 @@ description: Document a business process — flowcharts, RACI, and SOPs. Use whe
 argument-hint: "<process name or description>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Operational guides and runbooks for engineers go to `technical-documentation`. Use this skill for business processes: onboarding a practice, support, vendor and authority communication.
+
 # /process-doc
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

@@ -1,18 +1,9 @@
-# Connectors
+# Konektory: Data
 
-## How tool references work
+Skilly odkazují na nástroje obecnou kategorií se znaky `~~` (například `~~chat`). Tabulka uvádí, čím je kategorie v Doktůrku obsazená a jestli plugin konektor přibaluje v `.mcp.json`.
 
-Plugin files use `~~category` as a placeholder for whatever tool the user connects in that category. For example, `~~data warehouse` might mean Snowflake, BigQuery, or any other warehouse with an MCP server.
+| Kategorie | Nástroj v Doktůrku | Server v `.mcp.json` | Poznámka |
+| --- | --- | --- | --- |
+| `~~data warehouse` | — | — | Datový sklad Doktůrek nemá. Pracujte se soubory, exporty a testovací instancí. |
 
-Plugins are **tool-agnostic** — they describe workflows in terms of categories (data warehouse, notebook, product analytics, etc.) rather than specific products. The `.mcp.json` pre-configures specific MCP servers, but any MCP server in that category works.
-
-## Connectors for this plugin
-
-| Category | Placeholder | Included servers | Other options |
-|----------|-------------|-----------------|---------------|
-| Data warehouse | `~~data warehouse` | Snowflake\*, Databricks\*, BigQuery, Definite | Redshift, PostgreSQL, MySQL |
-| Notebook | `~~notebook` | Hex | Jupyter, Deepnote, Observable |
-| Product analytics | `~~product analytics` | Amplitude | Mixpanel, Heap |
-| Project tracker | `~~project tracker` | Atlassian (Jira/Confluence) | Linear, Asana |
-
-\* Placeholder — MCP URL not yet configured
+Kategorie bez nástroje skill obejde: pracuje s vloženým textem nebo nahraným souborem a řekne, co nepoužil. Přidání konektoru popisuje [CONTRIBUTING](https://github.com/Dokturek-ai/knowledge-work-plugins/blob/main/CONTRIBUTING.md#konektory).

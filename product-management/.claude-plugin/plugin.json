@@ -1,8 +1,18 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "product-management",
-  "version": "1.2.0",
-  "description": "Write feature specs, plan roadmaps, and synthesize user research faster. Keep stakeholders updated and stay ahead of the competitive landscape.",
+  "version": "2.0.0",
+  "description": "Run Doktůrek product work outside clinical screen design: non-clinical specs, roadmap changes as diffs to dokturek-docs, weekly sprints on GitHub milestones, stakeholder updates, research synthesis and brainstorming. Clinical EHR specs go to the ehr-design plugin.",
   "author": {
-    "name": "Anthropic"
-  }
+    "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",
+    "url": "https://github.com/Dokturek-ai"
+  },
+  "homepage": "https://github.com/Dokturek-ai/knowledge-work-plugins/tree/main/product-management",
+  "license": "Apache-2.0",
+  "keywords": [
+    "dokturek",
+    "product-management",
+    "czech",
+    "healthcare"
+  ]
 }

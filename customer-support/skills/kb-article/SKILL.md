@@ -4,6 +4,12 @@ description: Draft a knowledge base article from a resolved issue or common ques
 argument-hint: "<resolved issue or ticket>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Articles for practices are Czech with vykání and use synthetic data in every example and screenshot. Ask where the knowledge base lives; none is documented yet. For technical guides use `technical-documentation`.
+
 # /kb-article
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

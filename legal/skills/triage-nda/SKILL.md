@@ -4,6 +4,14 @@ description: Rapidly triage an incoming NDA and classify it as GREEN (standard a
 argument-hint: "<NDA file or text>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- The Doktůrek party is **Clementine Solutions s.r.o.** Typical counterparties: practices, AIS vendors, integration partners, investors.
+- An NDA that touches patient data is not an NDA case: route it to a DPA review (`review-contract`).
+- No lawyer is engaged yet: YELLOW and RED go to Honza with the list of points for an external lawyer.
+
 # /triage-nda -- NDA Pre-Screening
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

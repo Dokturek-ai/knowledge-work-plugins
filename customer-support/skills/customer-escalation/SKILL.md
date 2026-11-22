@@ -4,6 +4,12 @@ description: Package an escalation for engineering, product, or leadership with 
 argument-hint: "<issue summary> [customer name]"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Escalation owners: technical and integrations → Petr; infrastructure and outages → Kuba; identity and gateway → Martin Marhold; clinical questions → Anna; contract, price or relationship → Honza.
+
 # /customer-escalation
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

@@ -4,6 +4,13 @@ description: Review content against your brand voice, style guide, and messaging
 argument-hint: "<content to review>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- The brand authority is [`05-design/Doktůrek-brand/DESIGN.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/05-design/Doktůrek-brand/DESIGN.md): voice, vocabulary, colours (teal #1e7f74), typography (Geist, Roboto Mono). The generated OpenDesign templates are marked as not valid.
+- Flag every claim about AI, diagnosis, certification or compliance that the documents do not prove.
+
 # Brand Review
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

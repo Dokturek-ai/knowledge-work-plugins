@@ -4,6 +4,14 @@ description: Plan a sprint — scope work, estimate capacity, set goals, and dra
 argument-hint: "[sprint name or date range]"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Sprints are weekly GitHub milestones in `Dokturek-ai/dokturek-docs`; tasks are GitHub Issues there with an owner, expected output, spec and due date.
+- Use the triage labels `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. Check for an existing issue first, and create or edit issues only after the user confirms the exact list.
+- Capacity and shared milestones come from [`03-implementacni-plan/plan-prvni-ordinace.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/03-implementacni-plan/plan-prvni-ordinace.md). Never assign work to Adrian on your own.
+
 # /sprint-planning
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

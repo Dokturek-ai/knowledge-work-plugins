@@ -1,20 +1,13 @@
-# Connectors
+# Konektory: Provoz
 
-## How tool references work
+Skilly odkazují na nástroje obecnou kategorií se znaky `~~` (například `~~chat`). Tabulka uvádí, čím je kategorie v Doktůrku obsazená a jestli plugin konektor přibaluje v `.mcp.json`.
 
-Plugin files use `~~category` as a placeholder for whatever tool the user connects in that category. For example, `~~ITSM` might mean ServiceNow, Zendesk, or any other service management tool with an MCP server.
+| Kategorie | Nástroj v Doktůrku | Server v `.mcp.json` | Poznámka |
+| --- | --- | --- | --- |
+| `~~chat` | Slack | slack | Upozornění na selhání nasazení má podle dohody chodit do Telegramu. |
+| `~~project tracker` | GitHub Issues | — | V Claude Code přes `gh`, v claude.ai přes konektor GitHub. |
+| `~~knowledge base` | `dokturek-docs`, Notion (archiv) | notion |  |
+| `~~source control, ~~CI` | GitHub, GitHub Actions | — |  |
+| `~~monitoring, ~~ITSM, ~~calendar` | — | — | Nástroj pro monitoring ani ITSM dokumentace neuvádí. |
 
-Plugins are **tool-agnostic** — they describe workflows in terms of categories (ITSM, project tracker, knowledge base, etc.) rather than specific products. The `.mcp.json` pre-configures specific MCP servers, but any MCP server in that category works.
-
-## Connectors for this plugin
-
-| Category | Placeholder | Included servers | Other options |
-|----------|-------------|-----------------|---------------|
-| Calendar | `~~calendar` | Google Calendar | Microsoft 365 |
-| Chat | `~~chat` | Slack | Microsoft Teams |
-| Email | `~~email` | Gmail, Microsoft 365 | — |
-| ITSM | `~~ITSM` | ServiceNow | Zendesk, Freshservice, Jira Service Management |
-| Knowledge base | `~~knowledge base` | Notion, Atlassian (Confluence) | Guru, Coda |
-| Project tracker | `~~project tracker` | Asana, Atlassian (Jira) | Linear, monday.com, ClickUp |
-| Procurement | `~~procurement` | — | Coupa, SAP Ariba, Zip |
-| Office suite | `~~office suite` | Microsoft 365 | Google Workspace |
+Kategorie bez nástroje skill obejde: pracuje s vloženým textem nebo nahraným souborem a řekne, co nepoužil. Přidání konektoru popisuje [CONTRIBUTING](https://github.com/Dokturek-ai/knowledge-work-plugins/blob/main/CONTRIBUTING.md#konektory).

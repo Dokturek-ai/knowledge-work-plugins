@@ -4,6 +4,14 @@ description: Triage and prioritize a support ticket or customer issue. Use when 
 argument-hint: "<ticket or issue description>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Doktůrek has no agreed SLA yet: do not promise response or resolution times to a practice. The SLA tiers below are internal guidance until one is agreed.
+- Tickets about a failed or unclear eRecept or eNeschopenka are urgent and go to the incident path (operations `incident-response`). Never tell a doctor to simply resend.
+- Remove patient identifiers from the ticket text before analysis; ask the practice to send an anonymised description.
+
 # /ticket-triage
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

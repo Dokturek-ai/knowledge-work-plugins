@@ -1,0 +1,11 @@
+{
+  "extraKnownMarketplaces": {
+    "dokturek-work": {
+      "source": {
+        "source": "github",
+        "repo": "Dokturek-ai/knowledge-work-plugins"
+      },
+      "autoUpdate": true
+    }
+  }
+}

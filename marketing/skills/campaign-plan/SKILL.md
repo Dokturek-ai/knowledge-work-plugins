@@ -4,6 +4,13 @@ description: Generate a full campaign brief with objectives, audience, messaging
 argument-hint: "<campaign objective or product>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Current motions: Meta ads to the landing page `get.dokturek.ai` (leads go to Pipedrive and Slack `#pr-and-outreach`), and Filip's newsletter inviting doctors to try the demo and pre-order, ahead of paid operation from 1 January 2027.
+- Email campaigns need a lawful basis and an unsubscribe path under GDPR; flag any list without documented consent.
+
 # Campaign Plan
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

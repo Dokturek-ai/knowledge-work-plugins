@@ -1,8 +1,18 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "data",
-  "version": "1.1.0",
-  "description": "Write SQL, explore datasets, and generate insights faster. Build visualizations and dashboards, and turn raw data into clear stories for stakeholders.",
+  "version": "2.0.0",
+  "description": "Analyze Doktůrek data safely: write SQL for PostgreSQL or the Firebird AIS copy, explore datasets through schema and aggregates, run statistics on pilot-sized samples, build charts and dashboards in the Doktůrek palette, and validate analyses before sharing. Never handles patient-level data.",
   "author": {
-    "name": "Anthropic"
-  }
+    "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",
+    "url": "https://github.com/Dokturek-ai"
+  },
+  "homepage": "https://github.com/Dokturek-ai/knowledge-work-plugins/tree/main/data",
+  "license": "Apache-2.0",
+  "keywords": [
+    "dokturek",
+    "data",
+    "czech",
+    "healthcare"
+  ]
 }

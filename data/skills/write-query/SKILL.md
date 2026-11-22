@@ -4,6 +4,12 @@ description: Write optimized SQL for your dialect with best practices. Use when 
 argument-hint: "<description of what data you need>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Never write a query that returns patient-level rows from a real database. Prefer aggregates and synthetic test instances.
+
 # /write-query - Write Optimized SQL
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
@@ -80,7 +86,7 @@ Follow these best practices:
 - Put each major clause on its own line
 
 **Dialect-specific optimizations:**
-- Apply dialect-specific syntax and functions (see `sql-queries` skill for details)
+- Apply dialect-specific syntax and functions (ask which engine when unclear: Medplum runs on PostgreSQL, the incumbent AIS database copy on Firebird 3)
 - Use dialect-appropriate date functions, string functions, and window syntax
 - Note any dialect-specific performance features (e.g., Snowflake clustering, BigQuery partitioning)
 

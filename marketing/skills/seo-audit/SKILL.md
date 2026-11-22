@@ -4,6 +4,12 @@ description: Run a comprehensive SEO audit — keyword research, on-page analysi
 argument-hint: "<url or topic> [audit type]"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- The sites are `dokturek.ai` (with the price page `/cenik`) and the Meta-ads landing page `get.dokturek.ai` (source in `Dokturek-ai/dokturek-lp`). Target Czech search terms used by GPs (for example "ambulantní software", "eRecept", "eNeschopenka").
+
 # /seo-audit
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

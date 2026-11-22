@@ -1,121 +1,43 @@
-# Data Analyst Plugin
+# Data (`data`)
 
-A data analyst plugin primarily designed for [Cowork](https://claude.com/product/cowork), Anthropic's agentic desktop application — though it also works in Claude Code. SQL queries, data exploration, visualization, dashboards, and insight generation. Works with any data warehouse, any SQL dialect, and any analytics stack.
+Pomáhá s analýzou dat: SQL, průzkum datové sady, statistika, grafy a dashboardy. Typické použití je vyhodnocení pilotu (čas na návštěvu před a po) a práce se schématem a agregacemi z kopie databáze AIS.
 
-## Installation
+Pro koho: kdokoli z týmu, kdo vyhodnocuje pilot nebo datové podklady.
 
-```
-claude plugin marketplace add anthropics/knowledge-work-plugins
-claude plugin install data@knowledge-work-plugins
-```
+## Instalace v Claude Code
 
-## What It Does
-
-This plugin transforms Claude into a data analyst collaborator. It helps you explore datasets, write optimized SQL, build visualizations, create interactive dashboards, and validate analyses before sharing with stakeholders.
-
-### With a Data Warehouse Connection
-
-Connect your data warehouse MCP server (e.g., Snowflake, Databricks, BigQuery, or any SQL-compatible database) for the best experience. Claude will:
-
-- Query your data warehouse directly
-- Explore schemas and table metadata
-- Run analyses end-to-end without copy-pasting
-- Iterate on queries based on results
-
-### Without a Data Warehouse Connection
-
-Without a data warehouse connection, paste SQL results or upload CSV/Excel files for analysis and visualization. Claude can also write SQL queries for you to run manually, and then analyze the results you provide.
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `/analyze` | Answer data questions -- from quick lookups to full analyses |
-| `/explore-data` | Profile and explore a dataset to understand its shape, quality, and patterns |
-| `/write-query` | Write optimized SQL for your dialect with best practices |
-| `/create-viz` | Create publication-quality visualizations with Python |
-| `/build-dashboard` | Build interactive HTML dashboards with filters and charts |
-| `/validate` | QA an analysis before sharing -- methodology, accuracy, and bias checks |
-
-## Skills
-
-| Skill | Description |
-|-------|-------------|
-| `sql-queries` | SQL best practices across dialects, common patterns, and performance optimization |
-| `data-exploration` | Data profiling, quality assessment, and pattern discovery |
-| `data-visualization` | Chart selection, Python viz code patterns, and design principles |
-| `statistical-analysis` | Descriptive stats, trend analysis, outlier detection, and hypothesis testing |
-| `data-validation` | Pre-delivery QA, sanity checks, and documentation standards |
-| `interactive-dashboard-builder` | HTML/JS dashboard construction with Chart.js, filters, and styling |
-
-## Example Workflows
-
-### Ad-Hoc Analysis
-
-```
-You: /analyze What was our monthly revenue trend for the past 12 months, broken down by product line?
-
-Claude: [Writes SQL query] → [Executes against data warehouse] → [Generates trend chart]
-       → [Identifies key patterns: "Product line A grew 23% YoY while B was flat"]
-       → [Validates results with sanity checks]
+```text
+/plugin marketplace add Dokturek-ai/knowledge-work-plugins
+/plugin install data@dokturek-work
 ```
 
-### Data Exploration
+V Claude Desktop a Cowork přidejte marketplace v **Customize → Plugins**.
 
-```
-You: /explore-data users table
+## Skilly
 
-Claude: [Profiles table: 2.3M rows, 47 columns]
-       → [Reports: created_at has 0.2% nulls, email has 99.8% cardinality]
-       → [Flags: status column has unexpected value "UNKNOWN" in 340 rows]
-       → [Suggests: "High-value dimensions to explore: plan_type, signup_source, country"]
-```
+Skill se spustí sám podle zadání, nebo ho zavolejte jménem, například `/data:analyze`.
 
-### Query Writing
+| Skill | K čemu slouží |
+| --- | --- |
+| `analyze` | Odpověď na datovou otázku od rychlého dotazu po celou analýzu. |
+| `explore-data` | Profil datové sady; u kopie AIS jen schéma a agregace. |
+| `write-query` | SQL pro PostgreSQL (Medplum) nebo Firebird 3 (kopie AIS), bez řádků s daty pacientů. |
+| `statistical-analysis` | Statistika pro malé vzorky z pilotu s nejistotou místo tvrzení o významnosti. |
+| `create-viz` | Graf v barvách Doktůrku. |
+| `build-dashboard` | Interaktivní HTML dashboard se syntetickými nebo agregovanými daty. |
+| `validate-data` | Kontrola analýzy před sdílením, včetně ochrany malých skupin. |
+| `data-context-extractor` | Popis datového kontextu; FHIR modelování předá pluginu `fhir`. |
 
-```
-You: /write-query I need a cohort retention analysis -- users grouped by signup month,
-     showing what % are still active 1, 3, 6, and 12 months later. We use Snowflake.
+## Jak plugin pracuje
 
-Claude: [Writes optimized Snowflake SQL with CTEs]
-       → [Adds comments explaining each step]
-       → [Includes performance notes about partition pruning]
-```
+- Každý skill nejdřív načte [kontext Doktůrku](shared/dokturek-context.md): tým, zdroje pravdy, pravidla pro data a potvrzování, hlas značky a předávání jiným pluginům.
+- Odpovídá česky. Fakta o Doktůrku cituje z `dokturek-docs` a značí [Z], [P], [N].
+- Žádná data na úrovni pacienta. Jen syntetická data, agregace nebo skutečně anonymizované exporty.
 
-### Dashboard Building
+## Konektory
 
-```
-You: /build-dashboard Create a sales dashboard with monthly revenue, top products,
-     and regional breakdown. Here's the data: [pastes CSV]
+Viz [CONNECTORS.md](CONNECTORS.md).
 
-Claude: [Generates self-contained HTML file]
-       → [Includes interactive Chart.js visualizations]
-       → [Adds dropdown filters for region and time period]
-       → [Opens in browser for review]
-```
+## Původ
 
-### Pre-Share Validation
-
-```
-You: /validate [shares analysis document]
-
-Claude: [Reviews methodology] → [Checks for survivorship bias in churn analysis]
-       → [Verifies aggregation logic] → [Flags: "Denominator excludes trial users
-          which could overstate conversion rate by ~5pp"]
-       → [Confidence: "Ready to share with noted caveat"]
-```
-
-## Connecting Your Data Stack
-
-> If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](CONNECTORS.md).
-
-This plugin works best when connected to your data infrastructure. Add MCP servers for:
-
-- **Data Warehouse**: Snowflake, Databricks, BigQuery, Definite, or any SQL-compatible database
-- **Analytics/BI**: Amplitude, Looker, Tableau, or similar
-- **Notebooks**: Jupyter, Hex, or similar
-- **Spreadsheets**: Google Sheets, Excel
-- **Data Orchestration**: Airflow, dbt, Dagster, Prefect
-- **Data Ingestion**: Fivetran, Airbyte, Stitch
-
-Configure MCP servers in your `.mcp.json` or Claude Code settings to enable direct data access.
+Plugin vychází z pluginu `data` v [anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins) (Apache 2.0). Změny pro Doktůrek popisuje [CHANGELOG](https://github.com/Dokturek-ai/knowledge-work-plugins/blob/main/CHANGELOG.md).

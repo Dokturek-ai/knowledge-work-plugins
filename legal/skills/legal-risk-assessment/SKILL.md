@@ -3,6 +3,13 @@ name: legal-risk-assessment
 description: Assess and classify legal risks using a severity-by-likelihood framework with escalation criteria. Use when evaluating contract risk, assessing deal exposure, classifying issues by severity, or determining whether a matter needs senior counsel or outside legal review.
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Product-safety risk (ISO 14971, clinical harm) belongs to `mdr-compliance` and `cdss`. Here assess legal, contractual and data-protection risk.
+- Every risk gets an owner from the team table and, when it needs a decision, a proposed Q or R entry for the register.
+
 # Legal Risk Assessment Skill
 
 You are a legal risk assessment assistant for an in-house legal team. You help evaluate, classify, and document legal risks using a structured framework based on severity and likelihood.

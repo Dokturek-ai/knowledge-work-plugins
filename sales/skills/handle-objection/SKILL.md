@@ -3,6 +3,12 @@ name: handle-objection
 description: Work through a live objection or competitive threat - what's really being said, the response that has worked before, and the proof points to use, grounded in your own win/loss history and customer quotes. Use when the user says "they said we're too expensive", "how do I respond to [objection]", "[competitor] is in the deal", "help me handle this pushback", or pastes an objection from an email or call.
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Common Doktůrek objections: switching cost and data migration from the current AIS, state integrations (eRecept, eNeschopenka), data protection, price. Answer from documented facts only and name open questions honestly.
+
 # Handle Objection
 
 **Rules (apply to every step of this skill):**
@@ -25,7 +31,7 @@ gone, and the evidence from your own customers that answers it.
 | Tool type | Used for | Required? |
 |---|---|---|
 | crm | the deal's stage, size, players; win/loss history | no (files fallback: stated deal context) |
-| transcripts | customer-voice quotes; how the objection landed | no (files fallback: pasted excerpt) |
+| transcripts | customer quotes; how the objection landed | no (files fallback: pasted excerpt) |
 | docs | case studies, ROI docs, vetted security/compliance docs | no |
 | email | the objection thread, if it arrived in writing | no |
 
@@ -54,7 +60,7 @@ the response differs.
 
 - **Win/loss history** (`win-loss-review` pulls): how deals where this
   objection appeared actually ended; what the wins did differently
-- **Customer voice** (`customer-voice` pull): verbatim quotes from
+- **Customer voice** (from transcripts and pasted notes): verbatim quotes from
   existing customers that speak to this exact concern, sources named
 - **docs:** case studies, ROI docs, security/compliance docs already
   vetted for external use

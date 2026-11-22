@@ -3,6 +3,13 @@ name: create-an-asset
 description: Build a customer deck, one-pager or leave-behind from your account data, call notes and approved materials, with no made-up numbers. Use when the user asks for a sales asset, one-pager, deck, leave-behind, "create an asset for [prospect]", or "make something for [account]".
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Assets for doctors follow `DESIGN.md` voice and tokens (teal #1e7f74, Geist). Product screenshots only from the test instance with synthetic data.
+- No clinical, regulatory or price claims without a source; Anna confirms clinical wording.
+
 # Create an Asset
 
 **Rules (apply to every step of this skill):**
@@ -102,5 +109,5 @@ tiers:
   read-only:    live docs/crm/transcripts/email sourcing; rendered to
                 Slides/Pages where available, export fallback
   gated-writes: none (the render is the deliverable; sending and
-                logging hand off to draft-outreach / log-activity)
+                outreach hand off to draft-outreach)
 ```

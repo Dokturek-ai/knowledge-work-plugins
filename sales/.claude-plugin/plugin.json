@@ -1,8 +1,18 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "sales",
-  "version": "2.1.0",
-  "description": "Sales skills that work with the tools your team already uses - your CRM, email, calendar, chat and call recorder - or with uploaded files. Prep calls, summarize and follow up, research accounts, review deals and pipeline, and write the forecast. When you ask, it can update CRM records, create email drafts or send email, post to chat and book meetings through your connected tools.",
+  "version": "3.0.0",
+  "description": "Prepare and follow up sales conversations with Czech practices for Doktůrek: research a practice, prep and summarize calls, draft outreach, handle objections, compare with incumbent AIS products and review the Pipedrive pipeline. Drafts only; nothing is sent or written without confirmation.",
   "author": {
-    "name": "Anthropic"
-  }
+    "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",
+    "url": "https://github.com/Dokturek-ai"
+  },
+  "homepage": "https://github.com/Dokturek-ai/knowledge-work-plugins/tree/main/sales",
+  "license": "Apache-2.0",
+  "keywords": [
+    "dokturek",
+    "sales",
+    "czech",
+    "healthcare"
+  ]
 }

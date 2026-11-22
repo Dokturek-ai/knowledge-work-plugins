@@ -4,6 +4,14 @@ description: Run a compliance check on a proposed action, product feature, or bu
 argument-hint: "<action or initiative to check>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- MDR, IVDR, AI Act and SaMD classification belong to the `mdr-compliance` plugin. Here cover GDPR, DPA and DPIA status, health-records retention (Decree 444/2024 Sb.) and contractual obligations.
+- Real patient data stays blocked until a signed DPA and a DPIA exist. Report that gate explicitly whenever a feature or a pilot touches real data.
+- Check the current state in [`04-pravo-a-regulatorika/README.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/04-pravo-a-regulatorika/README.md) and the open questions in the register (for example Q-314, Q-745, Q-750, Q-753) before stating anything as settled.
+
 # /compliance-check -- Compliance Review
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
