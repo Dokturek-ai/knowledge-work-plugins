@@ -8,7 +8,8 @@ argument-hint: "<data source> [chart type]"
 
 ## Doktůrek specifics
 
-- Use the Doktůrek palette from `DESIGN.md` (teal #1e7f74 primary) for charts that leave the team.
+- Use the Doktůrek tokens from `DESIGN.md` (`dokturek-docs` → `05-design/Doktůrek-brand/DESIGN.md`): primary teal `#1E7F74`, dark teal `#145A52`, text `#272E33`, muted text `#5B6665`, border `#E5E5E5`, background `#FFFFFF` / `#F7FAFA`. The code template below sets them.
+- Red is reserved for clinical safety. Mark a decrease, a miss or a "negative" category with a text label or annotation, not with red.
 
 # /create-viz - Create Visualizations
 
@@ -19,7 +20,7 @@ Create publication-quality data visualizations using Python. Generates charts fr
 ## Usage
 
 ```
-/create-viz <data source> [chart type] [additional instructions]
+/data:create-viz <data source> [chart type] [additional instructions]
 ```
 
 ## Workflow
@@ -79,9 +80,21 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
-# Set professional style
+# Doktůrek tokens (dokturek-docs: 05-design/Doktůrek-brand/DESIGN.md)
+DOKTUREK_COLORS = ['#1E7F74', '#145A52', '#5B6665', '#272E33']  # series order
 plt.style.use('seaborn-v0_8-whitegrid')
-sns.set_palette("husl")
+sns.set_palette(DOKTUREK_COLORS)
+plt.rcParams.update({
+    'figure.facecolor': '#FFFFFF',
+    'axes.facecolor': '#FFFFFF',
+    'axes.edgecolor': '#E5E5E5',
+    'grid.color': '#E5E5E5',
+    'text.color': '#272E33',
+    'axes.labelcolor': '#272E33',
+    'xtick.color': '#5B6665',
+    'ytick.color': '#5B6665',
+})
+# More than four series: group the rest as "Ostatní" or use small multiples.
 
 # Create figure with appropriate size
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -95,7 +108,7 @@ ax.set_ylabel('Y-Axis Label', fontsize=11)
 
 # Format numbers appropriately
 # - Percentages: '45.2%' not '0.452'
-# - Currency: '$1.2M' not '1200000'
+# - Currency: '1,2 mil. Kč' not '1200000'
 # - Large numbers: '2.3K' or '1.5M' not '2300' or '1500000'
 
 # Remove chart junk
@@ -110,10 +123,11 @@ plt.show()
 ### 5. Apply Design Best Practices
 
 **Color:**
-- Use a consistent, colorblind-friendly palette
+- Use the Doktůrek tokens above; do not add new hues
 - Use color meaningfully (not decoratively)
-- Highlight the key data point or trend with a contrasting color
+- Highlight the key data point or trend in teal `#1E7F74` against muted `#5B6665`
 - Grey out less important reference data
+- Never use red for "bad" values; label them in text
 
 **Typography:**
 - Descriptive title that states the insight, not just the metric (e.g., "Revenue grew 23% YoY" not "Revenue by Month")
@@ -141,15 +155,15 @@ plt.show()
 ## Examples
 
 ```
-/create-viz Show monthly revenue for the last 12 months as a line chart with the trend highlighted
+/data:create-viz Show monthly revenue for the last 12 months as a line chart with the trend highlighted
 ```
 
 ```
-/create-viz Here's our NPS data by product: [pastes data]. Create a horizontal bar chart ranking products by score.
+/data:create-viz Here's our NPS data by product: [pastes data]. Create a horizontal bar chart ranking products by score.
 ```
 
 ```
-/create-viz Query the orders table and create a heatmap of order volume by day-of-week and hour
+/data:create-viz Query the orders table and create a heatmap of order volume by day-of-week and hour
 ```
 
 ## Tips

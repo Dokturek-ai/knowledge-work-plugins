@@ -20,15 +20,16 @@ Skill se spustí sám podle zadání, nebo ho zavolejte jménem, například `/m
 | Skill | K čemu slouží |
 | --- | --- |
 | `campaign-plan` | Plán kampaně: cíl, publikum, sdělení, kanály, kalendář (Meta reklamy, newsletter). |
-| `draft-content` | Návrh textu pro web, newsletter, sociální sítě nebo případovou studii. |
-| `email-sequence` | Sekvence e-mailů pro lékaře s jednou výzvou k akci v každém e-mailu. |
-| `brand-review` | Kontrola textu proti hlasu a slovníku Doktůrku z `DESIGN.md`. |
+| `draft-content` | Návrh textu pro veřejné kanály: web, newsletter, sociální sítě, tiskové zprávy. Podklady pro jednu ordinaci připraví `sales:create-an-asset`. |
+| `email-sequence` | Sekvence e-mailů pro seznam nebo segment lékařů s jednou výzvou k akci v každém e-mailu. Zprávu jedné ordinaci napíše `sales:draft-outreach`. |
+| `brand-review` | Kontrola marketingových a obchodních textů proti hlasu a slovníku Doktůrku z `DESIGN.md` a českým pravidlům psaní. Texty v aplikaci kontroluje `design:ux-copy`. |
 | `seo-audit` | SEO audit `dokturek.ai` a `get.dokturek.ai` pro české hledané výrazy. |
 
 ## Jak plugin pracuje
 
 - Každý skill nejdřív načte [kontext Doktůrku](shared/dokturek-context.md): tým, zdroje pravdy, pravidla pro data a potvrzování, hlas značky a předávání jiným pluginům.
 - Odpovídá česky. Fakta o Doktůrku cituje z `dokturek-docs` a značí [Z], [P], [N].
+- Texty nenabízejí slevy, pobídky ani časově omezené nabídky; cenu uvádějí jen odkazem na `dokturek.ai/cenik`. Reference a případové studie ordinací před 1. 1. 2027 skill nevymýšlí.
 - Klinická tvrzení v textech potvrzuje Anna. Tvrzení o MDR, certifikaci nebo přesnosti AI skill nepřipustí, pokud je dokumenty nedokládají.
 
 ## Konektory

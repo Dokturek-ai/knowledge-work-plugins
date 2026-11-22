@@ -10,7 +10,7 @@ argument-hint: "<question or topic>"
 
 - Search `dokturek-docs` (STAV.md, SLOVNIK.md, the register) and closed GitHub Issues before the web. Official sources for state services: SÚKL, ČSSZ, MZČR / NCEZ.
 
-# /customer-research
+# Customer research
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
 
@@ -19,7 +19,7 @@ Multi-source research on a customer question, product topic, or account-related 
 ## Usage
 
 ```
-/customer-research <question or topic>
+/customer-support:customer-research <question or topic>
 ```
 
 ## Workflow
@@ -27,9 +27,9 @@ Multi-source research on a customer question, product topic, or account-related 
 ### 1. Parse the Research Request
 
 Identify what type of research is needed:
-- **Customer question**: Something a customer has asked that needs an answer (e.g., "Does our product support SSO with Okta?")
+- **Customer question**: Something a customer has asked that needs an answer (e.g., „Umí Doktůrek přihlášení s dvoufázovým ověřením?“ — answer only from `dokturek-docs` or code)
 - **Issue investigation**: Background on a reported problem (e.g., "Has this bug been reported before? What's the known workaround?")
-- **Account context**: History with a specific customer (e.g., "What did we tell Acme Corp last time they asked about this?")
+- **Account context**: History with a specific customer (e.g., „Co jsme této ordinaci naposledy psali k předplatnému?“)
 - **Topic research**: General topic relevant to support work (e.g., "Best practices for webhook retry logic")
 
 Before searching, clarify what you're actually trying to find:
@@ -44,7 +44,7 @@ Search systematically through the source tiers below, adapting to what is connec
 
 **Tier 1 — Official Internal Sources (highest confidence):**
 - ~~knowledge base (if connected): product docs, runbooks, FAQs, policy documents
-- ~~cloud storage: internal documents, specs, guides, past research
+- Uploaded files: documents the user attached in this conversation (internal specs, guides, past research)
 - Product roadmap (internal-facing): feature timelines, priorities
 
 **Tier 2 — Organizational Context:**
@@ -133,11 +133,10 @@ If the research is to answer a customer question:
 
 After research is complete, suggest capturing the knowledge:
 
-- "Should I save these findings to your knowledge base for future reference?"
-- "Want me to create a FAQ entry based on this research?"
-- "This might be worth documenting — should I draft a runbook entry?"
+- "Want me to draft a FAQ entry or article from this (`kb-article`)?"
+- "Should I propose the exact text of a change to `dokturek-docs`?"
 
-This helps build institutional knowledge and reduces duplicate research effort across the team.
+Propose text only: never write to a knowledge base, Notion or `dokturek-docs` yourself. The user applies the change after review.
 
 ---
 
@@ -208,13 +207,13 @@ When sources disagree:
 - The answer requires specialized expertise you don't have
 - The customer is at risk and the wrong answer could exacerbate the situation
 
-### Escalation Path:
-1. **Subject matter expert**: For technical or domain-specific questions
-2. **Product team**: For roadmap, feature, or capability questions
-3. **Legal/compliance**: For terms, privacy, security, or regulatory questions
-4. **Billing/finance**: For pricing, invoice, or payment-related questions
-5. **Engineering**: For custom configurations, bugs, or technical root causes
-6. **Leadership**: For strategic decisions, exceptions, or high-stakes situations
+### Who to Ask (team table in the Doktůrek context):
+1. **Petr Sovadina**: technical questions, architecture, state integrations, data handling, bugs (Jan Rožánek for eRecept, registry and eNeschopenka details)
+2. **Jakub Sekula (Kuba)**: environments, availability, deploys
+3. **Martin Marhold**: login, Keycloak, gov-gateway
+4. **MUDr. Anna Chromcová**: anything clinical
+5. **Jan Chromec (Honza)**: roadmap commitments, price, subscription, contracts, exceptions
+6. **Regulatory questions** (MDR, AI Act): the `mdr-compliance` plugin; no lawyer or DPO is engaged yet, so legal and privacy questions go to Honza as an open question
 
 ## Research Documentation for Team Knowledge Base
 
@@ -251,6 +250,7 @@ After completing research, capture the knowledge for future use.
 ```
 
 ### Knowledge Base Hygiene:
+- These entries are proposed text; the user files them (in `dokturek-docs` or the practice knowledge base once one exists). Never write to Notion.
 - Date-stamp all entries
 - Flag entries that reference specific product versions or features
 - Review and update entries quarterly

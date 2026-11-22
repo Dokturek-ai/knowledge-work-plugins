@@ -20,11 +20,11 @@ Skill se spustí sám podle zadání, nebo ho zavolejte jménem, například `/l
 | Skill | K čemu slouží |
 | --- | --- |
 | `review-contract` | Revize smlouvy nebo DPA s ordinací: odchylky, rizika, návrh úprav. |
-| `triage-nda` | Rychlé zařazení NDA: GREEN, YELLOW, RED. |
+| `triage-nda` | Rychlé zařazení NDA podle českého práva: GREEN, YELLOW, RED. Výsledek je doporučení pro Honzu, bez něj se nic nepodepisuje. |
 | `compliance-check` | GDPR, stav DPA a DPIA, retence dokumentace podle vyhlášky 444/2024 Sb.; MDR předá pluginu `mdr-compliance`. |
 | `legal-risk-assessment` | Posouzení právního a smluvního rizika s vlastníkem a návrhem položky do registru. |
-| `legal-response` | Návrh odpovědi na právní dotaz, například žádost subjektu údajů předanou přes ordinaci. |
-| `vendor-check` | Kontrola dodavatele jako dalšího zpracovatele: smlouva, DPA, zpracování jen v EU/EHP. |
+| `legal-response` | Textový návrh odpovědi na právní dotaz, například předání žádosti pacienta ordinaci jako správci. Nic neodesílá. |
+| `vendor-check` | Kontrola dodavatele jako dalšího zpracovatele podle čl. 28 odst. 2 a 4 GDPR: povolení správce, smlouva se stejnými povinnostmi, zpracování v EU/EHP, uvedení v příloze DPA, SCC při přenosu mimo EHP. |
 
 ## Jak plugin pracuje
 

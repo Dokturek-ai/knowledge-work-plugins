@@ -1,6 +1,6 @@
 ---
 name: draft-content
-description: Draft blog posts, social media, email newsletters, landing pages, press releases, and case studies with channel-specific formatting and SEO recommendations. Use when writing any marketing content, when you need headline or subject line options, or when adapting a message for a specific platform, audience, and brand voice.
+description: Draft Doktůrek content for public channels (web and landing pages, newsletter, social media, blog, press releases) with channel-specific formatting and SEO recommendations. Use when writing marketing content for many readers, when you need headline or subject line options, or when adapting a message for a specific platform and audience. An asset for one named practice belongs to sales:create-an-asset.
 argument-hint: "<content type and topic>"
 ---
 
@@ -10,6 +10,7 @@ argument-hint: "<content type and topic>"
 
 - Audience: Czech GPs and practice staff. Czech, vykání, the Doktůrek voice. Prices only from `dokturek.ai/cenik`; no MDR or certification claims, no "AI rozhodla".
 - Clinical statements need Anna's confirmation; screenshots only with synthetic data.
+- No case studies, testimonials, customer quotes or results before 1 January 2027 unless the user provides them with the person's approval.
 
 # Draft Content
 
@@ -19,7 +20,7 @@ Generate marketing content drafts tailored to a specific content type, audience,
 
 ## Trigger
 
-User runs `/draft-content` or asks to draft, write, or create marketing content.
+User runs `/marketing:draft-content` or asks to draft, write, or create marketing content.
 
 ## Inputs
 
@@ -31,7 +32,7 @@ Gather the following from the user. If not provided, ask before proceeding:
    - Email newsletter
    - Landing page copy
    - Press release
-   - Case study
+   - Case study (only from material the user provides)
 
 2. **Topic** — the subject or theme of the content
 
@@ -39,21 +40,20 @@ Gather the following from the user. If not provided, ask before proceeding:
 
 4. **Key messages** — 2-4 main points or takeaways to communicate
 
-5. **Tone** — e.g., authoritative, conversational, inspirational, technical, witty (optional if brand voice is configured)
+5. **Tone** — e.g., authoritative, conversational, inspirational, technical, witty (optional; the Doktůrek voice is the default)
 
 6. **Length** — target word count or format constraint (e.g., "1000 words", "280 characters", "3 paragraphs")
 
 ## Brand Voice
 
-- If the user has a brand voice configured in their local settings file, apply it automatically. Inform the user that brand voice settings are being applied.
-- If no brand voice is configured, ask: "Do you have brand voice guidelines you'd like me to follow? If not, I'll use a neutral professional tone."
-- Apply the specified or default tone consistently throughout the draft.
+- Always use `dokturek-docs` → [`05-design/Doktůrek-brand/DESIGN.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/05-design/Doktůrek-brand/DESIGN.md) and the Voice section of the Doktůrek context. Tell the user which source you applied; if DESIGN.md is not reachable, say so and use the Voice section.
+- Apply the tone consistently throughout the draft.
 
 ## Content Generation by Type
 
 ### Blog Post
 - Engaging headline (provide 2-3 options)
-- Introduction with a hook (question, statistic, bold statement, or story)
+- Introduction with a hook (question, sourced statistic, or story)
 - 3-5 organized sections with descriptive subheadings
 - Supporting points, examples, or data references in each section
 - Conclusion with a clear call to action
@@ -82,7 +82,7 @@ Gather the following from the user. If not provided, ask before proceeding:
 - Headline and subheadline
 - Hero section copy
 - Value propositions (3-4 benefit-driven bullets or sections)
-- Social proof placeholder (suggest testimonial or stat placement)
+- No social proof before 1 January 2027 unless the user provides it; leave a marked placeholder [N] instead of inventing a testimonial or number
 - Primary and secondary CTAs
 - FAQ section suggestions
 - SEO: meta title and meta description suggestions
@@ -98,11 +98,12 @@ Gather the following from the user. If not provided, ask before proceeding:
 
 ### Case Study
 - Title emphasizing the result
-- Customer overview (industry, size, challenge)
+- Write only from material the user provides (before 1 January 2027 there are no paying practices to describe)
+- Practice overview (type, size, challenge), with the practice's approval to be named
 - Challenge section
 - Solution section (what was implemented)
-- Results section with metrics (prompt user for data)
-- Customer quote placeholder
+- Results section with metrics from the user; mark anything unverified [N]
+- Quote only if the user provides it with the person's approval
 - Call to action
 
 ## SEO Considerations (for web content)
@@ -119,6 +120,6 @@ For blog posts, landing pages, and other web-facing content:
 Present the draft with clear formatting. After the draft, include:
 - A brief note on what brand voice and tone were applied
 - Any SEO recommendations (for web content)
-- Suggestions for next steps (e.g., "Review with your team", "Add customer quotes", "Pair with a visual")
+- Suggestions for next steps (e.g., "Review with Filip", "Confirm clinical statements with Anna", "Pair with a visual")
 
 Ask: "Would you like me to revise any section, adjust the tone, or create a variation for a different channel?"

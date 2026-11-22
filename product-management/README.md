@@ -31,6 +31,8 @@ Skill se spustí sám podle zadání, nebo ho zavolejte jménem, například `/p
 - Každý skill nejdřív načte [kontext Doktůrku](shared/dokturek-context.md): tým, zdroje pravdy, pravidla pro data a potvrzování, hlas značky a předávání jiným pluginům.
 - Odpovídá česky. Fakta o Doktůrku cituje z `dokturek-docs` a značí [Z], [P], [N].
 - Rozhodnutí skill nikdy nepřijímá. Navrhne položku R nebo Q do registru `10-rozhodnuti-a-otevrene-otazky.md` s vlastníkem.
+- Issues, milníky, změny stavů a příspěvky do Slacku připraví jako návrh a provede je až po Vašem potvrzení.
+- Stand-upy, zápisy z porad a připomínky dělá týmový asistent OpenClaw; plugin je neduplikuje.
 
 ## Konektory
 

@@ -10,7 +10,7 @@ argument-hint: "<url or topic> [audit type]"
 
 - The sites are `dokturek.ai` (with the price page `/cenik`) and the Meta-ads landing page `get.dokturek.ai` (source in `Dokturek-ai/dokturek-lp`). Target Czech search terms used by GPs (for example "ambulantní software", "eRecept", "eNeschopenka").
 
-# /seo-audit
+# SEO audit
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
 
@@ -18,7 +18,7 @@ Audit a website's SEO health, research keyword opportunities, identify content g
 
 ## Trigger
 
-User runs `/seo-audit` or asks for an SEO audit, keyword research, content gap analysis, technical SEO check, or competitor SEO comparison.
+User runs `/marketing:seo-audit` or asks for an SEO audit, keyword research, content gap analysis, technical SEO check, or competitor SEO comparison.
 
 ## Inputs
 
@@ -54,7 +54,7 @@ Research keywords related to the user's domain, topic, or target keywords.
 
 **If tools are not connected:**
 - Use web search to research the keyword landscape
-- Note: "For more precise volume and difficulty data, connect an SEO tool like Ahrefs or Semrush via MCP. The audit will auto-populate with ranking data."
+- Note: "For precise volume, difficulty and ranking data, connect a ~~SEO tools connector or give me an export from your SEO tool. Without it, these values are estimates and I mark them [N]."
 
 For each keyword opportunity, assess:
 - **Primary keywords** — high-intent terms directly tied to the user's product or service
@@ -99,7 +99,7 @@ Evaluate technical foundations that affect crawlability and rankings:
 - **Crawlability** — robots.txt configuration, XML sitemap presence and accuracy, canonical tags, noindex/nofollow usage
 - **Broken links** — internal and external 404s, redirect chains
 - **HTTPS** — secure connection, mixed content issues
-- **Core Web Vitals signals** — LCP, FID/INP, CLS indicators based on observable page behavior
+- **Core Web Vitals signals** — LCP, INP, CLS. Without field or lab data from a connected tool or an export, describe only observable signals and mark any value [N]
 - **Indexation** — pages that should be indexed but may not be, duplicate content risks
 
 ### 5. Competitor SEO Comparison
@@ -129,6 +129,8 @@ Open with a 3-5 sentence summary of overall SEO health. Highlight:
 |---------|----------------|-------------------|-----------------|--------|--------------------------|
 
 Opportunity score: high, medium, or low — based on the combination of search demand, difficulty, and relevance to the user's business.
+
+Without ~~SEO tools data or an export, Est. Difficulty and Current Ranking are estimates or unknown: mark them [N] and never present them as measured.
 
 Include 15-25 keyword opportunities, sorted by opportunity score.
 

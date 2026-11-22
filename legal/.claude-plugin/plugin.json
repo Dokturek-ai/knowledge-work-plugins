@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "legal",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Prepare legal working documents for Doktůrek (Clementine Solutions s.r.o.): review contracts and DPAs with practices, triage NDAs, check GDPR and DPA/DPIA status, assess legal risk, draft responses to legal requests and check vendors as sub-processors. Not legal advice; MDR and AI Act go to the mdr-compliance plugin.",
   "author": {
     "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",

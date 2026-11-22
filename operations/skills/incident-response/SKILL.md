@@ -8,9 +8,22 @@ argument-hint: "<incident description or alert>"
 
 ## Doktůrek specifics
 
-- Owners: infrastructure, Coolify, deploys → Kuba; Keycloak and gov-gateway → Martin Marhold; state integrations → Jan Rožánek; overall and decisions → Petr. The team agreed to send deploy-failure alerts to Telegram.
+- Owners: infrastructure, Coolify, deploys → Kuba; Keycloak and gov-gateway → Martin Marhold; state integrations → Jan Rožánek; overall and decisions → Petr. Deploy-failure alerts are not running yet: the team only agreed, as an action item without a date for Petr and Kuba, to send them to Telegram instead of paid Slack (`dokturek-docs` → `46-porada-retro-a-planning-2026-11-13.md`). Do not assume an alert reached anyone.
 - An eRecept attempt with an unclear result is never retried blindly. Follow "Ruční dořešení nejasného pokusu" in [`02-architektura/specifikace/eRecept-bot-flow.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/02-architektura/specifikace/eRecept-bot-flow.md).
 - You never restart, deploy or change Coolify, Medplum, Keycloak or gov-gateway. Messages to practices about an incident are drafts Honza or Petr confirm.
+- If the incident may involve personal data (unauthorised access, loss, disclosure or alteration of patient or user data), follow "Personal data breach" below as well.
+
+### Personal data breach
+
+Doktůrek is the processor; the practice is the controller. The timings come from the DPA revision brief (`dokturek-docs` → `04-pravo-a-regulatorika/dpa-revision-brief.md`, section 8), which is a brief for a lawyer, not a signed contract (whether a DPA is signed is open, Q-745):
+
+1. **Notify the controller (the practice) without undue delay**, under the proposed contract wording within 24 hours of discovery (Art. 33(2) GDPR). Content: description of the incident, categories of data, estimated number of data subjects, possible consequences, measures taken or proposed.
+2. **Help the controller notify ÚOOÚ within 72 hours** (Art. 33 GDPR; the 72 hours run for the controller) and inform data subjects where needed. The controller notifies, not Doktůrek.
+3. **Honza (Jan Chromec) and Petr decide** whether it is a breach, what goes to the practice and when. Ask them at once; do not wait for the postmortem.
+4. **Drafts only.** Prepare the notice to the practice and a draft ÚOOÚ notification for the controller, with the facts marked [Z], [P] or [N]. Show the exact recipient and text, and send nothing without an explicit yes in the current turn. Never put patient identifiers into the draft, a chat message or the incident timeline.
+5. **Preserve evidence**: record the time of discovery and keep logs and the timeline unchanged.
+
+No lawyer or DPO is engaged yet; say so and do not present the draft as legal advice.
 
 # /incident-response
 
@@ -21,15 +34,15 @@ Manage an incident from detection through postmortem.
 ## Usage
 
 ```
-/incident-response $ARGUMENTS
+/operations:incident-response $ARGUMENTS
 ```
 
 ## Modes
 
 ```
-/incident-response new [description]     # Start a new incident
-/incident-response update [status]       # Post a status update
-/incident-response postmortem            # Generate postmortem from incident data
+/operations:incident-response new [description]     # Start a new incident
+/operations:incident-response update [status]       # Post a status update
+/operations:incident-response postmortem            # Generate postmortem from incident data
 ```
 
 If no mode is specified, ask what phase the incident is in.

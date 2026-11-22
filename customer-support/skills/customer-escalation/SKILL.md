@@ -1,6 +1,6 @@
 ---
 name: customer-escalation
-description: Package an escalation for engineering, product, or leadership with full context. Use when a bug needs engineering attention beyond normal support, multiple customers report the same issue, a customer is threatening to churn, or an issue has sat unresolved past its SLA.
+description: Package an escalation for the right Doktůrek owner (Petr, Kuba, Martin Marhold, Anna, Honza) with full context. Use when a bug needs technical attention beyond normal support, multiple practices report the same issue, a practice is unhappy enough to leave, or an issue has sat unresolved too long. A failed eRecept or eNeschopenka goes to operations incident-response first.
 argument-hint: "<issue summary> [customer name]"
 ---
 
@@ -9,24 +9,26 @@ argument-hint: "<issue summary> [customer name]"
 ## Doktůrek specifics
 
 - Escalation owners: technical and integrations → Petr; infrastructure and outages → Kuba; identity and gateway → Martin Marhold; clinical questions → Anna; contract, price or relationship → Honza.
+- A failed or unclear eRecept or eNeschopenka is an incident, not a normal escalation: hand it to operations `incident-response` first and attach this brief there.
+- Nothing is posted, sent or filed without confirmation of the exact channel or recipient and text. Reminders and follow-up nudges are OpenClaw's job, not this skill's.
 
-# /customer-escalation
+# Customer escalation
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
 
-Package a support issue into a structured escalation brief for engineering, product, or leadership. Gathers context, structures reproduction steps, assesses business impact, and identifies the right escalation target.
+Package a support issue into a structured escalation brief for the right Doktůrek owner. Gathers context, structures reproduction steps, assesses impact on practices, and identifies the owner.
 
 ## Usage
 
 ```
-/customer-escalation <issue description> [customer name or account]
+/customer-support:customer-escalation <issue description> [practice name]
 ```
 
 Examples:
-- `/customer-escalation API returning 500 errors intermittently for Acme Corp`
-- `/customer-escalation Data export is missing rows — 3 customers reported this week`
-- `/customer-escalation SSO login loop affecting all Enterprise customers`
-- `/customer-escalation Customer threatening to churn over missing audit log feature`
+- `/customer-support:customer-escalation Uložený dekurz se ordinaci po obnovení stránky nezobrazuje`
+- `/customer-support:customer-escalation Tři ordinace tento týden hlásí, že nejde přihlášení přes Keycloak`
+- `/customer-support:customer-escalation eNeschopenka se v jedné ordinaci opakovaně neodeslala`
+- `/customer-support:customer-escalation Ordinace zvažuje odchod kvůli chybějící funkci`
 
 ## Workflow
 
@@ -59,12 +61,12 @@ Using the impact dimensions below, quantify:
 - **Breadth**: How many customers/users affected? Growing?
 - **Depth**: Blocked vs. inconvenienced?
 - **Duration**: How long has this been going on?
-- **Revenue**: ARR at risk? Pending deals affected?
+- **Day-one scope**: Does it touch eRecept, patient identification in the registries, eNeschopenka or dekurz storage?
 - **Time pressure**: Hard deadline?
 
 ### 4. Determine Escalation Target
 
-Using the escalation tiers below, identify the right target: L2 Support, Engineering, Product, Security, or Leadership.
+Using the escalation owners below, identify the right person. For a failed or unclear eRecept or eNeschopenka, stop here and hand over to operations `incident-response`.
 
 ### 5. Structure Reproduction Steps (for bugs)
 
@@ -76,14 +78,14 @@ If the issue is a bug, follow the reproduction step best practices below to docu
 ## ESCALATION: [One-line summary]
 
 **Severity:** [Critical / High / Medium]
-**Target team:** [Engineering / Product / Security / Leadership]
+**Owner:** [Name from the escalation owners table]
 **Reported by:** [Your name/team]
 **Date:** [Today's date]
 
 ### Impact
 - **Customers affected:** [Who and how many]
 - **Workflow impact:** [What they can't do]
-- **Revenue at risk:** [If applicable]
+- **Day-one scope touched:** [eRecept / registries / eNeschopenka / dekurz / none]
 - **Time in queue:** [How long this has been an issue]
 
 ### Issue Description
@@ -122,10 +124,9 @@ Environment: [Details]
 ### 7. Offer Next Steps
 
 After generating the escalation:
-- "Want me to post this in a ~~chat channel for the target team?"
-- "Should I update the customer with an interim response?"
-- "Want me to set a follow-up reminder to check on this?"
-- "Should I draft a customer-facing update with the current status?"
+- "Want me to prepare this for a ~~chat channel? Tell me the channel; I will show the exact text and post only after your explicit yes."
+- "Should I draft an interim reply to the practice (`draft-response`)?"
+- "Should I draft a GitHub issue in `Dokturek-ai/dokturek-docs` from this brief? It is created only after you confirm."
 
 ---
 
@@ -142,42 +143,24 @@ After generating the escalation:
 - **Technical**: Bug confirmed and needs a code fix, infrastructure investigation needed, data corruption or loss
 - **Complexity**: Issue is beyond support's ability to diagnose, requires access support doesn't have, involves custom implementation
 - **Impact**: Multiple customers affected, production system down, data integrity at risk, security concern
-- **Business**: High-value customer at risk, SLA breach imminent or occurred, customer requesting executive involvement
-- **Time**: Issue has been open beyond SLA, customer has been waiting unreasonably long, normal support channels aren't progressing
+- **Business**: A practice is considering leaving, asks for a price or contract exception, or asks for Honza directly
+- **Time**: The practice has been blocked or waiting unreasonably long, normal handling isn't progressing
 - **Pattern**: Same issue reported by 3+ customers, recurring issue that was supposedly fixed, increasing severity over time
 
-## Escalation Tiers
+## Escalation Owners
 
-### L1 → L2 (Support Escalation)
-**From:** Frontline support
-**To:** Senior support / technical support specialists
-**When:** Issue requires deeper investigation, specialized product knowledge, or advanced troubleshooting
-**What to include:** Ticket summary, steps already tried, customer context
+Doktůrek has no support tiers, security team or leadership queue. Escalate to a named owner (team table in the Doktůrek context):
 
-### L2 → Engineering
-**From:** Senior support
-**To:** Engineering team (relevant product area)
-**When:** Confirmed bug, infrastructure issue, needs code change, requires system-level investigation
-**What to include:** Full reproduction steps, environment details, logs or error messages, business impact, customer timeline
+| Owner | When | What to include |
+|-------|------|-----------------|
+| **Operations `incident-response`** | Failed or unclear eRecept or eNeschopenka, outage affecting practices | Time, affected practices, exact error text, what the doctor did |
+| **Petr Sovadina** | Confirmed bug, architecture, state integrations, data access or security concern | Reproduction steps, environment, logs, impact |
+| **Jakub Sekula (Kuba)** | Infrastructure, environments, deploys, availability, performance | Time window, environment, symptoms, monitoring links |
+| **Martin Marhold** | Login, Keycloak, identity, gov-gateway | Account (no patient data), time, exact error, browser |
+| **MUDr. Anna Chromcová** | Anything clinical: content, safety, wording for doctors | The clinical question and the text concerned |
+| **Jan Chromec (Honza)** | Contract, price, subscription, relationship, feature priority, a practice considering leaving | Practice, request, what was already said |
 
-### L2 → Product
-**From:** Senior support
-**To:** Product management
-**When:** Feature gap causing customer pain, design decision needed, workflow doesn't match customer expectations, competing customer needs require prioritization
-**What to include:** Customer use case, business impact, frequency of request, competitive pressure (if known)
-
-### Any → Security
-**From:** Any support tier
-**To:** Security team
-**When:** Potential data exposure, unauthorized access, vulnerability report, compliance concern
-**What to include:** What was observed, who/what is potentially affected, immediate containment steps taken, urgency assessment
-**Note:** Security escalations bypass normal tier progression — escalate immediately regardless of your level
-
-### Any → Leadership
-**From:** Any tier (usually L2 or manager)
-**To:** Support leadership, executive team
-**When:** High-revenue customer threatening churn, SLA breach on critical account, cross-functional decision needed, exception to policy required, PR or legal risk
-**What to include:** Full business context, revenue at risk, what's been tried, specific decision or action needed, deadline
+Security concerns skip any queue: go straight to Petr. Integration details of eRecept, registries or eNeschopenka can also involve Jan Rožánek; ask Petr when unsure.
 
 ## Business Impact Assessment
 
@@ -190,14 +173,14 @@ When escalating, quantify impact where possible:
 | **Breadth** | How many customers/users are affected? Is it growing? |
 | **Depth** | How severely are they impacted? Blocked vs. inconvenienced? |
 | **Duration** | How long has this been going on? How long until it's critical? |
-| **Revenue** | What's the ARR at risk? Are there pending deals affected? |
-| **Reputation** | Could this become public? Is it a reference customer? |
-| **Contractual** | Are SLAs being breached? Are there contractual obligations? |
+| **Day-one scope** | Does it touch eRecept, registries, eNeschopenka or dekurz storage? |
+| **Reputation** | Could this become public? |
+| **Clinical safety** | Could a doctor act on wrong or missing data? If yes, include Anna. |
 
 ### Severity Shorthand
 
-- **Critical**: Production down, data at risk, security breach, or multiple high-value customers affected. Needs immediate attention.
-- **High**: Major functionality broken, key customer blocked, SLA at risk. Needs same-day attention.
+- **Critical**: Production down, data at risk, security breach, failed eRecept or eNeschopenka, or several practices blocked. Needs immediate attention.
+- **High**: Major functionality broken, a practice blocked in its daily work. Needs same-day attention.
 - **Medium**: Significant issue with workaround, important but not urgent business impact. Needs attention this week.
 
 ## Writing Reproduction Steps
@@ -214,13 +197,13 @@ Good reproduction steps are the single most valuable thing in a bug escalation. 
 
 ## Follow-up Cadence After Escalation
 
-Don't escalate and forget. Maintain ownership of the customer relationship.
+Don't escalate and forget. Maintain ownership of the practice relationship. The rhythm below is internal only: never promise it to the practice. Reminders come from OpenClaw.
 
 | Severity | Internal Follow-up | Customer Update |
 |----------|-------------------|-----------------|
-| **Critical** | Every 2 hours | Every 2-4 hours (or per SLA) |
-| **High** | Every 4 hours | Every 4-8 hours |
-| **Medium** | Daily | Every 1-2 business days |
+| **Critical** | Several times a day | When the state changes |
+| **High** | Daily | When the state changes |
+| **Medium** | Weekly | When there is news |
 
 ### Follow-up Actions
 - Check with the receiving team for progress
@@ -238,9 +221,9 @@ Not every escalation stays escalated. De-escalate when:
 - New information changes the severity assessment
 
 When de-escalating:
-- Notify the team you escalated to
-- Update the ticket with the resolution
-- Inform the customer of the resolution
+- Draft a note for the owner you escalated to
+- Draft the update for the issue (posted only after confirmation)
+- Draft the reply to the practice (`draft-response`)
 - Document what was learned for future reference
 
 ## Escalation Best Practices
@@ -248,7 +231,7 @@ When de-escalating:
 1. Always quantify impact — vague escalations get deprioritized
 2. Include reproduction steps for bugs — this is the #1 thing engineering needs
 3. Be clear about what you need — "investigate" vs. "fix" vs. "decide" are different asks
-4. Set and communicate a deadline — urgency without a deadline is ambiguous
+4. State when you need an answer internally — but never pass it to the practice as a promise
 5. Maintain ownership of the customer relationship even after escalating the technical issue
 6. Follow up proactively — don't wait for the receiving team to come to you
 7. Document everything — the escalation trail is valuable for pattern detection and process improvement

@@ -1,6 +1,6 @@
 ---
 name: ticket-triage
-description: Triage and prioritize a support ticket or customer issue. Use when a new ticket comes in and needs categorization, assigning P1-P4 priority, deciding which team should handle it, or checking whether it's a duplicate or known issue before routing.
+description: Triage and prioritize a support request from a practice using Doktůrek. Use when a new request comes in and needs categorization, assigning P1-P4 priority, deciding which Doktůrek owner should handle it, or checking whether it's a duplicate or known issue before routing.
 argument-hint: "<ticket or issue description>"
 ---
 
@@ -8,11 +8,11 @@ argument-hint: "<ticket or issue description>"
 
 ## Doktůrek specifics
 
-- Doktůrek has no agreed SLA yet: do not promise response or resolution times to a practice. The SLA tiers below are internal guidance until one is agreed.
+- Doktůrek has no agreed SLA or support tiers: never promise a response or resolution time to a practice. P1–P4 below only orders the internal queue.
 - Tickets about a failed or unclear eRecept or eNeschopenka are urgent and go to the incident path (operations `incident-response`). Never tell a doctor to simply resend.
 - Remove patient identifiers from the ticket text before analysis; ask the practice to send an anonymised description.
 
-# /ticket-triage
+# Ticket triage
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
 
@@ -21,14 +21,14 @@ Categorize, prioritize, and route an incoming support ticket or customer issue. 
 ## Usage
 
 ```
-/ticket-triage <ticket text, customer message, or issue description>
+/customer-support:ticket-triage <ticket text, customer message, or issue description>
 ```
 
 Examples:
-- `/ticket-triage Customer says their dashboard has been showing a blank page since this morning`
-- `/ticket-triage "I was charged twice for my subscription this month"`
-- `/ticket-triage User can't connect their SSO — getting a 403 error on the callback URL`
-- `/ticket-triage Feature request: they want to export reports as PDF`
+- `/customer-support:ticket-triage Ordinace hlásí, že eRecept se neodeslal a lékař nevidí žádnou chybovou hlášku`
+- `/customer-support:ticket-triage "Sestře nejde přihlášení přes Keycloak, po zadání hesla se vrací na přihlašovací stránku"`
+- `/customer-support:ticket-triage Lékař se ptá, kde najde dekurz, který uložil včera`
+- `/customer-support:ticket-triage Přání ordinace: tisk seznamu objednaných pacientů na další den`
 
 ## Workflow
 
@@ -62,7 +62,7 @@ Apply the duplicate detection process below.
 
 ### 4. Determine Routing
 
-Using the routing rules below, recommend which team or queue should handle this based on category and complexity.
+Using the routing rules below, recommend which Doktůrek owner should handle this based on category and complexity. A failed or unclear eRecept or eNeschopenka goes to operations `incident-response` first.
 
 ### 5. Generate Triage Output
 
@@ -84,13 +84,14 @@ Using the routing rules below, recommend which team or queue should handle this 
 - **Known issue:** [Yes — link / No / Checking]
 
 ### Routing Recommendation
-**Route to:** [Team or queue]
+**Route to:** [Owner from the routing table, or operations `incident-response`]
 **Why:** [Brief reasoning]
 
 ### Suggested Initial Response
-[Draft first response to the customer — acknowledge the issue,
-set expectations, provide workaround if available.
-Use the auto-response templates below as a starting point.]
+[Draft first reply in Czech: acknowledge the issue, ask for
+missing details, give a verified workaround if one exists, name
+the next step without a date. Start from the templates below.
+Draft only; the user sends it after confirming.]
 
 ### Internal Notes
 - [Any additional context for the agent picking this up]
@@ -104,7 +105,7 @@ After presenting the triage:
 - "Want me to draft a full response to the customer?"
 - "Should I search for more context on this issue?"
 - "Want me to check if this is a known bug in the tracker?"
-- "Should I escalate this? I can package it with /customer-escalation."
+- "Should I escalate this? I can package it with `customer-escalation`."
 
 ---
 
@@ -118,7 +119,7 @@ Assign every ticket a **primary category** and optionally a **secondary category
 | **How-to** | Customer needs guidance on using the product | How do I, can I, where is, setting up, configure, help with |
 | **Feature request** | Customer wants a capability that doesn't exist | Would be great if, wish I could, any plans to, requesting |
 | **Billing** | Payment, subscription, invoice, or pricing issues | Charge, invoice, payment, subscription, refund, upgrade, downgrade |
-| **Account** | Account access, permissions, settings, or user management | Login, password, access, permission, SSO, locked out, can't sign in |
+| **Account** | Account access, permissions, settings, or user management | Login, password, access, permission, Keycloak, locked out, can't sign in |
 | **Integration** | Issues connecting to third-party tools or APIs | API, webhook, integration, connect, OAuth, sync, third-party |
 | **Security** | Security concerns, data access, or compliance questions | Data breach, unauthorized, compliance, GDPR, SOC 2, vulnerability |
 | **Data** | Data quality, migration, import/export issues | Missing data, export, import, migration, incorrect data, duplicates |
@@ -142,8 +143,7 @@ Assign every ticket a **primary category** and optionally a **secondary category
 - Data is being lost, corrupted, or exposed
 - A security incident is in progress
 - The issue is worsening or expanding in scope
-
-**SLA expectation:** Respond within 1 hour. Continuous work until resolved or mitigated. Updates every 1-2 hours.
+- A failed or unclear eRecept or eNeschopenka (route to operations `incident-response`)
 
 ### P2 — High
 **Criteria:** Major feature broken, significant workflow blocked, many users affected, no workaround.
@@ -153,8 +153,6 @@ Assign every ticket a **primary category** and optionally a **secondary category
 - The issue is blocking time-sensitive work
 - No reasonable workaround exists
 
-**SLA expectation:** Respond within 4 hours. Active investigation same day. Updates every 4 hours.
-
 ### P3 — Medium
 **Criteria:** Feature partially broken, workaround available, single user or small team affected.
 
@@ -162,8 +160,6 @@ Assign every ticket a **primary category** and optionally a **secondary category
 - The issue is inconvenient but not blocking critical work
 - A single user or small team is affected
 - The customer is not escalating urgently
-
-**SLA expectation:** Respond within 1 business day. Resolution or update within 3 business days.
 
 ### P4 — Low
 **Criteria:** Minor inconvenience, cosmetic issue, general question, feature request.
@@ -173,12 +169,10 @@ Assign every ticket a **primary category** and optionally a **secondary category
 - General questions or how-to inquiries
 - Issues with simple, documented solutions
 
-**SLA expectation:** Respond within 2 business days. Resolution at normal pace.
-
 ### Priority Escalation Triggers
 
 Automatically bump priority up when:
-- Customer has been waiting longer than the SLA allows
+- The practice has been blocked for a long time without an update
 - Multiple customers report the same issue (pattern detected)
 - The customer explicitly escalates or mentions executive involvement
 - A workaround that was in place stops working
@@ -186,16 +180,18 @@ Automatically bump priority up when:
 
 ## Routing Rules
 
-Route tickets based on category and complexity:
+Doktůrek has no support tiers or specialist teams. Route to a named owner (team table in the Doktůrek context):
 
 | Route to | When |
 |----------|------|
-| **Tier 1 (frontline support)** | How-to questions, known issues with documented solutions, billing inquiries, password resets |
-| **Tier 2 (senior support)** | Bugs requiring investigation, complex configuration, integration troubleshooting, account issues |
-| **Engineering** | Confirmed bugs needing code fixes, infrastructure issues, performance degradation |
-| **Product** | Feature requests with significant demand, design decisions, workflow gaps |
-| **Security** | Data access concerns, vulnerability reports, compliance questions |
-| **Billing/Finance** | Refund requests, contract disputes, complex billing adjustments |
+| **You (the user), with a drafted reply** | How-to questions with an answer documented in `dokturek-docs`, known issues with a verified workaround |
+| **Operations `incident-response`** | A failed or unclear eRecept or eNeschopenka, an outage affecting practices |
+| **Petr Sovadina** | Confirmed bugs, architecture, state integrations, data access or security concerns |
+| **Jan Rožánek** | Integration details of eRecept, registries or eNeschopenka (via Petr when unsure) |
+| **Jakub Sekula (Kuba)** | Environments, deploys, availability, performance, monitoring |
+| **Martin Marhold** | Login, Keycloak, identity, gov-gateway |
+| **MUDr. Anna Chromcová** | Anything clinical: content, safety, wording for doctors |
+| **Jan Chromec (Honza)** | Subscription, price, contract or relationship questions; feature requests and priorities |
 
 ## Duplicate Detection
 
@@ -206,77 +202,104 @@ Before creating a new ticket or routing, check for duplicates:
 3. **Search by product area**: Look for recent tickets in the same feature area
 4. **Check known issues**: Compare against documented known issues
 
-**If a duplicate is found:**
-- Link the new ticket to the existing one
-- Notify the customer that this is a known issue being tracked
-- Add any new information from the new report to the existing ticket
-- Bump priority if the new report adds urgency (more customers affected, etc.)
+**If a duplicate is found**, propose, do not act:
+- Draft a link or comment that ties the new report to the existing issue, show the target issue and exact text, and post only after an explicit yes
+- Draft a reply telling the practice this is a known problem, with the next step and no fix date
+- List new information from this report that belongs in the existing issue
+- Suggest a higher priority to the owner if the new report adds urgency (more practices affected, etc.)
 
-## Auto-Response Templates by Category
+## Initial Reply Templates (Czech)
 
-### Bug — Initial Response
+Rules for every template: vykání, a concrete next step without a date, no claim that something was already logged, escalated or fixed unless the user confirms it happened, and no patient identifiers. Replace the bracketed parts; drop lines that do not apply.
+
+### Chyba (bug)
 ```
-Thank you for reporting this. I can see how [specific impact]
-would be disruptive for your work.
+Dobrý den,
 
-I've logged this as a [priority] issue and our team is
-investigating. [If workaround exists: "In the meantime, you
-can [workaround]."]
+děkujeme za popis. Rozumíme, že [konkrétní dopad, např. „nejde uložit dekurz“] Vám komplikuje práci.
 
-I'll update you within [SLA timeframe] with what we find.
-```
+Abychom mohli chybu prověřit, pošlete nám prosím [čas, kdy se to stalo; přesný text hlášky; snímek obrazovky bez údajů pacienta].
+[Jen ověřené náhradní řešení: „Mezitím můžete [postup].“]
 
-### How-to — Initial Response
-```
-Great question! [Direct answer or link to documentation]
+Dalším krokem je prověření chyby. Ozveme se Vám, až budeme vědět víc.
 
-[If more complex: "Let me walk you through the steps:"]
-[Steps or guidance]
-
-Let me know if that helps, or if you have any follow-up
-questions.
+S pozdravem
+[jméno], Doktůrek
 ```
 
-### Feature Request — Initial Response
+### Dotaz „jak na to“ (how-to)
 ```
-Thank you for this suggestion — I can see why [capability]
-would be valuable for your workflow.
+Dobrý den,
 
-I've documented this and shared it with our product team.
-While I can't commit to a specific timeline, your feedback
-directly informs our roadmap priorities.
+[přímá odpověď v jedné až dvou větách, ověřená v dokturek-docs]
 
-[If alternative exists: "In the meantime, you might find
-[alternative] helpful for achieving something similar."]
-```
+Postup:
+1. [krok]
+2. [krok]
 
-### Billing — Initial Response
-```
-I understand billing issues need prompt attention. Let me
-look into this for you.
+Pokud se na některém kroku zastavíte, napište nám prosím, na kterém.
 
-[If straightforward: resolution details]
-[If complex: "I'm reviewing your account now and will have
-an answer for you within [timeframe]."]
+S pozdravem
+[jméno], Doktůrek
 ```
 
-### Security — Initial Response
+### Přání nové funkce (feature request)
 ```
-Thank you for flagging this — we take security concerns
-seriously and are reviewing this immediately.
+Dobrý den,
 
-I've escalated this to our security team for investigation.
-We'll follow up with you within [timeframe] with our findings.
+děkujeme za podnět. Chápeme, proč by Vám [funkce] pomohla při [jejich práce].
 
-[If action is needed: "In the meantime, we recommend
-[protective action]."]
+Váš podnět předáme k posouzení. Zda a kdy funkci zařadíme, zatím slíbit nemůžeme.
+[Jen ověřená alternativa: „Zatím můžete [postup].“]
+
+S pozdravem
+[jméno], Doktůrek
 ```
+
+### Předplatné a platby
+```
+Dobrý den,
+
+děkujeme za zprávu. Abychom mohli [platbu / fakturu / předplatné] prověřit, pošlete nám prosím [číslo faktury, datum platby].
+Zveřejněný ceník předplatného najdete na https://dokturek.ai/cenik.
+
+S pozdravem
+[jméno], Doktůrek
+```
+Individual terms, refunds and exceptions belong to Honza; the reply never offers them.
+
+### eRecept nebo eNeschopenka
+```
+Dobrý den,
+
+děkujeme za rychlé upozornění. Problém s [eReceptem / eNeschopenkou] řešíme jako naléhavý.
+
+Pošlete nám prosím čas odeslání a přesný text hlášky, bez jména a rodného čísla pacienta.
+Další postup Vám napíšeme, jakmile ověříme stav dokladu.
+
+S pozdravem
+[jméno], Doktůrek
+```
+Do not advise resending; the next step for the patient comes from the incident owner.
+
+### Bezpečnost nebo přístup k datům
+```
+Dobrý den,
+
+děkujeme, že jste nám to dali vědět. Bereme to vážně a předáme to technickému vlastníkovi systému.
+
+Prosíme, do další zprávy nevkládejte údaje pacientů. Pošlete nám jen [co jste viděli, kdy a pod jakým účtem].
+
+S pozdravem
+[jméno], Doktůrek
+```
+Add a protective recommendation only when Petr has confirmed it.
 
 ## Triage Best Practices
 
 1. Read the full ticket before categorizing — context in later messages often changes the assessment
 2. Categorize by **root cause**, not just the symptom described
-3. When in doubt on priority, err on the side of higher — it's easier to de-escalate than to recover from a missed SLA
+3. When in doubt on priority, err on the side of higher — it's easier to de-escalate than to recover from a missed urgent case
 4. Always check for duplicates and known issues before routing
 5. Write internal notes that help the next person pick up context quickly
 6. Include what you've already checked or ruled out to avoid duplicate investigation

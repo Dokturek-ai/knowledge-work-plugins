@@ -2,6 +2,31 @@
 
 Formát vychází z [Keep a Changelog](https://keepachangelog.com/cs/1.1.0/), verze podle [SemVer](https://semver.org/lang/cs/).
 
+## 2026-11-22 — Review pluginem plugin-development (marketplace 1.1.0)
+
+Všech osm pluginů prošlo review agentem `plugin-reviewer` z pluginu `plugin-development`. Opravené nálezy:
+
+### Změněno
+
+- Sdílený kontext: potvrzení platí i pro akce, o které uživatel požádá, a přebíjí opačný text skillu; plánované běhy jen čtou a navrhují. Nové pravidlo 9: žádné SLA, sliby termínů ani tvrzení o hotové práci. Doplněný Adrian Golian, ceník podle Q-772, zdroje obchodních kanálů, potlačení skupin pod 5, Notion jen ke čtení.
+- `sales` 3.1.0: blok pravidel ve všech 11 skillech už neříká „nikdy neodmítni akci“; odeslání, rezervace a zápis do Pipedrive jen po potvrzení. Bez Gong, Outlook, Calendly a Salesforce; `win-loss-review` bez procent; `argument-hint` u 9 skillů.
+- `customer-support` 2.1.0: šablony bez SLA a bez „už jsme opravili“, české šablony s vykáním, eskalace na jmenované vlastníky, eRecept a eNeschopenka do `incident-response`.
+- `marketing` 2.1.0: bez slev, pobídek a vymyšlených benchmarků; české konvence místo amerických; hlas jen z `DESIGN.md`.
+- `product-management` 2.1.0: rozhodnutí jen jako návrh do registru 10; bez facilitace standupů (OpenClaw); issues až po potvrzení.
+- `legal` 2.1.0: české právo místo amerického (licence podle 121/2000 Sb., § 2048 a § 2898 OZ); GREEN u NDA je doporučení pro Honzu; žádost subjektu údajů jako předání správci; `vendor-check` kontroluje dalšího zpracovatele podle čl. 28.
+- `operations` 2.1.0: zápisy jen po potvrzení; větev pro porušení zabezpečení osobních údajů; brány G01–G10 v `deploy-checklist`; Telegram jen jako dohoda bez termínu.
+- `design` 2.1.0: WCAG 2.5.5 (AAA) nahrazeno 2.5.8 (AA); bez hravého tónu.
+- `data` 2.1.0: z reálných dat jen agregace bez hodnot identifikátorů; Firebird 3; barvy Doktůrku.
+
+### Odstraněno
+
+- `data/data-context-extractor`: předpokládal datový sklad a balicí skript měl chybu v cestách.
+
+### Přidáno
+
+- Evaly `claude plugin eval` pro osm pluginů ([evals/README.md](evals/README.md)) a workflow `plugin-evals.yml`.
+- `scripts/check_repo.py`: kategorie `~~` proti CONNECTORS.md, povinný oddíl Doktůrek specifics, verze v README, sken tajemství, rodných čísel a absolutních cest.
+
 ## 2026-11-22 — Obálka a mapa v README (marketplace 1.0.1)
 
 ### Přidáno

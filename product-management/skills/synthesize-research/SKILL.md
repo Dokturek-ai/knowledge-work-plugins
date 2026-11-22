@@ -20,7 +20,7 @@ Synthesize user research from multiple sources into structured insights and reco
 ## Usage
 
 ```
-/synthesize-research $ARGUMENTS
+/product-management:synthesize-research $ARGUMENTS
 ```
 
 ## Workflow
@@ -187,122 +187,16 @@ After processing individual interviews:
 - Surface contradictions: where do participants disagree? This often reveals meaningful segments.
 - Find surprises: what challenged your prior assumptions?
 
-## Survey Data Interpretation
+## Small Samples, Surveys and Sizing
 
-### Quantitative Survey Analysis
-- **Response rate**: How representative is the sample? Low response rates may introduce bias.
-- **Distribution**: Look at the shape of responses, not just averages. A bimodal distribution (lots of 1s and 5s) tells a different story than a normal distribution (lots of 3s).
-- **Segmentation**: Break down responses by user segment. Aggregates can mask important differences.
-- **Statistical significance**: For small samples, be cautious about drawing conclusions from small differences.
-- **Benchmark comparison**: How do scores compare to industry benchmarks or previous surveys?
+Doktůrek research is mostly a handful of GP interviews and pilot feedback, not large surveys. Keep the analysis proportional:
 
-### Open-Ended Survey Response Analysis
-- Treat open-ended responses like mini interview notes
-- Code each response with themes
-- Count frequency of themes across responses
-- Pull representative quotes for each theme
-- Look for themes that appear in open-ended responses but not in structured questions — these are things you did not think to ask about
-
-### Common Survey Analysis Mistakes
-- Reporting averages without distributions. A 3.5 average could mean everyone is lukewarm or half love it and half hate it.
-- Ignoring non-response bias. The people who did not respond may be systematically different.
-- Over-interpreting small differences. A 0.1 point change in NPS is noise, not signal.
-- Treating Likert scales as interval data. The difference between "Strongly Agree" and "Agree" is not necessarily the same as between "Agree" and "Neutral."
-- Confusing correlation with causation in cross-tabulations.
-
-## Combining Qualitative and Quantitative Insights
-
-### The Qual-Quant Feedback Loop
-- **Qualitative first**: Interviews and observation reveal WHAT is happening and WHY. They generate hypotheses.
-- **Quantitative validation**: Surveys and analytics reveal HOW MUCH and HOW MANY. They test hypotheses at scale.
-- **Qualitative deep-dive**: Return to qualitative methods to understand unexpected quantitative findings.
-
-### Integration Strategies
-- Use quantitative data to prioritize qualitative findings. A theme from interviews is more important if usage data shows it affects many users.
-- Use qualitative data to explain quantitative anomalies. A drop in retention is a number; interviews reveal it is because of a confusing onboarding change.
-- Present combined evidence: "47% of surveyed users report difficulty with X (survey), and interviews reveal this is because Y (qualitative finding)."
-
-### When Sources Disagree
-- Quantitative and qualitative sources may tell different stories. This is signal, not error.
-- Check if the disagreement is due to different populations being measured
-- Check if stated preferences (survey) differ from actual behavior (analytics)
-- Check if the quantitative question captured what you think it captured
-- Report the disagreement honestly and investigate further rather than choosing one source
-
-## Persona Development from Research
-
-### Building Evidence-Based Personas
-Personas should emerge from research data, not imagination:
-
-1. **Identify behavioral patterns**: Look for clusters of similar behaviors, goals, and contexts across participants
-2. **Define distinguishing variables**: What dimensions differentiate one cluster from another? (e.g., company size, technical skill, usage frequency, primary use case)
-3. **Create persona profiles**: For each behavioral cluster:
-   - Name and brief description
-   - Key behaviors and goals
-   - Pain points and needs
-   - Context (role, company, tools used)
-   - Representative quotes
-4. **Validate with data**: Can you size each persona segment using quantitative data?
-
-### Persona Template
-```
-[Persona Name] — [One-line description]
-
-Who they are:
-- Role, company type/size, experience level
-- How they found/started using the product
-
-What they are trying to accomplish:
-- Primary goals and jobs to be done
-- How they measure success
-
-How they use the product:
-- Frequency and depth of usage
-- Key workflows and features used
-- Tools they use alongside this product
-
-Key pain points:
-- Top 3 frustrations or unmet needs
-- Workarounds they have developed
-
-What they value:
-- What matters most in a solution
-- What would make them switch or churn
-
-Representative quotes:
-- 2-3 verbatim quotes that capture this persona's perspective
-```
-
-### Common Persona Mistakes
-- Demographic personas: defining by age/gender/location instead of behavior. Behavior predicts product needs better than demographics.
-- Too many personas: 3-5 is the sweet spot. More than that and they are not actionable.
-- Fictional personas: made up based on assumptions rather than research data.
-- Static personas: never updated as the product and market evolve.
-- Personas without implications: a persona that does not change any product decisions is not useful.
-
-## Opportunity Sizing
-
-### Estimating Opportunity Size
-For each research finding or opportunity area, estimate:
-
-- **Addressable users**: How many users could benefit from addressing this? Use product analytics, survey data, or market data to estimate.
-- **Frequency**: How often do affected users encounter this issue? (Daily, weekly, monthly, one-time)
-- **Severity**: How much does this issue impact users when it occurs? (Blocker, significant friction, minor annoyance)
-- **Willingness to pay**: Would addressing this drive upgrades, retention, or new customer acquisition?
-
-### Opportunity Scoring
-Score opportunities on a simple matrix:
-
-- **Impact**: (Users affected) x (Frequency) x (Severity) = impact score
-- **Evidence strength**: How confident are we in the finding? (Multiple sources > single source, behavioral data > stated preferences)
-- **Strategic alignment**: Does this opportunity align with company strategy and product vision?
-- **Feasibility**: Can we realistically address this? (Technical feasibility, resource availability, time to impact)
-
-### Presenting Opportunity Sizing
-- Be transparent about assumptions and confidence levels
-- Show the math: "Based on support ticket volume, approximately 2,000 users per month encounter this issue. Interview data suggests 60% of them consider it a significant blocker."
-- Use ranges rather than false precision: "This affects 1,500-2,500 users monthly" not "This affects 2,137 users monthly"
-- Compare opportunities against each other to create a relative ranking, not just absolute scores
+- **Counts, not percentages**: "4 of 6 doctors" says more than "67 %". A finding from 1–2 interviews is a hypothesis [P], not a conclusion.
+- **Surveys**: report the distribution, not just the average, and say how many answered. Do not compare against industry benchmarks you cannot cite.
+- **Aggregates from a real source**: suppress groups smaller than 5 and never list names, birth numbers, insurance numbers or dates (Doktůrek context, rule 4).
+- **Qualitative and quantitative together**: use usage data or ticket counts to weigh interview themes when they exist; when sources disagree, report the disagreement instead of picking one.
+- **Personas**: build them only from observed behaviour across participants (3–5 at most), with representative quotes by participant type, never by name. If the data does not support a persona, say so.
+- **Sizing**: rank opportunities relatively by frequency (daily, weekly, rare) and severity (blocker, friction, annoyance), and mark every estimate [P] or [N]. No user or revenue numbers without a source.
 
 ## Output Format
 

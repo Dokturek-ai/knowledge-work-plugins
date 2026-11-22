@@ -1,6 +1,6 @@
 ---
 name: draft-response
-description: Draft a professional customer-facing response tailored to the situation and relationship. Use when answering a product question, responding to an escalation or outage, delivering bad news like a delay or won't-fix, declining a feature request, or replying to a billing issue.
+description: Draft a reply to a support request from a practice that already uses Doktůrek (doctor, nurse or practice staff), tailored to the situation. Use when answering a product question, responding to an outage or a failed eRecept or eNeschopenka, delivering bad news like a delay or won't-fix, declining a feature request, or replying about the subscription. Sales follow-ups go to sales:call-summary, first contact with a prospect to sales:draft-outreach.
 argument-hint: "<situation description>"
 ---
 
@@ -9,9 +9,10 @@ argument-hint: "<situation description>"
 ## Doktůrek specifics
 
 - Doctors and practice staff: Czech, vykání, calm and concrete. Describe the real state and the next step. No timelines, prices or clinical advice that the team has not confirmed.
-- Draft only; the user sends it.
+- Draft only; the user sends it. Never write that something was logged, escalated, corrected or discussed unless the user confirms it happened.
+- Escalation itself is `customer-escalation`; this skill only drafts the reply to the practice.
 
-# /draft-response
+# Draft response
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
 
@@ -20,14 +21,14 @@ Draft a professional, customer-facing response tailored to the situation, custom
 ## Usage
 
 ```
-/draft-response <context about the customer question, issue, or request>
+/customer-support:draft-response <context about the customer question, issue, or request>
 ```
 
 Examples:
-- `/draft-response Acme Corp is asking when the new dashboard feature will ship`
-- `/draft-response Customer escalation — their integration has been down for 2 days`
-- `/draft-response Responding to a feature request we won't be building`
-- `/draft-response Customer hit a billing error and wants a resolution ASAP`
+- `/customer-support:draft-response Ordinace se ptá, proč se eRecept neodeslal a co má říct pacientovi`
+- `/customer-support:draft-response Lékaři nejde přihlášení přes Keycloak a je rozladěný`
+- `/customer-support:draft-response Odpověď na přání funkce, kterou Honza zatím nezařadil`
+- `/customer-support:draft-response Ordinace se ptá na fakturu za předplatné`
 
 ## Workflow
 
@@ -64,7 +65,7 @@ Gather relevant background from available sources:
 **~~support platform (if connected):**
 - Related tickets and their resolution
 - Known issues or workarounds
-- SLA status and response time commitments
+- What was already told to the practice (there is no SLA; never invent a response time)
 
 **~~knowledge base:**
 - Official documentation or help articles to reference
@@ -116,7 +117,7 @@ After presenting the draft:
 - "Should I add or remove any specific points?"
 - "Want me to make this shorter/longer?"
 - "Should I draft a version for a different stakeholder?"
-- "Want me to draft the internal escalation note as well?"
+- "Should I package the escalation with `customer-escalation`?"
 - "Should I prepare a follow-up message to send after [X days] if no response?"
 
 ---
@@ -128,7 +129,7 @@ After presenting the draft:
 1. **Lead with empathy**: Acknowledge the customer's situation before jumping to solutions
 2. **Be direct**: Get to the point — customers are busy. Bottom-line-up-front.
 3. **Be honest**: Never overpromise, never mislead, never hide bad news in jargon
-4. **Be specific**: Use concrete details, timelines, and names — avoid vague language
+4. **Be specific**: Use concrete details and names — avoid vague language. No dates the owner has not confirmed
 5. **Own it**: Take responsibility when appropriate. "We" not "the system" or "the process"
 6. **Close the loop**: Every response should have a clear next step or call to action
 7. **Match their energy**: If they're frustrated, be empathetic first. If they're excited, be enthusiastic.
@@ -148,9 +149,8 @@ For most customer communications, follow this structure:
    - Include relevant details they need
 
 3. Next Steps (1-3 bullets)
-   - What YOU will do and by when
+   - What happens next on our side (no date unless the owner confirmed it)
    - What THEY need to do (if anything)
-   - When they'll hear from you next
 
 4. Closing (1 sentence)
    - Warm but professional sign-off
@@ -196,18 +196,17 @@ For most customer communications, follow this structure:
 
 **Frustrated or Escalated Customer:**
 - Extra empathy and acknowledgment
-- Urgency in response times
-- Concrete action plans with specific commitments
-- Shorter feedback loops
+- A concrete next step and the owner handling it
+- Only commitments the owner has confirmed
 
 ### Writing Style Rules
 
 **DO:**
 - Use active voice ("We'll investigate" not "This will be investigated")
 - Use "I" for personal commitments and "we" for team commitments
-- Name specific people when assigning actions ("Sarah from our engineering team will...")
+- Name the real owner from the team table when the user agrees to it, never a generic team
 - Use the customer's terminology, not your internal jargon
-- Include specific dates and times, not relative terms ("by Friday January 24" not "in a few days")
+- Leave out dates and times for an answer or fix unless the owner confirmed them in writing
 - Break up long responses with headers or bullet points
 
 **DON'T:**
@@ -224,20 +223,19 @@ For most customer communications, follow this structure:
 - Lead with the direct answer
 - Provide relevant documentation links
 - Offer to connect them with the right resource if needed
-- If you don't know the answer: say so honestly, commit to finding out, give a timeline
+- If you don't know the answer: say so honestly and say you will find out, without a timeline
 
 **Responding to an issue or bug:**
 - Acknowledge the impact on their work
 - State what you know about the issue and its status
-- Provide workaround if available
-- Set expectations for resolution timeline
-- Commit to updates at regular intervals
+- Provide a verified workaround if available
+- Name the next step, without a resolution date
 
 **Handling an escalation:**
 - Acknowledge the severity and their frustration
 - Take ownership (no deflecting or excuse-making)
-- Provide a clear action plan with timeline
-- Identify the person accountable for resolution
+- Name the next step, without a timeline unless the owner confirmed one
+- Identify the person accountable for resolution (from the team table)
 - Offer a meeting or call if appropriate for the severity
 
 **Delivering bad news (feature sunset, delay, can't-fix):**
@@ -253,173 +251,94 @@ For most customer communications, follow this structure:
 - Suggest next steps to capitalize on the good news
 - Express genuine enthusiasm
 
-**Declining a request (feature request, discount, exception):**
+**Declining a request (feature request, price exception, other exception):**
 - Acknowledge the request and its reasoning
-- Be honest about the decision
+- Be honest about the decision (only one Honza or the owner has actually made)
 - Explain the why without being dismissive
 - Offer alternatives when possible
 - Leave the door open for future conversation
 
-## Response Templates for Common Scenarios
+## Reply Templates (Czech)
 
-### Acknowledging a Bug Report
+Rules for every template: vykání, a concrete next step without a date, no claim that something was already logged, escalated, corrected or discussed unless the user confirms it happened, no patient identifiers, and the brand written as Doktůrek. Replace the bracketed parts; drop lines that do not apply.
 
+### Potvrzení chyby
 ```
-Hi [Name],
+Dobrý den,
 
-Thank you for reporting this — I can see how [specific impact] would be
-frustrating for your team.
+děkujeme za popis. Rozumíme, že [konkrétní dopad] Vám komplikuje práci.
 
-I've confirmed the issue and escalated it to our engineering team as a
-[priority level]. Here's what we know so far:
-- [What's happening]
-- [What's causing it, if known]
-- [Workaround, if available]
+Co zatím víme:
+- [co se děje]
+- [příčina, jen pokud je ověřená]
+- [náhradní postup, jen pokud je ověřený]
 
-I'll update you by [specific date/time] with a resolution timeline.
-In the meantime, [workaround details if applicable].
+Dalším krokem je [prověření chyby / oprava]. Ozveme se Vám, až budeme vědět víc.
 
-Let me know if you have any questions or if this is impacting you in
-other ways I should know about.
-
-Best,
-[Your name]
+S pozdravem
+[jméno], Doktůrek
 ```
 
-### Acknowledging a Billing or Account Issue
-
+### Předplatné nebo faktura
 ```
-Hi [Name],
+Dobrý den,
 
-Thank you for reaching out about this — I understand billing issues
-need prompt attention, and I want to make sure this gets resolved
-quickly.
+děkujeme za zprávu. Podle podkladů, které máme, [věcné vysvětlení, co se stalo].
 
-I've looked into your account and here's what I'm seeing:
-- [What happened — clear factual explanation]
-- [Impact on their account — charges, access, etc.]
+Abychom to mohli dořešit, pošlete nám prosím [číslo faktury, datum platby].
+Zveřejněný ceník předplatného najdete na https://dokturek.ai/cenik.
 
-Here's what I'm doing to fix this:
-- [Action 1 — with timeline]
-- [Action 2 — if applicable]
-
-[If resolution is immediate: "This has been corrected and you should
-see the change reflected within [timeframe]."]
-[If needs investigation: "I'm escalating this to our billing team
-and will have an update for you by [specific date]."]
-
-I'm sorry for the inconvenience. Let me know if you have any
-questions about your account.
-
-Best,
-[Your name]
+S pozdravem
+[jméno], Doktůrek
 ```
+Refunds, individual terms and exceptions belong to Honza; the reply never offers them.
 
-### Responding to a Feature Request You Won't Build
-
+### Funkce, kterou zatím neplánujeme
+Use only after Honza decided it; otherwise use the feature-request template in `ticket-triage`.
 ```
-Hi [Name],
+Dobrý den,
 
-Thank you for sharing this request — I can see why [capability] would
-be valuable for [their use case].
+děkujeme za podnět. Chápeme, proč by Vám [funkce] pomohla při [jejich práce].
 
-I discussed this with our product team, and this isn't something we're
-planning to build in the near term. The primary reason is [honest,
-respectful explanation — e.g., it serves a narrow use case, it conflicts
-with our architecture direction, etc.].
+Tuto funkci teď do vývoje nezařazujeme. Důvod: [stručné a věcné vysvětlení].
 
-That said, I want to make sure you can accomplish your goal. Here are
-some alternatives:
-- [Alternative approach 1]
-- [Alternative approach 2]
-- [Integration or workaround if applicable]
+Zatím můžete:
+- [ověřená alternativa]
 
-I've also documented your request in our feedback system, and if our
-direction changes, I'll let you know.
+Pokud se priorita změní, dáme Vám vědět.
 
-Would any of these alternatives work for your team? Happy to dig
-deeper into any of them.
-
-Best,
-[Your name]
+S pozdravem
+[jméno], Doktůrek
 ```
 
-### Outage or Incident Communication
-
+### Výpadek nebo incident
 ```
-Hi [Name],
+Dobrý den,
 
-I wanted to reach out directly to let you know about an issue affecting
-[service/feature] that I know your team relies on.
+chceme Vás informovat o problému, který se týká [služba nebo funkce].
 
-**What happened:** [Clear, non-technical explanation]
-**Impact:** [How it affects them specifically]
-**Status:** [Current status — investigating / identified / fixing / resolved]
-**ETA for resolution:** [Specific time if known, or "we'll update every X hours"]
+Co se děje: [srozumitelné vysvětlení]
+Dopad na Vaši ordinaci: [konkrétně]
+Stav: [prověřujeme / známe příčinu / opravujeme / vyřešeno]
+[Jen ověřený náhradní postup: „Mezitím můžete [postup].“]
 
-[If applicable: "In the meantime, you can [workaround]."]
+Další zprávu Vám pošleme, jakmile se stav změní.
 
-I'm personally tracking this and will update you as soon as we have a
-resolution. You can also check [status page URL] for real-time updates.
-
-I'm sorry for the disruption to your team's work. We take this seriously
-and [what you're doing to prevent recurrence if known].
-
-[Your name]
+Omlouváme se za komplikace při práci.
+[jméno], Doktůrek
 ```
+Statements about state services (SÚKL, ČSSZ) come from the incident owner, not from guesses.
 
-### Following Up After Silence
-
+### Připomenutí po odmlčení
 ```
-Hi [Name],
+Dobrý den,
 
-I wanted to check in — I sent over [what you sent] on [date] and
-wanted to make sure it didn't get lost in the shuffle.
+[datum] jsme Vám psali ohledně [téma]. Ozýváme se pro jistotu, kdyby zpráva zapadla.
 
-[Brief reminder of what you need from them or what you're offering]
+[Co od Vás potřebujeme, nebo co Vám nabízíme.]
 
-If now isn't a good time, no worries — just let me know when would be
-better, and I'm happy to reconnect then.
-
-Best,
-[Your name]
+S pozdravem
+[jméno], Doktůrek
 ```
 
-## Follow-up and Escalation Guidance
-
-### Follow-up Cadence
-
-| Situation | Follow-up Timing |
-|-----------|-----------------|
-| Unanswered question | 2-3 business days |
-| Open support issue | Daily until resolved for critical, 2-3 days for standard |
-| Post-meeting action items | Within 24 hours (send notes), then check at deadline |
-| General check-in | As needed for ongoing issues |
-| After delivering bad news | 1 week to check on impact and sentiment |
-
-### When to Escalate
-
-**Escalate to your manager when:**
-- Customer threatens to cancel or significantly downsell
-- Customer requests exception to policy you can't authorize
-- An issue has been unresolved for longer than SLA allows
-- Customer requests direct contact with leadership
-- You've made an error that needs senior involvement to resolve
-
-**Escalate to product/engineering when:**
-- Bug is critical and blocking the customer's business
-- Feature gap is causing a competitive loss
-- Customer has unique technical requirements beyond standard support
-- Integration issues require engineering investigation
-
-**Escalation format:**
-```
-ESCALATION: [Customer Name] — [One-line summary]
-
-Urgency: [Critical / High / Medium]
-Customer impact: [What's broken for them]
-History: [Brief background — 2-3 sentences]
-What I've tried: [Actions taken so far]
-What I need: [Specific help or decision needed]
-Deadline: [When this needs to be resolved by]
-```
+When the situation needs an escalation rather than a reply, package it with `customer-escalation`.

@@ -23,7 +23,7 @@ Skill se spustí sám podle zadání, nebo ho zavolejte jménem, například `/o
 | `deploy-checklist` | Kontrola před nasazením přes Coolify, včetně release gate Keycloaku a předprodukčního checklistu. |
 | `change-request` | Změnový požadavek s dopadem a plánem návratu; schvaluje Petr, klinické chování i Anna. |
 | `capacity-plan` | Kapacita týmu podle plánu první ordinace. |
-| `tech-debt` | Třídění technického dluhu do existujících registrů. |
+| `tech-debt` | Návrh řádků do registru technického dluhu (`technicky-dluh.md` v `dokturek-docs`) nebo do předprodukčního checklistu platformy. |
 | `process-doc` | Popis obchodního nebo provozního procesu (onboarding ordinace, podpora); runbooky předá `technical-documentation`. |
 
 ## Jak plugin pracuje

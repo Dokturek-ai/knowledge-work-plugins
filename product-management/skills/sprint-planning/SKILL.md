@@ -10,9 +10,10 @@ argument-hint: "[sprint name or date range]"
 
 - Sprints are weekly GitHub milestones in `Dokturek-ai/dokturek-docs`; tasks are GitHub Issues there with an owner, expected output, spec and due date.
 - Use the triage labels `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. Check for an existing issue first, and create or edit issues only after the user confirms the exact list.
+- Create issues and milestones only after the user confirms the exact list: in Claude Code with `gh issue create --repo Dokturek-ai/dokturek-docs` (and `--milestone`, `--label`, `--assignee`), in claude.ai through the GitHub connector.
 - Capacity and shared milestones come from [`03-implementacni-plan/plan-prvni-ordinace.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/03-implementacni-plan/plan-prvni-ordinace.md). Never assign work to Adrian on your own.
 
-# /sprint-planning
+# Sprint planning
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
 
@@ -21,7 +22,7 @@ Plan a sprint by scoping work, estimating capacity, and setting clear goals.
 ## Usage
 
 ```
-/sprint-planning $ARGUMENTS
+/product-management:sprint-planning $ARGUMENTS
 ```
 
 ## How It Works
@@ -38,9 +39,9 @@ Plan a sprint by scoping work, estimating capacity, and setting clear goals.
 │  ✓ Generate sprint plan document                                │
 ├─────────────────────────────────────────────────────────────────┤
 │  SUPERCHARGED (when you connect your tools)                      │
-│  + Project tracker: Pull backlog, create sprint, assign items   │
+│  + Project tracker: Pull backlog; draft milestone and issues    │
 │  + Calendar: Account for PTO and meetings in capacity           │
-│  + Chat: Share sprint plan with the team                        │
+│  + Chat: Draft a sprint-plan post (sent after you confirm)      │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -93,6 +94,12 @@ Plan a sprint by scoping work, estimating capacity, and setting clear goals.
 | [Date] | Sprint end / Demo |
 | [Date] | Retro |
 ```
+
+## After the Plan
+
+Offer, as drafts only:
+- The list of issues to create or edit in `Dokturek-ai/dokturek-docs` (title, owner, labels, milestone, expected output). After an explicit yes: `gh issue create --repo Dokturek-ai/dokturek-docs --title "…" --body "…" --milestone "…" --label "…" --assignee "…"` in Claude Code, or the GitHub connector in claude.ai.
+- A ~~chat post with the sprint plan; show the exact channel and text and post only after an explicit yes.
 
 ## Tips
 

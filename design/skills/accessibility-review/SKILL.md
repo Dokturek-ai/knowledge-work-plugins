@@ -1,7 +1,7 @@
 ---
 name: accessibility-review
 description: Run a WCAG 2.1 AA accessibility audit on a design or page. Trigger with "audit accessibility", "check a11y", "is this accessible?", or when reviewing a design for color contrast, keyboard navigation, touch target size, or screen reader behavior before handoff.
-argument-hint: "<Figma URL, URL, or description>"
+argument-hint: "<screenshot, HTML or description>"
 ---
 
 > **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
@@ -9,6 +9,8 @@ argument-hint: "<Figma URL, URL, or description>"
 ## Doktůrek specifics
 
 - Doktůrek rules from `DESIGN.md`: text contrast at least 4.5:1, large text and icons 3:1, 2 px focus ring, respect `prefers-reduced-motion`. The warning orange fails small-text contrast: pair it with text.
+- Target size: `DESIGN.md` sets the md control height to 34 px; standalone touch demos widen it to 44 px. WCAG 2.5.5 (44×44) is AAA, not AA: do not report a 34 px control as an AA failure. Check 2.5.8 Target Size (Minimum) instead (24×24 CSS px or enough spacing; added in WCAG 2.2 at level AA).
+- The UI is Czech only: the page language is `cs`.
 - Clinical human-factors review belongs to `ehr-design` (`ehr-ux-reference`).
 
 # /accessibility-review
@@ -20,10 +22,10 @@ Audit a design or page for WCAG 2.1 AA accessibility compliance.
 ## Usage
 
 ```
-/accessibility-review $ARGUMENTS
+/design:accessibility-review <screenshot, HTML or description>
 ```
 
-Audit for accessibility: @$1
+Audit for accessibility: $ARGUMENTS
 
 ## WCAG 2.1 AA Quick Reference
 
@@ -37,9 +39,10 @@ Audit for accessibility: @$1
 - **2.1.1** All functionality available via keyboard
 - **2.4.3** Logical focus order
 - **2.4.7** Visible focus indicator
-- **2.5.5** Touch target >= 44x44 CSS pixels
+- **2.5.8** Target size (minimum) >= 24x24 CSS pixels or sufficient spacing (WCAG 2.2 AA; checked in addition to 2.1 AA). 2.5.5 (44x44) is AAA and is not part of this audit; `DESIGN.md` md controls are 34 px high, touch demos 44 px
 
 ### Understandable
+- **3.1.1** Language of page set (`lang="cs"`)
 - **3.2.1** Predictable on focus (no unexpected changes)
 - **3.3.1** Error identification (describe the error)
 - **3.3.2** Labels or instructions for inputs
@@ -120,13 +123,14 @@ Audit for accessibility: @$1
 
 ## If Connectors Available
 
-If **~~design tool** is connected:
-- Inspect color values, font sizes, and touch targets directly from Figma
+If **~~design tool** is connected (none is documented for Doktůrek; work from a screenshot, HTML or description):
+- Inspect color values, font sizes, and target sizes directly from the design file
 - Check component ARIA roles and keyboard behavior in the design spec
 
-If **~~project tracker** is connected:
-- Create tickets for each accessibility finding with severity and WCAG criterion
-- Link findings to existing accessibility remediation epics
+If **~~project tracker** (GitHub Issues) is connected:
+- Draft a list of issues, one per finding, with title, severity, WCAG criterion, screen and proposed fix
+- Show the exact repository and the exact text of each issue, and create the issues only after the user explicitly confirms them in the current turn
+- Link findings to existing issues the user names
 
 ## Tips
 

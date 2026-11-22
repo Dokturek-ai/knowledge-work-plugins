@@ -4,7 +4,7 @@ Skilly odkazují na nástroje obecnou kategorií se znaky `~~` (například `~~c
 
 | Kategorie | Nástroj v Doktůrku | Server v `.mcp.json` | Poznámka |
 | --- | --- | --- | --- |
-| `~~chat` | Slack | slack | Upozornění na selhání nasazení má podle dohody chodit do Telegramu. |
+| `~~chat` | Slack | slack | Upozornění na selhání nasazení zatím neběží: tým se jen dohodl (úkol bez termínu, [`46-porada-retro-a-planning-2026-11-13.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/46-porada-retro-a-planning-2026-11-13.md)), že mají chodit do Telegramu. |
 | `~~project tracker` | GitHub Issues | — | V Claude Code přes `gh`, v claude.ai přes konektor GitHub. |
 | `~~knowledge base` | `dokturek-docs`, Notion (archiv) | notion |  |
 | `~~source control, ~~CI` | GitHub, GitHub Actions | — |  |

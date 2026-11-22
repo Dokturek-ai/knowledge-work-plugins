@@ -8,7 +8,8 @@ argument-hint: "<description> [data source]"
 
 ## Doktůrek specifics
 
-- Dashboards use synthetic or aggregate data and the Doktůrek tokens from `DESIGN.md` when shared outside the team.
+- Dashboards use synthetic or aggregate data and the Doktůrek tokens from `DESIGN.md` (`dokturek-docs` → `05-design/Doktůrek-brand/DESIGN.md`): primary teal `#1E7F74`, dark teal `#145A52`, text `#272E33`, muted text `#5B6665`, border `#E5E5E5`, background `#FFFFFF` and muted surface `#F7FAFA`. The Color System below already uses them.
+- Do not encode "bad" or "negative" in red. Red is reserved for clinical safety; show a decrease or a miss with a text label (for example "pokles", "pod cílem") and an arrow in the normal text color.
 
 # /build-dashboard - Build Interactive Dashboards
 
@@ -19,7 +20,7 @@ Build a self-contained interactive HTML dashboard with charts, filters, tables, 
 ## Usage
 
 ```
-/build-dashboard <description of dashboard> [data source]
+/data:build-dashboard <description of dashboard> [data source]
 ```
 
 ## Workflow
@@ -89,7 +90,7 @@ Generate a single self-contained HTML file using the base template below. The fi
 - Data table with sortable headers
 
 **Styling (CSS):**
-- Professional color scheme (clean whites, grays, with accent colors for data)
+- Doktůrek color tokens (white and muted surfaces, teal accents for data; see Color System)
 - Card-based layout with subtle shadows
 - Consistent typography (system fonts for fast loading)
 - Responsive design that works on different screen sizes
@@ -221,7 +222,7 @@ Every dashboard follows this structure:
 <div class="kpi-card">
     <div class="kpi-label">Total Revenue</div>
     <div class="kpi-value" id="kpi-revenue">$0</div>
-    <div class="kpi-change positive" id="kpi-revenue-change">+0%</div>
+    <div class="kpi-change" id="kpi-revenue-change">+0%</div>
 </div>
 ```
 
@@ -237,8 +238,10 @@ function renderKPI(elementId, value, previousValue, format = 'number') {
     if (previousValue && previousValue !== 0) {
         const pctChange = ((value - previousValue) / previousValue) * 100;
         const sign = pctChange >= 0 ? '+' : '';
-        changeEl.textContent = `${sign}${pctChange.toFixed(1)}% vs prior period`;
-        changeEl.className = `kpi-change ${pctChange >= 0 ? 'positive' : 'negative'}`;
+        // Direction is carried by an arrow and a word, not by red/green
+        const label = pctChange >= 0 ? '↑ nárůst' : '↓ pokles';
+        changeEl.textContent = `${label} ${sign}${pctChange.toFixed(1)} % oproti minulému období`;
+        changeEl.className = 'kpi-change';
     }
 }
 
@@ -587,33 +590,38 @@ function renderTable(containerId, data, columns) {
 
 ```css
 :root {
+    /* Doktůrek tokens (dokturek-docs: 05-design/Doktůrek-brand/DESIGN.md) */
     /* Background layers */
-    --bg-primary: #f8f9fa;
-    --bg-card: #ffffff;
-    --bg-header: #1a1a2e;
+    --bg-primary: #F7FAFA;   /* muted surface */
+    --bg-card: #FFFFFF;      /* background */
+    --bg-header: #145A52;    /* dark teal */
+    --border: #E5E5E5;
 
     /* Text */
-    --text-primary: #212529;
-    --text-secondary: #6c757d;
-    --text-on-dark: #ffffff;
+    --text-primary: #272E33;
+    --text-secondary: #5B6665;
+    --text-on-dark: #FFFFFF;
 
-    /* Accent colors for data */
-    --color-1: #4C72B0;
-    --color-2: #DD8452;
-    --color-3: #55A868;
-    --color-4: #C44E52;
-    --color-5: #8172B3;
-    --color-6: #937860;
+    /* Accent colors for data: teal first, then dark teal and neutrals */
+    --color-1: #1E7F74;
+    --color-2: #145A52;
+    --color-3: #5B6665;
+    --color-4: #272E33;
 
-    /* Status colors */
-    --positive: #28a745;
-    --negative: #dc3545;
-    --neutral: #6c757d;
+    /* No red/green status colors: change direction is a text label.
+       Red is reserved for clinical safety. */
 
     /* Spacing */
     --gap: 16px;
     --radius: 8px;
 }
+```
+
+```javascript
+// Chart.js series colors, same tokens as the CSS variables above.
+// More than four series: group the rest as "Ostatní" or use small multiples
+// instead of inventing new colors.
+const COLORS = ['#1E7F74', '#145A52', '#5B6665', '#272E33'];
 ```
 
 ### Layout
@@ -692,10 +700,8 @@ body {
 .kpi-change {
     font-size: 13px;
     font-weight: 500;
+    color: var(--text-secondary); /* direction is in the text, not the color */
 }
-
-.kpi-change.positive { color: var(--positive); }
-.kpi-change.negative { color: var(--negative); }
 ```
 
 ### Chart Containers
@@ -784,7 +790,7 @@ body {
 .data-table thead th {
     text-align: left;
     padding: 10px 12px;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid var(--border);
     color: var(--text-secondary);
     font-weight: 600;
     font-size: 12px;
@@ -796,16 +802,16 @@ body {
 
 .data-table thead th:hover {
     color: var(--text-primary);
-    background: #f8f9fa;
+    background: var(--bg-primary);
 }
 
 .data-table tbody td {
     padding: 10px 12px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border);
 }
 
 .data-table tbody tr:hover {
-    background: #f8f9fa;
+    background: var(--bg-primary);
 }
 
 .data-table tbody tr:last-child td {
@@ -841,7 +847,7 @@ body {
     .dashboard-container { max-width: none; }
     .filters { display: none; }
     .chart-container { break-inside: avoid; }
-    .kpi-card { border: 1px solid #dee2e6; box-shadow: none; }
+    .kpi-card { border: 1px solid var(--border); box-shadow: none; }
 }
 ```
 
@@ -911,20 +917,20 @@ function renderTablePage(data, page, pageSize = 50) {
 ## Examples
 
 ```
-/build-dashboard Monthly sales dashboard with revenue trend, top products, and regional breakdown. Data is in the orders table.
+/data:build-dashboard Monthly sales dashboard with revenue trend, top products, and regional breakdown. Data is in the orders table.
 ```
 
 ```
-/build-dashboard Here's our support ticket data [pastes CSV]. Build a dashboard showing volume by priority, response time trends, and resolution rates.
+/data:build-dashboard Here's our support ticket data [pastes CSV]. Build a dashboard showing volume by priority, response time trends, and resolution rates.
 ```
 
 ```
-/build-dashboard Create a template executive dashboard for a SaaS company showing MRR, churn, new customers, and NPS. Use sample data.
+/data:build-dashboard Create a template executive dashboard for a SaaS company showing MRR, churn, new customers, and NPS. Use sample data.
 ```
 
 ## Tips
 
 - Dashboards are fully self-contained HTML files -- share them with anyone by sending the file
 - For real-time dashboards, consider connecting to a BI tool instead. These dashboards are point-in-time snapshots
-- Request "dark mode" or "presentation mode" for different styling
-- You can request a specific color scheme to match your brand
+- Request "presentation mode" for larger type (Doktůrek has one light theme; dark mode is not part of the brand)
+- Colors follow the Doktůrek tokens; ask before departing from them

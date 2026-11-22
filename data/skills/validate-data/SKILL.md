@@ -9,6 +9,7 @@ argument-hint: "<analysis to review>"
 ## Doktůrek specifics
 
 - Before sharing, confirm the analysis contains no patient identifiers and that small groups cannot identify a person.
+- On a real source (the AIS database copy, any production data) validate only through aggregates: never open, trace or filter down to individual records, patients or users. Record-level tracing is allowed only on synthetic or test data.
 
 # /validate-data - Validate Analysis Before Sharing
 
@@ -19,7 +20,7 @@ Review an analysis for accuracy, methodology, and potential biases before sharin
 ## Usage
 
 ```
-/validate-data <analysis to review>
+/data:validate-data <analysis to review>
 ```
 
 The analysis can be:
@@ -279,10 +280,9 @@ For any key number in your analysis, verify it passes the "smell test":
 ### Cross-Validation Techniques
 
 1. **Calculate the same metric two different ways** and verify they match
-2. **Spot-check individual records** -- pick a few specific entities and trace their data manually
-3. **Compare to known benchmarks** -- match against published dashboards, finance reports, or prior analyses
-4. **Reverse engineer** -- if total revenue is X, does per-user revenue times user count approximately equal X?
-5. **Boundary checks** -- what happens when you filter to a single day, a single user, or a single category? Are those micro-results sensible?
+2. **Compare to known benchmarks** -- match against published dashboards or prior analyses
+3. **Reverse engineer** -- if a total is X, does the per-unit value times the unit count approximately equal X?
+4. **Boundary checks** -- filter to a single day or a single category (never to a single person or user on real data, and keep groups of 5 or more): are those results sensible?
 
 ### Red Flags That Warrant Investigation
 
@@ -370,20 +370,20 @@ Output:
 ## Examples
 
 ```
-/validate-data Review this quarterly revenue analysis before I send it to the exec team: [analysis]
+/data:validate-data Review this quarterly revenue analysis before I send it to the exec team: [analysis]
 ```
 
 ```
-/validate-data Check my churn analysis -- I'm comparing Q4 churn rates to Q3 but Q4 has a shorter measurement window
+/data:validate-data Check my churn analysis -- I'm comparing Q4 churn rates to Q3 but Q4 has a shorter measurement window
 ```
 
 ```
-/validate-data Here's a SQL query and its results for our conversion funnel. Does the logic look right? [query + results]
+/data:validate-data Here's a SQL query and its results for our conversion funnel. Does the logic look right? [query + results]
 ```
 
 ## Tips
 
-- Run /validate-data before any high-stakes presentation or decision
+- Run /data:validate-data before any high-stakes presentation or decision
 - Even quick analyses benefit from a sanity check -- it takes a minute and can save your credibility
 - If the validation finds issues, fix them and re-validate
 - Share the validation output alongside your analysis to build stakeholder confidence

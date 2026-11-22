@@ -1,6 +1,6 @@
 ---
 name: review-contract
-description: Review a contract against your organization's negotiation playbook — flag deviations, generate redlines, provide business impact analysis. Use when reviewing vendor or customer agreements, when you need clause-by-clause analysis against standard positions, or when preparing a negotiation strategy with prioritized redlines and fallback positions.
+description: Review a contract or DPA under Czech law against Doktůrek's DPA requirements and Czech default positions — flag deviations, draft redlines, summarise business impact and list points for a lawyer. Use when reviewing a contract with a practice, a vendor or a partner, when you need clause-by-clause analysis, or when preparing negotiation points for Honza.
 argument-hint: "<contract file or text>"
 ---
 
@@ -12,22 +12,23 @@ argument-hint: "<contract file or text>"
 - For a DPA, start from the draft [`04-pravo-a-regulatorika/dpa-template.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/04-pravo-a-regulatorika/dpa-template.md) and the requirements in [`dpa-revision-brief.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/04-pravo-a-regulatorika/dpa-revision-brief.md) (EU/EEA only, RPO ≤ 1 h, RTO ≤ 4 h, incident notice 24 h / 72 h). The template is marked "Nepodepisovat": never present it as ready to sign.
 - Governing law is Czech law and GDPR (with Act 110/2019 Sb.). No lawyer is engaged yet: every output ends with a list of points for a lawyer and for Lukáš Peter (GDPR, MDR).
 - Health records retention follows Decree 444/2024 Sb. (at least 10 years); open questions such as Q-B08 stay open, do not resolve them in a contract review.
+- **No local playbook exists** (there is no `legal.local.md`). The reference is `dpa-revision-brief.md` plus the Czech defaults in Step 3. Contracts are in Czech, amounts in Kč. Honza decides customer contracts; the review is a recommendation, never an approval.
 
-# /review-contract -- Contract Review Against Playbook
+# /review-contract -- Contract Review Against the DPA Brief and Czech Defaults
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
 
-Review a contract against your organization's negotiation playbook. Analyze each clause, flag deviations, generate redline suggestions, and provide business impact analysis.
+Review a contract against the DPA revision brief and Czech default positions. Analyze each clause, flag deviations, generate redline suggestions, and provide business impact analysis.
 
 **Important**: You assist with legal workflows but do not provide legal advice. All analysis should be reviewed by qualified legal professionals before being relied upon.
 
 ## Invocation
 
 ```
-/review-contract <contract file or URL>
+/legal:review-contract <contract file or text>
 ```
 
-Review the contract: @$1
+Review the contract: $ARGUMENTS
 
 ## Workflow
 
@@ -35,7 +36,7 @@ Review the contract: @$1
 
 Accept the contract in any of these formats:
 - **File upload**: PDF, DOCX, or other document format
-- **URL**: Link to a contract in your CLM, cloud storage (e.g., Box, Egnyte, SharePoint), or other document system
+- **URL**: Link to a contract in a document system the user can open (no CLM or cloud-storage connector ships with this plugin, see CONNECTORS.md)
 - **Pasted text**: Contract text pasted directly into the conversation
 
 If no contract is provided, prompt the user to supply one.
@@ -51,21 +52,13 @@ Ask the user for context before beginning the review:
 
 If the user provides partial context, proceed with what you have and note assumptions.
 
-### Step 3: Load the Playbook
+### Step 3: Load the Reference Positions
 
-Look for the organization's contract review playbook in local settings (e.g., `legal.local.md` or similar configuration files).
+Doktůrek has no local playbook file (no `legal.local.md`); do not look for one or offer to build one. Use this baseline and name it in the output as **Review Basis: dpa-revision-brief + Czech defaults**:
 
-The playbook should define:
-- **Standard positions**: The organization's preferred terms for each major clause type
-- **Acceptable ranges**: Terms that can be agreed to without escalation
-- **Escalation triggers**: Terms that require senior counsel review or outside counsel involvement
-
-**If no playbook is configured:**
-- Inform the user that no playbook was found
-- Offer two options:
-  1. Help the user set up their playbook (walk through defining positions for key clauses)
-  2. Proceed with a generic review using widely-accepted commercial standards as the baseline
-- If proceeding generically, clearly note that the review is based on general commercial standards, not the organization's specific positions
+- **DPA and data protection**: the positions in [`dpa-revision-brief.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/04-pravo-a-regulatorika/dpa-revision-brief.md) (prior written authorisation of sub-processors under Art. 28(2) GDPR, EU/EEA only, incident notice to the controller within 24 h, return of data within 30 days, deletion within 60 days, backups within 90 days, Czech law and Czech courts).
+- **Czech defaults for everything else**: Czech law (Act 89/2012 Sb., Civil Code, "OZ"), Czech courts, contract language Czech, amounts in Kč, copyright through a licence under Act 121/2000 Sb., limits on excluding liability under § 2898 OZ.
+- **Escalation**: every YELLOW or RED item goes to Honza (customer contracts) with a list of points for an external lawyer. Where a position is not in the brief and not a statutory rule, mark it [P] and write "ověří právník".
 
 ### Step 4: Clause-by-Clause Analysis
 
@@ -74,7 +67,7 @@ Apply the following review process:
 1. **Identify the contract type**: SaaS agreement, professional services, license, partnership, procurement, etc. The contract type affects which clauses are most material.
 2. **Determine the user's side**: Vendor, customer, licensor, licensee, partner. This fundamentally changes the analysis (e.g., limitation of liability protections favor different parties).
 3. **Read the entire contract** before flagging issues. Clauses interact with each other (e.g., an uncapped indemnity may be partially mitigated by a broad limitation of liability).
-4. **Analyze each material clause** against the playbook position.
+4. **Analyze each material clause** against the reference position (Step 3).
 5. **Consider the contract holistically**: Are the overall risk allocation and commercial terms balanced?
 
 Analyze the contract systematically, covering at minimum:
@@ -94,20 +87,22 @@ Analyze the contract systematically, covering at minimum:
 | **Force Majeure** | Scope, notification, termination rights |
 | **Payment Terms** | Net terms, late fees, taxes, price escalation |
 
-For each clause, assess against the playbook (or generic standards) and note whether it is present, absent, or unusual.
+For each clause, assess against the reference positions and note whether it is present, absent, or unusual.
 
 #### Detailed Clause Guidance
 
 ##### Limitation of Liability
 
 **Key elements to review:**
-- Cap amount (fixed dollar amount, multiple of fees, or uncapped)
+- Cap amount (fixed amount in Kč, multiple of fees, or uncapped)
 - Whether the cap is mutual or applies differently to each party
 - Carveouts from the cap (what liabilities are uncapped)
 - Whether consequential, indirect, special, or punitive damages are excluded
 - Whether the exclusion is mutual
 - Carveouts from the consequential damages exclusion
 - Whether the cap applies per-claim, per-year, or aggregate
+- **Statutory limits (§ 2898 OZ)**: under Czech law an agreement that excludes or limits in advance the duty to compensate harm to a person's natural rights (including health), or harm caused intentionally or by gross negligence, is disregarded; the same applies to excluding or limiting compensation of any harm to the weaker party. A cap that reaches these cases does not work in that part; the exact effect ověří právník.
+- Czech law compensates actual loss and lost profit (§ 2952 OZ); "consequential" or "indirect" damages are common-law terms with no direct Czech equivalent, so ask what the clause is meant to exclude
 
 **Common issues:**
 - Cap set at a fraction of fees paid (e.g., "fees paid in the prior 3 months" on a low-value contract)
@@ -136,14 +131,14 @@ For each clause, assess against the playbook (or generic standards) and note whe
 **Key elements to review:**
 - Ownership of pre-existing IP (each party should retain their own)
 - Ownership of IP developed during the engagement
-- Work-for-hire provisions and their scope
+- Copyright under Act 121/2000 Sb. (autorský zákon): the author's economic rights cannot be transferred, so the contract grants a licence; check its scope, exclusivity, territory, duration, remuneration and sublicensing rights. Works created by employees, and software created on commission, follow the employee-work rules of the Act; how they apply to a given contract ověří právník
 - License grants: scope, exclusivity, territory, sublicensing rights
 - Open source considerations
 - Feedback clauses (grants on suggestions or improvements)
 
 **Common issues:**
 - Broad IP assignment that could capture the customer's pre-existing IP
-- Work-for-hire provisions extending beyond the deliverables
+- A clause that "transfers" copyright (not possible under Czech law; read it as a licence and check its scope) or a licence that extends beyond the deliverables
 - Unrestricted feedback clauses granting perpetual, irrevocable licenses
 - License scope broader than needed for the business relationship
 
@@ -153,7 +148,7 @@ For each clause, assess against the playbook (or generic standards) and note whe
 - Whether a Data Processing Agreement/Addendum (DPA) is required
 - Data controller vs. data processor classification
 - Sub-processor rights and notification obligations
-- Data breach notification timeline (72 hours for GDPR)
+- Data breach notification timeline (processor to controller without undue delay, contractually 24 h per the brief; controller to ÚOOÚ within 72 hours under Art. 33 GDPR)
 - Cross-border data transfer mechanisms (SCCs, adequacy decisions, binding corporate rules)
 - Data deletion or return obligations on termination
 - Data security requirements and audit rights
@@ -190,34 +185,30 @@ For each clause, assess against the playbook (or generic standards) and note whe
 - Dispute resolution mechanism (litigation, arbitration, mediation first)
 - Venue and jurisdiction for litigation
 - Arbitration rules and seat (if arbitration)
-- Jury waiver
-- Class action waiver
-- Prevailing party attorney's fees
 
 **Common issues:**
-- Unfavorable jurisdiction (unusual or remote venue)
+- Foreign governing law or foreign courts in a contract with a Czech practice (the default is Czech law and Czech courts)
 - Mandatory arbitration with rules favorable to the drafter
-- Waiver of jury trial without corresponding protections
 - No escalation process before formal dispute resolution
 
 ### Step 5: Flag Deviations
 
-Classify each deviation from the playbook using a three-tier system:
+Classify each deviation from the reference positions using a three-tier system:
 
 #### GREEN -- Acceptable
 
-The clause aligns with or is better than the organization's standard position. Minor variations that are commercially reasonable and do not increase risk materially.
+The clause aligns with or is better than the reference position. Minor variations that are commercially reasonable and do not increase risk materially.
 
 **Examples:**
 - Liability cap at 18 months of fees when standard is 12 months (better for the customer)
 - Mutual NDA term of 2 years when standard is 3 years (shorter but reasonable)
 - Governing law in a well-established commercial jurisdiction close to the preferred one
 
-**Action**: Note for awareness. No negotiation needed.
+**Action**: Note for awareness. No negotiation needed; the contract still goes to Honza for the decision.
 
 #### YELLOW -- Negotiate
 
-The clause falls outside the standard position but within a negotiable range. The term is common in the market but not the organization's preference. Requires attention and likely negotiation, but not escalation.
+The clause falls outside the standard position but within a negotiable range. The term is common in the market but not the preferred position. Requires attention and likely negotiation; Honza still decides.
 
 **Examples:**
 - Liability cap at 6 months of fees when standard is 12 months (below standard but negotiable)
@@ -232,7 +223,7 @@ The clause falls outside the standard position but within a negotiable range. Th
 
 #### RED -- Escalate
 
-The clause falls outside acceptable range, triggers a defined escalation criterion, or poses material risk. Requires senior counsel review, outside counsel involvement, or business decision-maker sign-off.
+The clause falls outside acceptable range, conflicts with the DPA brief or a statutory rule, or poses material risk. Requires Honza's decision and review by an external lawyer before signature.
 
 **Examples:**
 - Uncapped liability or no limitation of liability clause
@@ -314,14 +305,9 @@ Issues that improve the position but can be conceded strategically:
 
 **Negotiation strategy**: Lead with Tier 1 items. Trade Tier 3 concessions to secure Tier 2 wins. Never concede on Tier 1 without escalation.
 
-### Step 8: CLM Routing (If Connected)
+### Step 8: Routing
 
-If a Contract Lifecycle Management system is connected via MCP:
-- Recommend the appropriate approval workflow based on contract type and risk level
-- Suggest the correct routing path (e.g., standard approval, senior counsel, outside counsel)
-- Note any required approvals based on contract value or risk flags
-
-If no CLM is connected, skip this step.
+No CLM ships with this plugin. Route the output to Honza (customer contracts) and attach the list of points for an external lawyer and for Lukáš Peter (GDPR). Do not send the review to the counterparty yourself.
 
 ## Output Format
 
@@ -334,7 +320,7 @@ Structure the output as:
 **Parties**: [party names and roles]
 **Your Side**: [vendor/customer/etc.]
 **Deadline**: [if provided]
-**Review Basis**: [Playbook / Generic Standards]
+**Review Basis**: dpa-revision-brief + Czech defaults
 
 ## Key Findings
 
@@ -344,7 +330,7 @@ Structure the output as:
 
 ### [Clause Category] -- [GREEN/YELLOW/RED]
 **Contract says**: [summary of the provision]
-**Playbook position**: [your standard]
+**Reference position**: [brief or Czech default; [P] where neither covers it]
 **Deviation**: [description of gap]
 **Business impact**: [what this means practically]
 **Redline suggestion**: [specific language, if YELLOW or RED]
@@ -358,10 +344,14 @@ Structure the output as:
 ## Next Steps
 
 [Specific actions to take]
+
+## Points for a lawyer
+
+[Questions an external lawyer must answer before signature]
 ```
 
 ## Notes
 
-- If the contract is in a language other than English, note this and ask if the user wants a translation or review in the original language
+- Contracts with practices and Czech partners are in Czech: review them in Czech and quote the original wording. If a contract is in another language, note it and ask whether the user wants the review in the original language or a Czech summary
 - For very long contracts (50+ pages), offer to focus on the most material sections first and then do a complete review
 - Always remind the user that this analysis should be reviewed by qualified legal counsel before being relied upon for legal decisions
