@@ -4,6 +4,13 @@ description: Check the status of existing agreements with a vendor across all co
 argument-hint: "[vendor name]"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Doktůrek sub-processors named in the documents include Hetzner (hosting), Mistral (OCR) and Langfuse (disabled). The DPA review lists them as missing from the template: check that every vendor that touches personal data appears in the DPA annex.
+- Only EU/EEA processing is acceptable for clinical data (DPA revision brief).
+
 # /vendor-check -- Vendor Agreement Status
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

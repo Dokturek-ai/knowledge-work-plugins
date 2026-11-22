@@ -4,6 +4,13 @@ description: Draft a professional customer-facing response tailored to the situa
 argument-hint: "<situation description>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Doctors and practice staff: Czech, vykání, calm and concrete. Describe the real state and the next step. No timelines, prices or clinical advice that the team has not confirmed.
+- Draft only; the user sends it.
+
 # /draft-response
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

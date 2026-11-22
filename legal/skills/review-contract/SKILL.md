@@ -4,6 +4,15 @@ description: Review a contract against your organization's negotiation playbook 
 argument-hint: "<contract file or text>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Doktůrek signs as **Clementine Solutions s.r.o.** Contracts with practices are the core case: the practice is the data controller (správce), Clementine Solutions is the processor (zpracovatel).
+- For a DPA, start from the draft [`04-pravo-a-regulatorika/dpa-template.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/04-pravo-a-regulatorika/dpa-template.md) and the requirements in [`dpa-revision-brief.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/04-pravo-a-regulatorika/dpa-revision-brief.md) (EU/EEA only, RPO ≤ 1 h, RTO ≤ 4 h, incident notice 24 h / 72 h). The template is marked "Nepodepisovat": never present it as ready to sign.
+- Governing law is Czech law and GDPR (with Act 110/2019 Sb.). No lawyer is engaged yet: every output ends with a list of points for a lawyer and for Lukáš Peter (GDPR, MDR).
+- Health records retention follows Decree 444/2024 Sb. (at least 10 years); open questions such as Q-B08 stay open, do not resolve them in a contract review.
+
 # /review-contract -- Contract Review Against Playbook
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

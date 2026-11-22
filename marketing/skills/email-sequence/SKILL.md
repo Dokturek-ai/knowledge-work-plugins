@@ -4,6 +4,12 @@ description: Design and draft multi-email sequences with full copy, timing, bran
 argument-hint: "[sequence type]"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Recipients are doctors: Czech, vykání, short. Each email has one call to action (demo, pre-order, call). Include an unsubscribe line. Draft only; Filip sends.
+
 # Email Sequence
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

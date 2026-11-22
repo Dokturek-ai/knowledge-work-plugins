@@ -3,6 +3,12 @@ name: stakeholder-map
 description: Map the people in a deal or account - roles, influence, sentiment, who's missing, and your best access path to the people you haven't reached. Use when the user asks "who are the players at [account]", "who's my way in", "am I single-threaded on [deal]", "map the stakeholders", or "who else should I be talking to".
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- In a practice, map the owner doctor, other doctors, nurses and the person who runs the current AIS. For a network such as a multi-practice group, map the network decision-maker separately.
+
 # Stakeholder Map
 
 **Rules (apply to every step of this skill):**
@@ -16,7 +22,7 @@ description: Map the people in a deal or account - roles, influence, sentiment, 
 - Missing connector: work with what is available and say plainly what was used and what was not. Uploaded or pasted files are a complete input, not an apology: read what was uploaded before asking for anything, use the file's own column headers, and if a required input is missing ask once for that upload or paste. When today's date falls outside an upload's dates, anchor "today", "this week" and lookbacks on the upload's dates and say which date was used. At the start, check which tools this session has with a cheap read (who-am-I, one record); use what answers, and work from files only when nothing answers. If two tools answer for the same job (for example Gmail and Outlook), prefer the one matching the CRM user's email domain, otherwise ask once; never merge or pick silently. If a connected tool refuses a write (for example an admin turned the write tool off), keep reading, turn the change into a checklist or paste-ready text the person applies, quote the refusal, and never retry or reach for another tool to make it. A validation or field error on an allowed write is reported as that error, not treated as writes turned off.
 - Rendering: transient analysis as an artifact; anything a second person or a second week touches as a Page; anything presented as Slides; fall back to an artifact plus export when those are unavailable. A view of the user's whole day or whole book (a briefing, a day wrap, a pipeline, a renewal radar, a ranked lead list) is a real artifact the user can open beside the chat and come back to, updated in place on later runs, never tiles or tables drawn inside the reply. The reply itself is two or three lines on what matters most.
 
-`account-context` lists contacts. This skill
+A contact list names people. This skill
 models the deal: who actually decides, who influences, where you have
 real relationships vs. names in a database, and the shortest path to
 the people you're missing.

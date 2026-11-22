@@ -4,6 +4,12 @@ description: Plan resource capacity — workload analysis and utilization foreca
 argument-hint: "<team or project scope>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Use the capacity section of [`03-implementacni-plan/plan-prvni-ordinace.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/03-implementacni-plan/plan-prvni-ordinace.md) and the team table. Do not plan work for advisors or for Adrian.
+
 # /capacity-plan
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

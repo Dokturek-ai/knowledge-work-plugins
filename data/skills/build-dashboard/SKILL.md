@@ -4,6 +4,12 @@ description: Build an interactive HTML dashboard with charts, filters, and table
 argument-hint: "<description> [data source]"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Dashboards use synthetic or aggregate data and the Doktůrek tokens from `DESIGN.md` when shared outside the team.
+
 # /build-dashboard - Build Interactive Dashboards
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

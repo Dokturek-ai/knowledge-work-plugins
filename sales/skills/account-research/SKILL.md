@@ -3,6 +3,12 @@ name: account-research
 description: Research a target company and optionally a specific contact - company overview, recent news, likely priorities, and fit against your ICP. Cross-references existing CRM records. Use when the user asks to "research [company]", "look into [company]", "prospect research on [company]", "look up [person]", "intel on [prospect]", "who is [person] at [company]", or "tell me about [company]" when the company is a prospect rather than an existing account.
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- For a practice, start with public sources: NRPZS, the practice's website, its current AIS if known. Do not collect personal data beyond business contacts.
+
 # Account Research
 
 **Rules (apply to every step of this skill):**
@@ -96,5 +102,5 @@ tiers:
   files-only:   research brief from web search where available + the uploaded book for the dedup check. No web and no enrichment: say so at the top, fill sections only from uploaded or pasted material, mark the rest not verified, and offer to use pasted site copy or articles
   read-only:    adds the live crm dedup/owner check and richer
                 enrichment tools
-  gated-writes: none (record creation/logging hands off to the the skills that make changes (update-opportunity, log-activity and others))
+  gated-writes: none (record creation is an item the user creates in Pipedrive)
 ```

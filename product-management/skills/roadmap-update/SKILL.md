@@ -4,6 +4,13 @@ description: Update, create, or reprioritize your product roadmap. Use when addi
 argument-hint: "<update description>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- The roadmap lives in [`01-produkt/produktova-roadmapa.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/01-produkt/produktova-roadmapa.md). Output a proposed diff to that file, not a new roadmap document.
+- Day one is 1 January 2027 with the scope confirmed in R-nový-L. CDS co-pilot, patient portal and white-label CDS are possible future extensions without a date: do not schedule them.
+
 # Roadmap Update
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

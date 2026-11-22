@@ -3,6 +3,14 @@ name: call-prep
 description: Pre-call brief for an upcoming meeting - attendees, account history, prior call context from transcripts, open opportunity status, and suggested discovery questions. Use when the user asks "prep me for [meeting/company]", "call prep [company]", "I'm meeting with [company], prep me", "get me ready for [meeting]", or "what do I need to know before my [time] call".
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Doktůrek sells to Czech practices, first GP practices. The decision-maker is usually the doctor who owns the practice; nurses and practice managers influence day-to-day use.
+- The CRM is Pipedrive (leads from `get.dokturek.ai` land in the "Inbound leads" pipeline). Without a Pipedrive connector, work from an export the user uploads.
+- Useful public context: the practice's entry in the national registry of providers (NRPZS), its current AIS, and whether it prescribes electronically.
+
 # Call Prep
 
 **Rules (apply to every step of this skill):**

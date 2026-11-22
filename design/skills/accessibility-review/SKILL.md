@@ -4,6 +4,13 @@ description: Run a WCAG 2.1 AA accessibility audit on a design or page. Trigger 
 argument-hint: "<Figma URL, URL, or description>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Doktůrek rules from `DESIGN.md`: text contrast at least 4.5:1, large text and icons 3:1, 2 px focus ring, respect `prefers-reduced-motion`. The warning orange fails small-text contrast: pair it with text.
+- Clinical human-factors review belongs to `ehr-design` (`ehr-ux-reference`).
+
 # /accessibility-review
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

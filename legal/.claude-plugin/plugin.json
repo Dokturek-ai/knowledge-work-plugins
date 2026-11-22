@@ -1,8 +1,18 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "legal",
-  "version": "1.3.0",
-  "description": "Speed up contract review, NDA triage, and compliance workflows for in-house legal teams. Draft legal briefs, organize precedent research, and manage institutional knowledge.",
+  "version": "2.0.0",
+  "description": "Prepare legal working documents for Doktůrek (Clementine Solutions s.r.o.): review contracts and DPAs with practices, triage NDAs, check GDPR and DPA/DPIA status, assess legal risk, draft responses to legal requests and check vendors as sub-processors. Not legal advice; MDR and AI Act go to the mdr-compliance plugin.",
   "author": {
-    "name": "Anthropic"
-  }
+    "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",
+    "url": "https://github.com/Dokturek-ai"
+  },
+  "homepage": "https://github.com/Dokturek-ai/knowledge-work-plugins/tree/main/legal",
+  "license": "Apache-2.0",
+  "keywords": [
+    "dokturek",
+    "legal",
+    "czech",
+    "healthcare"
+  ]
 }

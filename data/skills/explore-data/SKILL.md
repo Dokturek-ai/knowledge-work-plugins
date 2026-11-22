@@ -4,6 +4,12 @@ description: Profile and explore a dataset to understand its shape, quality, and
 argument-hint: "<table or file>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- The incumbent AIS database copy (Firebird 3) may be explored only through schema and aggregates; never select rows with patient data.
+
 # /explore-data - Profile and Explore a Dataset
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

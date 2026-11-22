@@ -1,8 +1,18 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "design",
-  "version": "1.2.0",
-  "description": "Accelerate design workflows — critique, design system management, UX writing, accessibility audits, research synthesis, and dev handoff. From exploration to pixel-perfect specs.",
+  "version": "2.0.0",
+  "description": "Write and review Czech UI copy in the Doktůrek vocabulary and run WCAG 2.1 AA accessibility reviews against the DESIGN.md rules. Clinical screen design and human-factors review go to the ehr-design plugin.",
   "author": {
-    "name": "Anthropic"
-  }
+    "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",
+    "url": "https://github.com/Dokturek-ai"
+  },
+  "homepage": "https://github.com/Dokturek-ai/knowledge-work-plugins/tree/main/design",
+  "license": "Apache-2.0",
+  "keywords": [
+    "dokturek",
+    "design",
+    "czech",
+    "healthcare"
+  ]
 }

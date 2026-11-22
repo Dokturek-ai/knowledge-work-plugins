@@ -4,6 +4,12 @@ description: Stage-by-stage pipeline health check - coverage, aging, conversion,
 argument-hint: "<segment or rep>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Review a Pipedrive export or a connected Pipedrive. Use Pipedrive's own stage names. Flag every deal without a next task: the team requires one.
+
 # Pipeline Review
 
 **Rules (apply to every step of this skill):**
@@ -26,7 +32,7 @@ much is where, what's aging, what's at risk.
 |---|---|---|
 | crm | open pipeline + 2 quarters of closed for baselines | no (files fallback: uploaded pipeline export) |
 
-Read-only throughout; fixes hand off to the the skills that make changes (update-opportunity, log-activity and others).
+Read-only throughout; fixes are a checklist the user applies in Pipedrive.
 
 ## Inputs
 
@@ -85,8 +91,7 @@ working from files, the export file with its sheet and row - per the
 links rule above); conversion signal from the 2-quarter baseline
 (stage-to-stage rates, win rate, median cycle); and recommended focus
 (highest-$ at-risk deal + action, the stage with most stuck deals,
-coverage gap action if under). Fixes apply through `update-opportunity`
-or the crm hygiene flow - this skill only reads.
+coverage gap action if under). Fixes are a checklist for Pipedrive - this skill only reads.
 
 ## How it adapts (guidance for Claude; never show these labels to the user)
 
@@ -96,5 +101,5 @@ tiers:
                 export for slip detection); history-based flags noted
                 absent
   read-only:    live crm pull with history, contact roles, baselines
-  gated-writes: none - fixes hand off to update-opportunity
+  gated-writes: none - fixes are a checklist for Pipedrive
 ```

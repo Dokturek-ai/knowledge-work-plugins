@@ -1,8 +1,18 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "marketing",
-  "version": "1.2.0",
-  "description": "Create content, plan campaigns, and analyze performance across marketing channels. Maintain brand voice consistency, track competitors, and report on what's working.",
+  "version": "2.0.0",
+  "description": "Plan campaigns and draft marketing content for Doktůrek in Czech: newsletter and email sequences for doctors, landing-page and social copy, brand-voice review against DESIGN.md, and SEO audits of dokturek.ai and get.dokturek.ai. Drafts only.",
   "author": {
-    "name": "Anthropic"
-  }
+    "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",
+    "url": "https://github.com/Dokturek-ai"
+  },
+  "homepage": "https://github.com/Dokturek-ai/knowledge-work-plugins/tree/main/marketing",
+  "license": "Apache-2.0",
+  "keywords": [
+    "dokturek",
+    "marketing",
+    "czech",
+    "healthcare"
+  ]
 }

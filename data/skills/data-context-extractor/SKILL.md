@@ -15,6 +15,12 @@ description: >
   terminology, metrics definitions, and common query patterns.
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Context for Doktůrek data: Medplum (FHIR R4, PostgreSQL) is the clinical system of record; the FHIR mapping lives in `dokturek-docs:02-architektura/fhir/`. Hand FHIR modelling to the `fhir` plugin.
+
 # Data Context Extractor
 
 A meta-skill that extracts company-specific data knowledge from analysts and generates tailored data analysis skills.

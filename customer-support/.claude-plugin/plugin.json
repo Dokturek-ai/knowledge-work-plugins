@@ -1,8 +1,18 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "customer-support",
-  "version": "1.3.0",
-  "description": "Triage tickets, draft responses, escalate issues, and build your knowledge base. Research customer context and turn resolved issues into self-service content.",
+  "version": "2.0.0",
+  "description": "Support Czech practices using Doktůrek: triage requests, draft replies to doctors, package escalations to the right owner, research answers in dokturek-docs and write knowledge-base articles. Patient identifiers are removed; drafts only.",
   "author": {
-    "name": "Anthropic"
-  }
+    "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",
+    "url": "https://github.com/Dokturek-ai"
+  },
+  "homepage": "https://github.com/Dokturek-ai/knowledge-work-plugins/tree/main/customer-support",
+  "license": "Apache-2.0",
+  "keywords": [
+    "dokturek",
+    "customer-support",
+    "czech",
+    "healthcare"
+  ]
 }

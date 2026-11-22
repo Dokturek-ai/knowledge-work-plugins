@@ -4,6 +4,12 @@ description: Multi-source research on a customer question or topic with source a
 argument-hint: "<question or topic>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Search `dokturek-docs` (STAV.md, SLOVNIK.md, the register) and closed GitHub Issues before the web. Official sources for state services: SÚKL, ČSSZ, MZČR / NCEZ.
+
 # /customer-research
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

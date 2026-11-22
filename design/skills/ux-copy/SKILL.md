@@ -4,6 +4,14 @@ description: Write or review UX copy — microcopy, error messages, empty states
 argument-hint: "<context or copy to review>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- UI text is Czech. Use the vocabulary in the Doktůrek context (ordinace, kartotéka, pacient, koncept, uloženo, přihlásit se) and the terms in `SLOVNIK.md`.
+- State the real result: "Uloženo" only after the save succeeded; never "hotovo" for something not verified. Clinical wording goes to Anna.
+- Clinical screens are reviewed with `ehr-design` (`ehr-ux-reference`).
+
 # /ux-copy
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).

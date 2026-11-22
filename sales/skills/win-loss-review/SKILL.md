@@ -3,6 +3,12 @@ name: win-loss-review
 description: Analyze recently closed opportunities to find patterns in what wins and what loses - stage of loss, common objections from transcripts, deal characteristics. Leader-focused. Use when the user asks "win loss review", "why are we losing deals", "what's working", or "analyze closed opps".
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- With few deals, report each one qualitatively; do not compute rates from a handful of practices.
+
 # Win-Loss Review
 
 **Rules (apply to every step of this skill):**
@@ -76,7 +82,7 @@ losses - what happened (one line each, evidenced); and recommended
 actions - systemic (process/enablement change tied to the headline),
 coaching (which reps, on what), and data (what to start capturing if a
 pattern is suspected but unproven). This skill only reads; any
-loss-reason backfill hands to `update-opportunity`.
+loss-reason backfill is a checklist for Pipedrive.
 
 ## How it adapts (guidance for Claude; never show these labels to the user)
 
@@ -85,5 +91,5 @@ tiers:
   files-only:   quantitative pass from an uploaded closed-opps export
                 + pasted transcripts for the qualitative sample
   read-only:    live crm set with history + transcript/email evidence
-  gated-writes: none - field backfills hand off to update-opportunity
+  gated-writes: none - field backfills are a checklist for Pipedrive
 ```

@@ -4,6 +4,12 @@ description: Answer data questions -- from quick lookups to full analyses. Use w
 argument-hint: "<question>"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- No patient-level data. Work with synthetic data, aggregates or anonymised exports. The copy of the incumbent AIS database is analysed only through schema, table names and aggregate counts.
+
 # /analyze - Answer Data Questions
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
@@ -45,7 +51,7 @@ Parse the user's question and determine:
    - Paste query results directly
    - Upload a CSV or Excel file
    - Describe the schema so you can write queries for them to run
-2. If writing queries for manual execution, use the `sql-queries` skill for dialect-specific best practices
+2. If writing queries for manual execution, apply dialect-specific best practices (see the `write-query` skill)
 3. Once data is provided, proceed with analysis
 
 ### 3. Analyze
@@ -90,7 +96,7 @@ If any check raises concerns, investigate and note caveats.
 
 When a chart would communicate results more effectively than a table:
 
-- Use the `data-visualization` skill to select the right chart type
+- Use the `create-viz` skill to select the right chart type
 - Generate a Python visualization or build it into an HTML dashboard
 - Follow visualization best practices for clarity and accuracy
 

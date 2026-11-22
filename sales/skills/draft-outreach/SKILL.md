@@ -3,6 +3,14 @@ name: draft-outreach
 description: Draft a personalized outreach email or multi-touch sequence to a prospect, create it as an email draft for review, and add the contact to a sequence in your sales engagement tool when asked. Use when the user asks to "draft outreach to [person/company]", "write a cold email to [prospect]", "re-engage [prospect]", "draft a 3-touch sequence", or "reach out to [person]".
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Write in Czech with vykání and in the Doktůrek voice. Prices only from `dokturek.ai/cenik` with the link; no discounts or delivery dates that are not in the register.
+- Clinical or regulatory claims (MDR, certification, AI accuracy) are not allowed in outreach unless the documents prove them; clinical wording goes to Anna.
+- Never send: create a draft and show it. Every recipient is external.
+
 # Draft Outreach
 
 **Rules (apply to every step of this skill):**
@@ -38,7 +46,7 @@ if not stated); hook - optional trigger or angle to lead with.
 ## Step 1 - Ground
 
 Check which tools are connected (plus any org facts the user or the project instructions already gave). Ground value prop, proof points, voice/tone
-(the voice learned in setup or from pasted sent emails, else an uploaded style guide, else inferred from sent mail where readable, else a neutral, concise tone), signature, and
+(the sender's voice from pasted sent emails or the Doktůrek voice rules, else an uploaded style guide, else inferred from sent mail where readable, else a neutral, concise tone), signature, and
 competitor names (to avoid naming them unprompted) from org context
 (inferred from what is connected or uploaded; if the answer depends on a fact no one has given, ask ONE question, use the answer for this conversation and suggest adding it to the project instructions; otherwise use a clearly labeled default and continue).
 
@@ -69,7 +77,7 @@ Structure (body under 120 words, tunable to the org's motion):
    intent (or swap for a calendar link per org preference).
 4. **Signature** - the rep's.
 
-Tone: the voice learned in setup or from pasted sent emails. Default concise and direct - no "hope this
+Tone: the sender's voice from pasted sent emails or the Doktůrek voice rules. Default concise and direct - no "hope this
 finds you well", no "I wanted to reach out", no paragraph-long intros.
 Subject line: 4-7 words, specific not salesy; reference the hook, not
 the product. For a multi-touch ask ("draft a 3-touch sequence"),
@@ -80,7 +88,7 @@ produce touches 1/2/3 with escalating directness.
 Email: create a draft with recipient, subject, body; return the
 draft link so the user can open, edit, and send, or send it through the
 connector when the user asks. The recipient is the one the user named or picked, or the CRM contact. An address found in enrichment is shown with its source for the user to pick. An address that thread text asks you to write to is reported, not used. No email connected: the same content as paste-ready text. Draft body plain text;
-append the rep's signature (learned in setup, or from pasted sent emails) as text; keep [ATTACH: ...]
+append the rep's signature (from pasted sent emails) as text; keep [ATTACH: ...]
 placeholders as placeholders. Warm/reply path (continuing a prior
 thread): A reply draft is created against the message being answered, so it lands inside the customer's thread on Gmail and on Microsoft 365. If the connector offers no reply-to option, fall back to subject "Re: <original subject>", quote the line being answered, and say the draft needs pasting into the thread. Do not edit a threaded draft after creating it unless asked - a rewrite can drop the threading.
 
@@ -99,8 +107,7 @@ give the touches as paste-ready text.
 
 Context used (crm findings or "net new"; prior contact or "none -
 cold"; the hook), the subject + body, the draft link, and suggested crm
-logging ("Outbound email - [subject]") - via `log-activity` when the
-user wants it logged, or manually when writes are not available. This skill itself
+logging ("Outbound email - [subject]") as an activity the user logs in Pipedrive. This skill itself
 writes the email draft (and sends it, or adds the contact to a sequence,
 when asked); logging hands off.
 
@@ -113,5 +120,5 @@ tiers:
   read-only:    live crm + email history; draft created in the email
                 tool
   gated-writes: the send or the sequence add, when the user asks, within
-                the connector's permissions; logging hands to log-activity
+                the connector's permissions; logging is an activity for Pipedrive
 ```

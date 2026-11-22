@@ -4,6 +4,12 @@ description: Apply statistical methods including descriptive stats, trend analys
 user-invocable: false
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- With pilot-sized samples (one or a few practices), report effect sizes and uncertainty, not significance claims. The planned pilot metric is time per visit before and after.
+
 # Statistical Analysis Skill
 
 Descriptive statistics, trend analysis, outlier detection, hypothesis testing, and guidance on when to be cautious about statistical claims.

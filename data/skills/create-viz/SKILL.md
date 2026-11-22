@@ -4,6 +4,12 @@ description: Create publication-quality visualizations with Python. Use when tur
 argument-hint: "<data source> [chart type]"
 ---
 
+> **Doktůrek:** Before the first step, read [the Doktůrek context](../../shared/dokturek-context.md) and apply it: Czech output, sources of truth, data rules, confirmation before anything leaves the company, and routing to the other Doktůrek plugins.
+
+## Doktůrek specifics
+
+- Use the Doktůrek palette from `DESIGN.md` (teal #1e7f74 primary) for charts that leave the team.
+
 # /create-viz - Create Visualizations
 
 > If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
