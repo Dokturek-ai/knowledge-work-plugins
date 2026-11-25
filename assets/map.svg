@@ -13,10 +13,10 @@
     <text x="784" y="162" font-size="16" font-weight="700" fill="#145A52">dokturek-team</text>
     <text x="784" y="186" font-size="14" fill="#5B6665">Vývoj EHR a oborové znalosti</text>
     <path d="M784 204H1136" stroke="#D7DCDB"/>
-    <text x="784" y="232" font-size="15" font-weight="600" fill="#145A52">ehr-design</text><text x="952" y="232" font-size="15" font-weight="600" fill="#145A52">fhir</text><text x="784" y="262" font-size="15" font-weight="600" fill="#145A52">medplum ×4</text><text x="952" y="262" font-size="15" font-weight="600" fill="#145A52">cdss</text><text x="784" y="292" font-size="15" font-weight="600" fill="#145A52">mdr-compliance</text><text x="952" y="292" font-size="15" font-weight="600" fill="#145A52">vykazovani</text><text x="784" y="322" font-size="15" font-weight="600" fill="#145A52">mzcr-ez</text><text x="952" y="322" font-size="15" font-weight="600" fill="#145A52">technical-documentation</text>
+    <text x="784" y="228" font-size="15" font-weight="600" fill="#145A52">ehr-design</text><text x="952" y="228" font-size="15" font-weight="600" fill="#145A52">fhir</text><text x="784" y="254" font-size="15" font-weight="600" fill="#145A52">medplum ×4</text><text x="952" y="254" font-size="15" font-weight="600" fill="#145A52">cdss</text><text x="784" y="280" font-size="15" font-weight="600" fill="#145A52">mdr-compliance</text><text x="952" y="280" font-size="15" font-weight="600" fill="#145A52">cz-health-ai</text><text x="784" y="306" font-size="15" font-weight="600" fill="#145A52">vykazovani</text><text x="952" y="306" font-size="15" font-weight="600" fill="#145A52">mzcr-ez</text><text x="784" y="332" font-size="15" font-weight="600" fill="#145A52">plugin-development</text><text x="952" y="332" font-size="15" font-weight="600" fill="#145A52">technical-documentation</text>
     <rect x="760" y="376" width="400" height="128" rx="16" fill="#FFFFFF" stroke="#D7DCDB"/>
     <text x="784" y="414" font-size="16" font-weight="700" fill="#145A52">dokturek-dev-toolkit</text>
-    <text x="784" y="438" font-size="14" fill="#5B6665">Přístup k datům Medplumu, s RISK.md</text>
+    <text x="784" y="438" font-size="14" fill="#5B6665">Přístup k datům a k Medplumu, s RISK.md</text>
     <text x="784" y="476" font-size="15" font-weight="600" fill="#145A52">medplum-mcp</text>
     <text x="952" y="476" font-size="15" font-weight="600" fill="#145A52">mcp-smoke</text>
     <rect x="760" y="520" width="400" height="130" rx="16" fill="#FFFFFF" stroke="#D7DCDB"/>

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "data",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Analyze Doktůrek data safely: write SQL for PostgreSQL or the Firebird AIS copy, explore datasets through schema and aggregates, run statistics on pilot-sized samples, build charts and dashboards in the Doktůrek palette, and validate analyses before sharing. Never handles patient-level data.",
   "author": {
     "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",

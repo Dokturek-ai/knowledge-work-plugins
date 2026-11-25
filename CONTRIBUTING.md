@@ -3,7 +3,7 @@
 ## Kam změna patří
 
 - Skill pro práci mimo vývoj (produkt, obchod, marketing, podpora, právo, provoz, data) patří sem.
-- Skill pro vývoj EHR, FHIR, Medplum, CDS, MDR, vykazování nebo státní služby patří do [`plugin-marketplace-healthcare-dev`](https://github.com/Dokturek-ai/plugin-marketplace-healthcare-dev).
+- Skill pro vývoj EHR, FHIR, Medplum, CDS, MDR, regulatoriku AI funkcí, vykazování nebo státní služby patří do [`plugin-marketplace-healthcare-dev`](https://github.com/Dokturek-ai/plugin-marketplace-healthcare-dev).
 - Nástroj s přístupem k datům patří do [`developer-toolkit`](https://github.com/Dokturek-ai/developer-toolkit) s vlastním `RISK.md`.
 - Opakující se týmový tok ve Slacku (standup, zápisy, připomínky) patří do OpenClaw.
 

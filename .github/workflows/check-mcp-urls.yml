@@ -39,9 +39,8 @@ jobs:
 
           MARKETPLACE=".claude-plugin/marketplace.json"
 
-          # Each line: "<plugin>\t<server>\t<url>". Marketplace entries with a
-          # string `source` are local paths; objects describe an external repo
-          # pinned at a SHA, which we don't have checked out — skip those.
+          # Each line: "<plugin>\t<server>\t<url>". Marketplace entries are local
+          # paths (check_repo.py forbids external sources).
           discover() {
             jq -r '.plugins[] | select(.source | type == "string") | "\(.name)\t\(.source)"' "$MARKETPLACE" |
             while IFS=$'\t' read -r plugin src; do
@@ -109,7 +108,7 @@ jobs:
             exit 0
           fi
 
-          # Many vendored plugins share servers (slack, notion, atlassian …).
+          # Many vendored plugins share servers (slack, notion …).
           # Probe each distinct URL once and reuse the verdict so the run cost
           # is bounded by unique URLs, not (plugins × servers).
           declare -A verdict_for

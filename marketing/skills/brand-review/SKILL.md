@@ -90,7 +90,7 @@ Regardless of whether brand guidelines are configured, flag:
 - **Comparative claims** — comparisons to competitors that could be challenged
 - **Regulatory language** — content that may need compliance review (financial services, healthcare, etc.)
 - **Testimonial issues** — quotes or endorsements without attribution or approval; any testimonial, case study or result from a practice before 1 January 2027 that the user did not provide
-- **Doktůrek claims** — clinical statements without Anna's confirmation; MDR, certification or compliance claims the documents do not prove (Q-750, Q-753); "AI rozhodla" or anything that lets the system decide instead of the doctor; prices other than a link to `dokturek.ai/cenik`; discounts or incentives
+- **Doktůrek claims** — clinical statements without Anna's confirmation; MDR, certification or compliance claims the documents do not prove (Q-749, Q-750, Q-753; claims about what an AI feature does or its regulatory status go to `cz-health-ai`); "AI rozhodla" or anything that lets the system decide instead of the doctor; prices other than a link to `dokturek.ai/cenik`; discounts or incentives
 - **Copyright concerns** — content that appears to be closely paraphrased from other sources
 
 ## Brand Voice Reference
