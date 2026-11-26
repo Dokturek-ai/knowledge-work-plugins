@@ -213,7 +213,7 @@ When sources disagree:
 3. **Martin Marhold**: login, Keycloak, gov-gateway
 4. **MUDr. Anna Chromcová**: anything clinical
 5. **Jan Chromec (Honza)**: roadmap commitments, price, subscription, contracts, exceptions
-6. **Regulatory questions** (MDR, AI Act): the `mdr-compliance` plugin; no lawyer or DPO is engaged yet, so legal and privacy questions go to Honza as an open question
+6. **Regulatory questions** (MDR, AI Act): the `mdr-compliance` plugin, AI feature questions `cz-health-ai`; no lawyer or DPO is engaged yet, so legal and privacy questions go to Honza as an open question
 
 ## Research Documentation for Team Knowledge Base
 

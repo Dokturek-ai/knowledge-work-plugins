@@ -2,6 +2,20 @@
 
 Formát vychází z [Keep a Changelog](https://keepachangelog.com/cs/1.1.0/), verze podle [SemVer](https://semver.org/lang/cs/).
 
+## 2026-11-25 — Aktualizace podle sesterských marketplace (marketplace 1.1.1)
+
+Všech osm pluginů má patch verzi (sales 3.1.1, ostatní 2.1.1), protože se mění sdílený kontext.
+
+### Změněno
+
+- Sdílený kontext: předávání do nového pluginu `cz-health-ai` (kvalifikace AI a softwarových funkcí, konzultace v Inovační kanceláři SÚKL); pravidlo 8 uvádí i Q-749 a pracovní podklad z 25. 11. 2026; umístění serverů Hetzner v EU je označené jako neověřené podle `SLOVNIK.md`.
+- `legal` (`compliance-check`, `legal-risk-assessment`), `marketing` (`brand-review`), `product-management` (`write-spec`) a `customer-support` (`customer-research`) předávají kvalifikaci AI funkcí do `cz-health-ai`.
+- README a mapa uvádějí všech 13 pluginů `dokturek-team` a přesnější popis `dokturek-dev-toolkit`; tabulka struktury uvádí workflow evalů. CONTRIBUTING řadí regulatoriku AI funkcí do `plugin-marketplace-healthcare-dev`.
+
+### Odstraněno
+
+- Komentáře v `check-mcp-urls.yml` po upstream forku (externí zdroje pinované na SHA, Atlassian).
+
 ## 2026-11-22 — Review pluginem plugin-development (marketplace 1.1.0)
 
 Všech osm pluginů prošlo review agentem `plugin-reviewer` z pluginu `plugin-development`. Opravené nálezy:

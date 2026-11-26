@@ -11,21 +11,21 @@
 
 Katalog `dokturek-work` obsahuje pluginy pro Claude Code a Claude Cowork, které pomáhají týmu Doktůrek.ai s produktem, obchodem, marketingem, podporou ordinací, právem, provozem, texty rozhraní a analýzou dat. Každý plugin zná kontext Doktůrku: tým, zdroje pravdy v `dokturek-docs`, pravidla pro data a potvrzování a hlas značky.
 
-Marketplace **1.1.0** · [Historie změn](CHANGELOG.md) · [Přispívání](CONTRIBUTING.md)
+Marketplace **1.1.1** · [Historie změn](CHANGELOG.md) · [Přispívání](CONTRIBUTING.md)
 
 ## Kam patří který marketplace
 
 Doktůrek má tři marketplace s oddělenou odpovědností. Vyberte podle úkolu.
 
 <p align="center">
-  <img src="assets/map.png" alt="Mapa: vlevo osm pluginů dokturek-work, vpravo dokturek-team (ehr-design, fhir, medplum, cdss, mdr-compliance, vykazovani, mzcr-ez, technical-documentation), dokturek-dev-toolkit (medplum-mcp, mcp-smoke) a OpenClaw ve Slacku. Dole pravidla sdíleného kontextu." width="100%">
+  <img src="assets/map.png" alt="Mapa: vlevo osm pluginů dokturek-work, vpravo 13 pluginů dokturek-team (mimo jiné ehr-design, fhir, čtyři pluginy medplum, cdss, mdr-compliance, cz-health-ai, vykazovani, mzcr-ez), dokturek-dev-toolkit (medplum-mcp, mcp-smoke) a OpenClaw ve Slacku. Dole pravidla sdíleného kontextu." width="100%">
 </p>
 
 | Marketplace | Repozitář | Obsah |
 | --- | --- | --- |
 | `dokturek-work` | tento repozitář | práce mimo vývoj: produkt, obchod, marketing, podpora, právo, provoz, UX texty, data |
-| `dokturek-team` | [`plugin-marketplace-healthcare-dev`](https://github.com/Dokturek-ai/plugin-marketplace-healthcare-dev) | vývoj EHR a oborové znalosti: `ehr-design`, `fhir`, `medplum`, `cdss`, `mdr-compliance`, `vykazovani`, `mzcr-ez`, `technical-documentation` |
-| `dokturek-dev-toolkit` | [`developer-toolkit`](https://github.com/Dokturek-ai/developer-toolkit) | nástroje s přístupem k datům Medplumu, s vlastními pravidly rizika |
+| `dokturek-team` | [`plugin-marketplace-healthcare-dev`](https://github.com/Dokturek-ai/plugin-marketplace-healthcare-dev) | vývoj EHR a oborové znalosti: `ehr-design`, `fhir`, `medplum`, `medplum-decisions`, `medplum-engineering`, `medplum-ai-design`, `cdss`, `mdr-compliance`, `cz-health-ai`, `vykazovani`, `mzcr-ez`, `technical-documentation`, `plugin-development` |
+| `dokturek-dev-toolkit` | [`developer-toolkit`](https://github.com/Dokturek-ai/developer-toolkit) | nástroje s přístupem k datům a k Medplumu, s vlastními pravidly rizika |
 
 Pluginy v tomto katalogu úkoly z ostatních dvou neopakují a předávají je tam. Standupy, zápisy z porad a dotazy nad `dokturek-docs` ve Slacku řeší týmový asistent OpenClaw.
 
@@ -54,14 +54,14 @@ V Claude Desktop a Cowork přidejte marketplace v **Customize → Plugins**. Na 
 
 | Plugin | Verze | K čemu slouží |
 | --- | --- | --- |
-| [`product-management`](product-management/README.md) | 2.1.0 | Neklinické specifikace, roadmapa jako diff do `dokturek-docs`, týdenní sprinty v GitHub Issues, reporty, vyhodnocení rozhovorů s lékaři. |
-| [`sales`](sales/README.md) | 3.1.0 | Průzkum ordinace, příprava a shrnutí hovoru, oslovení, námitky, srovnání s AIS konkurence, přehled obchodů v Pipedrive. |
-| [`marketing`](marketing/README.md) | 2.1.0 | Kampaně, newsletter a e-mailové sekvence pro lékaře, texty na web, kontrola tónu značky, SEO `dokturek.ai`. |
-| [`customer-support`](customer-support/README.md) | 2.1.0 | Třídění požadavků ordinací, odpovědi lékařům, eskalace, dohledání odpovědi, články do znalostní báze. |
-| [`legal`](legal/README.md) | 2.1.0 | Smlouvy a DPA s ordinacemi, NDA, GDPR a stav DPA/DPIA, právní rizika, další zpracovatelé. |
-| [`operations`](operations/README.md) | 2.1.0 | Incidenty, kontrola před nasazením přes Coolify, změnové požadavky, kapacita, technický dluh, popis procesů. |
-| [`design`](design/README.md) | 2.1.0 | České texty rozhraní a audit přístupnosti podle `DESIGN.md`. |
-| [`data`](data/README.md) | 2.1.0 | SQL pro PostgreSQL a Firebird, průzkum dat, statistika pilotu, grafy a dashboardy bez dat na úrovni pacienta. |
+| [`product-management`](product-management/README.md) | 2.1.1 | Neklinické specifikace, roadmapa jako diff do `dokturek-docs`, týdenní sprinty v GitHub Issues, reporty, vyhodnocení rozhovorů s lékaři. |
+| [`sales`](sales/README.md) | 3.1.1 | Průzkum ordinace, příprava a shrnutí hovoru, oslovení, námitky, srovnání s AIS konkurence, přehled obchodů v Pipedrive. |
+| [`marketing`](marketing/README.md) | 2.1.1 | Kampaně, newsletter a e-mailové sekvence pro lékaře, texty na web, kontrola tónu značky, SEO `dokturek.ai`. |
+| [`customer-support`](customer-support/README.md) | 2.1.1 | Třídění požadavků ordinací, odpovědi lékařům, eskalace, dohledání odpovědi, články do znalostní báze. |
+| [`legal`](legal/README.md) | 2.1.1 | Smlouvy a DPA s ordinacemi, NDA, GDPR a stav DPA/DPIA, právní rizika, další zpracovatelé. |
+| [`operations`](operations/README.md) | 2.1.1 | Incidenty, kontrola před nasazením přes Coolify, změnové požadavky, kapacita, technický dluh, popis procesů. |
+| [`design`](design/README.md) | 2.1.1 | České texty rozhraní a audit přístupnosti podle `DESIGN.md`. |
+| [`data`](data/README.md) | 2.1.1 | SQL pro PostgreSQL a Firebird, průzkum dat, statistika pilotu, grafy a dashboardy bez dat na úrovni pacienta. |
 
 ## Pravidla, která platí ve všech pluginech
 
@@ -82,7 +82,7 @@ V Claude Desktop a Cowork přidejte marketplace v **Customize → Plugins**. Na 
 | `<plugin>/` | Manifest, skilly, `CONNECTORS.md`, `README.md` a kopie sdíleného kontextu v `shared/` |
 | [`shared/dokturek-context.md`](shared/dokturek-context.md) | Kanonický kontext Doktůrku; CI hlídá, že se kopie v pluginech neliší |
 | [`scripts/check_repo.py`](scripts/check_repo.py) | Kontroly struktury, popisů skillů, tabulek v README, konektorů a odkazů |
-| [`.github/workflows/`](.github/workflows/) | Validace pluginů a kontrola dostupnosti MCP serverů |
+| [`.github/workflows/`](.github/workflows/) | Validace pluginů, kontrola dostupnosti MCP serverů a týdenní evaly (`plugin-evals.yml`) |
 | [`assets/`](assets/) | Obálka a mapa: zdrojové SVG a PNG vykreslené písmem Geist, barvy a logo podle `DESIGN.md` |
 
 ## Původ a licence

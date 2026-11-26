@@ -246,7 +246,7 @@ No lawyer is engaged yet. You only recommend; Honza decides whether and whom to 
 - **Unsettled law**: Questions where Czech or EU law gives no clear answer (for example the open questions in the register)
 - **Foreign law**: Matters governed by a law other than Czech law
 - **Specialised expertise**: Competition law, public procurement, patents, cybersecurity regulation (NIS2, open question Q-739)
-- **Regulatory changes**: New regulation that materially affects the product (EHDS, eŽádanky; MDR and AI Act go to `mdr-compliance`)
+- **Regulatory changes**: New regulation that materially affects the product (EHDS, eŽádanky; MDR and AI Act go to `mdr-compliance`, AI feature qualification to `cz-health-ai`)
 
 ### Consider
 - **Contract disputes**: Disagreement over interpretation with a practice, vendor or partner

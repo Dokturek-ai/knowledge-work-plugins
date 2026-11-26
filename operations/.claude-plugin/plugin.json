@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "operations",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Support Doktůrek operations: incident response with the right owners and the eRecept manual-resolution rule, deploy checklists for Coolify, change requests, capacity planning, technical-debt triage and business process documentation. Never deploys, restarts or changes infrastructure.",
   "author": {
     "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",

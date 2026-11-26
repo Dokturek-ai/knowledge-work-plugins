@@ -8,7 +8,7 @@ argument-hint: "<action or initiative to check>"
 
 ## Doktůrek specifics
 
-- MDR, IVDR, AI Act and SaMD classification belong to the `mdr-compliance` plugin. Here cover GDPR, DPA and DPIA status, health-records retention (Decree 444/2024 Sb.) and contractual obligations.
+- MDR, IVDR, AI Act and SaMD classification belong to the `mdr-compliance` plugin; qualifying a specific AI or software feature and SÚKL consultations belong to `cz-health-ai`. Here cover GDPR, DPA and DPIA status, health-records retention (Decree 444/2024 Sb.) and contractual obligations.
 - Real patient data stays blocked until a signed DPA and a DPIA exist. Report that gate explicitly whenever a feature or a pilot touches real data.
 - No lawyer and no DPO are engaged: say so whenever a requirement depends on them.
 - Check the current state in [`04-pravo-a-regulatorika/README.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/04-pravo-a-regulatorika/README.md) and the open questions in the register (for example Q-314, Q-745, Q-750, Q-753) before stating anything as settled.
@@ -107,7 +107,7 @@ Describe what you're planning to do. Examples:
 | **DPA and DPIA** | Signed DPA and documented DPIA assessment before any real patient data | Q-745; `04-pravo-a-regulatorika/README.md` |
 | **DPO** | No DPO is appointed; whether Art. 37 GDPR requires one for Clementine Solutions s.r.o. is open [N] | ověří právník |
 | **EHDS** (EU) 2025/327 | Applicability to the product is open | Q-740 |
-| **MDR, AI Act** | Not covered here | `mdr-compliance` plugin |
+| **MDR, AI Act** | Not covered here | `mdr-compliance` plugin; AI feature qualification `cz-health-ai` |
 
 ## DPA Review Checklist
 

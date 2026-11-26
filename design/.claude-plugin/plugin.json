@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "design",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Write and review Czech UI copy in the Doktůrek vocabulary and run WCAG 2.1 AA accessibility reviews against the DESIGN.md rules. Clinical screen design and human-factors review go to the ehr-design plugin.",
   "author": {
     "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",

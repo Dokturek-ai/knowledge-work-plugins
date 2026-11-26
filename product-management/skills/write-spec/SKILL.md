@@ -8,7 +8,7 @@ argument-hint: "<feature or problem statement>"
 
 ## Doktůrek specifics
 
-- Clinical EHR screens and workflows go to `ehr-design` (`ehr-prd`, `ehr-user-stories`). Use this skill for non-clinical specs: onboarding of a practice, billing and subscription, migration, internal processes, the website.
+- Clinical EHR screens and workflows go to `ehr-design` (`ehr-prd`, `ehr-user-stories`). Use this skill for non-clinical specs: onboarding of a practice, billing and subscription, migration, internal processes, the website. A spec for an AI or decision-support feature also needs `cz-health-ai` (`ai-feature-readiness`).
 - Check the day-one scope in [`01-produkt/prvni-den-2027.md`](https://github.com/Dokturek-ai/dokturek-docs/blob/main/01-produkt/prvni-den-2027.md) and the register before you add scope. Scope decisions are Honza's.
 - A spec that changes product behaviour lives in `dokturek-docs`; a code PR without the linked docs PR goes back from review (R-nový-G).
 

@@ -6,7 +6,7 @@
     "url": "https://github.com/Dokturek-ai"
   },
   "description": "Marketplace týmu Doktůrek.ai pro práci mimo vývoj: produkt, obchod, marketing, podpora ordinací, právo, provoz, texty rozhraní a analýza dat.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "plugins": [
     {
       "name": "product-management",

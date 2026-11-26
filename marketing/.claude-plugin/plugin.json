@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "marketing",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Plan campaigns and draft marketing content for Doktůrek in Czech: newsletter and email sequences for doctors, landing-page and social copy, brand-voice review against DESIGN.md, and SEO audits of dokturek.ai and get.dokturek.ai. Drafts only.",
   "author": {
     "name": "Doktůrek.ai (Clementine Solutions s.r.o.)",
